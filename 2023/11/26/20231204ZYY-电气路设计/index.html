@@ -1,0 +1,859 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="电气路控制设计 一个简单的气动控制一共分为四大步： 第一步是进行气路仿真，然后确定气路控制的逻辑性； 第二步编写控制程序，将气路仿真得出的逻辑结果以控制代码的形式进行书写； 第三步设计气路控制板，因为很多电磁阀根本无法直接通过单片机进行驱动，因此我们需要借助外部电源的力量，就需要制作外围电路，来完成小马拉大车的效果； 第四步进行实际的气路连接并控制，连线的话就需要根据之前的仿真图来进行气路的连线，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电气路控制设计">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2023/11/26/20231204ZYY-%E7%94%B5%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="电气路控制设计 一个简单的气动控制一共分为四大步： 第一步是进行气路仿真，然后确定气路控制的逻辑性； 第二步编写控制程序，将气路仿真得出的逻辑结果以控制代码的形式进行书写； 第三步设计气路控制板，因为很多电磁阀根本无法直接通过单片机进行驱动，因此我们需要借助外部电源的力量，就需要制作外围电路，来完成小马拉大车的效果； 第四步进行实际的气路连接并控制，连线的话就需要根据之前的仿真图来进行气路的连线，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picss.sunbangyan.cn/2023/11/29/f271e8d8706ef9ac62eaab4025ec81f3.jpeg">
+<meta property="og:image" content="https://picdm.sunbangyan.cn/2023/11/29/f3526be0094237b34f961ecf2d2b9e04.jpeg">
+<meta property="og:image" content="https://picst.sunbangyan.cn/2023/11/29/6b7f958fbe983a0f05d3e9c2ad4252c3.jpeg">
+<meta property="og:image" content="https://picdm.sunbangyan.cn/2023/11/29/2be07b3e5d478d569f147c98f91da10d.jpeg">
+<meta property="og:image" content="https://picdm.sunbangyan.cn/2023/11/29/a611906e4e773fa55356787357dcf618.jpeg">
+<meta property="og:image" content="https://picst.sunbangyan.cn/2023/11/29/8704c328c58619d6fb920f54f5bf54f2.jpeg">
+<meta property="og:image" content="https://picst.sunbangyan.cn/2023/11/29/9f9500dda6401faee73322dc803ee935.jpeg">
+<meta property="article:published_time" content="2023-11-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T01:35:41.293Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="控制设计">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://picss.sunbangyan.cn/2023/11/29/f271e8d8706ef9ac62eaab4025ec81f3.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>电气路控制设计 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="电气路控制设计"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-26 00:00" pubdate>
+          2023年11月26日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">电气路控制设计</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月31日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="电气路控制设计"><a href="#电气路控制设计" class="headerlink" title="电气路控制设计"></a>电气路控制设计</h1><ul>
+<li><strong>一个简单的气动控制一共分为四大步：</strong><ul>
+<li>第一步是进行<strong>气路仿真</strong>，然后确定气路控制的逻辑性；</li>
+<li>第二步<strong>编写控制程序</strong>，将气路仿真得出的逻辑结果以控制代码的形式进行书写；</li>
+<li>第三步<strong>设计气路控制板</strong>，因为很多电磁阀根本无法直接通过单片机进行驱动，因此我们需要借助外部电源的力量，就需要制作外围电路，来完成小马拉大车的效果；</li>
+<li>第四步进行实际的<strong>气路连接并控制</strong>，连线的话就需要根据之前的仿真图来进行气路的连线，测试当然也是要基于第二步的控制代码来进行；</li>
+</ul>
+</li>
+<li>所以要想做好一个完整的气路控制，这四步少一步不行，不要因为很麻烦而去省略其中一步，当你在排查气路问题的时候，会让你抓狂的</li>
+</ul>
+<h2 id="1-设计需求假设"><a href="#1-设计需求假设" class="headerlink" title="1.设计需求假设"></a>1.设计需求假设</h2><ul>
+<li>示例：现在要设计一个机械臂的抬升，使用了一个双作用气缸，该气缸能够通过控制实现伸长和收缩</li>
+</ul>
+<h2 id="2-气路仿真"><a href="#2-气路仿真" class="headerlink" title="2.气路仿真"></a>2.气路仿真</h2><ul>
+<li>气路仿真最好用的还是FuildSim，这款软件是费斯托公司提供用户进行气路仿真，用法简单，操作容易，因此我这边仿真都是采用了这个软件进行仿真</li>
+<li>构建仿真原理图，这个软件的详细操作请看<strong>FuildSim</strong>专栏帖子，这边不进行详细介绍，下面是我构建的简易气路图，这个气路图里面包含了1个双作用气缸，3个电磁阀，1个气泵，1个节流阀，节流阀的作用是控制气流量来控制气缸伸缩的用时，这里面<strong>我给电磁阀进行了编号，这个编号非常重要，而且后续接线以及编写代码，必须要按这个编号严格进行，减少错误，甚至后续测试的时候，必须在电磁阀上面贴上编号</strong></li>
+</ul>
+<p><img src="https://picss.sunbangyan.cn/2023/11/29/f271e8d8706ef9ac62eaab4025ec81f3.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="气路图"></p>
+<ul>
+<li><p>开始进行仿真，这次的目的是要实现一个双作用气缸的伸长和收缩控制，开始仿真后，得出控制顺序为：</p>
+<ul>
+<li>伸长：打开DCF3，保持通路，打开DCF1，实现进气，进行延时，以达到所需要求，达到固定位置后，关闭DCF1，关闭DCF3，归为所有电磁阀，达到伸长控制<strong>（ DCF3 - DCF1 - 5秒 - DCF1 - DCF3 ）</strong>；</li>
+</ul>
+<p><img src="https://picdm.sunbangyan.cn/2023/11/29/f3526be0094237b34f961ecf2d2b9e04.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="气缸伸长"></p>
+<ul>
+<li>缩回：打开DCF2，保持通路，打开DCF1，实现进气，进行延时，以达到所需要求，达到固定位置后，关闭DCF1，关闭DCF2，归为所有电磁阀，达到伸长控制<strong>（ DCF2 - DCF1 - 5秒 - DCF1 - DCF2 ）</strong>；</li>
+</ul>
+<p><img src="https://picst.sunbangyan.cn/2023/11/29/6b7f958fbe983a0f05d3e9c2ad4252c3.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="气缸缩回"></p>
+</li>
+<li><p>完成仿真，得出想要的结果，之后开始根据结果进行代码的设计</p>
+</li>
+</ul>
+<h2 id="3-代码设计"><a href="#3-代码设计" class="headerlink" title="3.代码设计"></a>3.代码设计</h2><ul>
+<li>代码设计采用最简单的Arduino控制，设计的过程也很简单，跟点灯一模一样，按照仿真的结果进行顺序点灯，即可达到效果</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-type">int</span> DCF1=<span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> DCF2=<span class="hljs-number">6</span>;<br><span class="hljs-type">int</span> DCF3=<span class="hljs-number">7</span>;<br><span class="hljs-comment">//引脚的定义根据实际连接电磁阀的需求来设计</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-built_in">pinMode</span>(DCF1,<span class="hljs-literal">OUTPUT</span>);<br>  <span class="hljs-built_in">pinMode</span>(DCF2,<span class="hljs-literal">OUTPUT</span>);<br>  <span class="hljs-built_in">pinMode</span>(DCF3,<span class="hljs-literal">OUTPUT</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UP</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//气缸伸长（ DCF3 - DCF1 - 5秒 - DCF1 - DCF3 ）</span><br>  <span class="hljs-built_in">digitalWrite</span>(DCF3,<span class="hljs-literal">HIGH</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<span class="hljs-comment">//延时的目的防止电磁阀响应过快</span><br>  <span class="hljs-built_in">digitalWrite</span>(DCF1,<span class="hljs-literal">HIGH</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">5000</span>);<span class="hljs-comment">//延时的目的为了能够控制进入气流量，达到控制位置效果</span><br>  <span class="hljs-built_in">digitalWrite</span>(DCF1,<span class="hljs-literal">LOW</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<br>  <span class="hljs-built_in">digitalWrite</span>(DCF3,<span class="hljs-literal">LOW</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Down</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//气缸缩短（ DCF2 - DCF1 - 5秒 - DCF1 - DCF2 ）</span><br>  <span class="hljs-built_in">digitalWrite</span>(DCF2,<span class="hljs-literal">HIGH</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<br>  <span class="hljs-built_in">digitalWrite</span>(DCF1,<span class="hljs-literal">HIGH</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">5000</span>);<br>  <span class="hljs-built_in">digitalWrite</span>(DCF1,<span class="hljs-literal">LOW</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<br>  <span class="hljs-built_in">digitalWrite</span>(DCF2,<span class="hljs-literal">LOW</span>);<br>  <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-built_in">UP</span>();<br>  <span class="hljs-built_in">Down</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>这里面的代码逻辑是跟上面仿真的结果一样，因此环环相扣，不能因为怕麻烦，缺失了其中一个环节</li>
+</ul>
+<h2 id="4-电磁阀控制"><a href="#4-电磁阀控制" class="headerlink" title="4.电磁阀控制"></a>4.<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.32c42e8dCPUvWl&id=36262310020&_u=t2g8gqc420ea">电磁阀</a>控制</h2><ul>
+<li>因为目前所用的电磁阀基本都是12V和24V的，所以要想能够利用单片机的3.3V输出的话是不可能的，因此就需要用我们的单片机的3.3V搭配上一个只能开关NMOS管来实现小电压控制大电压的效果，当然这里面还需要进行外部高电压的接入，以下是我们会用到的元器件以及他的功能<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc49fb1&id=670446268383&spm=a1z09.2.0.0.32c42e8dCPUvWl">ESP32</a>：</strong>这个最简单理解，我们代码的承载体，以及整个机器人控制的设备，为啥选择ESP32，因为他简单而且比Arduino小，还集成WIFI功能</li>
+<li><strong><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.32c42e8dCPUvWl&id=672833563616&_u=t2g8gqc4b0ae">24V&#x2F;12V电源</a>：</strong>一部分用于驱动电磁阀的通断，借助外部电源的电压来实现驱动，一部分用于ESP32的供电</li>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc495fe&id=582430989377&spm=a1z09.2.0.0.32c42e8dCPUvWl">DC-DC降压模块</a>：</strong>利用输入的高电压，转为5V的稳压电源，供电给ESP32，来保证一个电源即可实现多种利用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc44f16&id=14478416081&spm=a1z09.2.0.0.32c42e8dCPUvWl">NMOS管（A3400）</a>：</strong>用来充当开关的作用，G极连接单片机引脚，用于接收信号来实现控制，D极连接24V&#x2F;12V电源的正极，S极连接接地端，来实现电路的导通</li>
+<li><strong><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a21n57.1.0.0.3d58523cFi5cOt&id=583531277832&ns=1&abbucket=19#detail">光耦模块(LTV-247)</a>：</strong>利用光电隔离，实现高低电压的连接处隔离，防止大电流倒灌，损坏ESP32，光耦模块最好只用三组，四组的功率太大，容易损坏光耦模块，光耦模块的输出接地端，需要加一个保护电阻560欧，输出端也需要加一个保护电阻100K欧</li>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc49a07&id=13860351935&spm=a1z09.2.0.0.32c42e8dCPUvWl">LED灯（0603）</a>：</strong>用来提示电源是否接入，需要添加一个保护电阻100K</li>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc4e83f&id=18691413288&spm=a1z09.2.0.0.32c42e8dCPUvWl">船型开关</a>：</strong>用来开关控制电源的输入，减少插拔电源的麻烦</li>
+<li><strong><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc448e3&id=13300685584&spm=a1z09.2.0.0.32c42e8dCPUvWl">快速插拔二端子（XH-2.54-2P）</a>：</strong>用来快速插拔电磁阀，能够实现电池阀的快速的接入</li>
+<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=t2g8gqc4ad83&id=16520506238&spm=a1z09.2.0.0.32c42e8dCPUvWl"><strong>DC插头母头（DC-005）</strong></a>：</li>
+</ul>
+</li>
+<li><strong>电路图请看目录下的QL-EDA.pdf文件</strong></li>
+<li>以上的是整体所需的元器件以及购买链接，正常来说都是以上的类型，然后需要注意一个问题，<strong>就是整个电路，必须低电压一个接地，高电压一个接地，不允许出现共地情况，防止出现烧坏的情况，整体电路，导通24V&#x2F;12V的PCB电路宽度不低于0.8mm，导通常规5V&#x2F;3.3V的电路宽度不低于0.5mm</strong></li>
+</ul>
+<h2 id="5-气路连接并控制"><a href="#5-气路连接并控制" class="headerlink" title="5.气路连接并控制"></a>5.气路连接并控制</h2><ul>
+<li><p>做到这一步的时候，基本上已经完成差不多了，这个时候只需要对照第一步进行连线，这边需要强调的是电磁阀的1、2、3口是具体指那几个口，图片会给予详细解答，请查看</p>
+<ul>
+<li>费斯托电磁阀（24V），具备高速开关能力</li>
+</ul>
+<p><img src="https://picdm.sunbangyan.cn/2023/11/29/2be07b3e5d478d569f147c98f91da10d.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="费斯托电磁阀"></p>
+<ul>
+<li>海德斯电磁阀（12V），小巧，但是不具备高速开关能力</li>
+</ul>
+<p><img src="https://picdm.sunbangyan.cn/2023/11/29/a611906e4e773fa55356787357dcf618.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="海德斯电磁阀"></p>
+<ul>
+<li>转接头，仅仅列举几个</li>
+</ul>
+<p>![TLTBHDFZOG4_{&#96;U(H9GL6MR](<a target="_blank" rel="noopener" href="https://picss.sunbangyan.cn/2023/11/29/2e62fc7686022bc47f98f1fe186cf7df.jpeg)![%E5%9B%9B%E9%80%9A%E8%BD%AC%E6%8E%A5%E5%A4%B4](https://picss.sunbangyan.cn/2023/11/29/0095a70ac81fa88a189f0f66f78b101b.jpeg)">https://picss.sunbangyan.cn/2023/11/29/2e62fc7686022bc47f98f1fe186cf7df.jpeg)![四通转接头](https://picss.sunbangyan.cn/2023/11/29/0095a70ac81fa88a189f0f66f78b101b.jpeg)</a></p>
+<ul>
+<li>气动调节阀</li>
+</ul>
+<p><img src="https://picst.sunbangyan.cn/2023/11/29/8704c328c58619d6fb920f54f5bf54f2.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="气动调节阀"></p>
+<ul>
+<li>稳压阀</li>
+</ul>
+<p><img src="https://picst.sunbangyan.cn/2023/11/29/9f9500dda6401faee73322dc803ee935.jpeg" srcset="/YYang.github.io/img/loading.gif" lazyload alt="稳压阀"></p>
+</li>
+<li><p>以上就是电气路设计的全过程，这里面的经验成分居多，需要不断的实操，不断的学习，才能够更深的掌握气动方面的知识</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/" class="category-chain-item">控制设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/" class="print-no-link">#控制设计</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>电气路控制设计</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2023/11/26/20231204ZYY-电气路设计/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2023/11/30/20231204ZYY-Markdown%E7%94%A8%E6%B3%95/" title="Markdown用法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Markdown用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2023/11/10/20231204ZYY-%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9C%E4%B8%80%E4%BB%BD%E4%BC%98%E7%A7%80%E7%9A%84%E8%B7%AF%E6%BC%94PPT/" title="如何制作一份优秀的路演PPT">
+                        <span class="hidden-mobile">如何制作一份优秀的路演PPT</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

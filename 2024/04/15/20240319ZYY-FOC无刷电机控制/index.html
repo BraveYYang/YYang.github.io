@@ -1,0 +1,926 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="FOC无刷电机控制一、无刷电机基本理解基本的航模无刷电机结构图如下图所示，分为前盖，中盖，后盖，磁铁，硅钢片，漆包线、轴承和转轴组成。   1.可以直接把电机分为定子部分和转子部分： 定子就是有线圈绕组，固定不动的部分； 转子就是电机旋转的部分，用于输出电机的转动和扭矩。  2.内外旋转类型区分： 内转子无刷电机就是转子在内部，轴进行旋转；  外转子无刷电机就是转子在外面，外壳进行旋转。  而直流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOC无刷电机控制">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/04/15/20240319ZYY-FOC%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="FOC无刷电机控制一、无刷电机基本理解基本的航模无刷电机结构图如下图所示，分为前盖，中盖，后盖，磁铁，硅钢片，漆包线、轴承和转轴组成。   1.可以直接把电机分为定子部分和转子部分： 定子就是有线圈绕组，固定不动的部分； 转子就是电机旋转的部分，用于输出电机的转动和扭矩。  2.内外旋转类型区分： 内转子无刷电机就是转子在内部，轴进行旋转；  外转子无刷电机就是转子在外面，外壳进行旋转。  而直流">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/1-1.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/2-2.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/2-4.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/2-5.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.1-1.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.1-3.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.1-4.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/YO6LurHIQkSfV21.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/ZUyTqOcmRVtHSe7.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/xR4twW1ynvGp2ou.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/fSHMDIEoRj4JsOl.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/1bvRp6E8T3Q5dPk.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/esquFgkWVyZpf4c.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/58PAe2iML9I1uDW.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/qxy9OB8GJH2frNj.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/eYjA7Q6pOFBVcNo.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/Rbtm5MOlFEc8k1d.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.3-2.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.3-3.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/fahwsKAl9RnDUr6.png">
+<meta property="og:image" content="http://dengfoc.com/dengfoc/shouimage/3.4-1.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/GQ3qP7uYbaWCotK.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/ZwqigGLHyDB9tFb.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/IqfPkovwQDlSTR9.png">
+<meta property="og:image" content="https://s2.loli.net/2024/07/25/76QqI34TyP5rozm.png">
+<meta property="article:published_time" content="2024-04-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T01:35:41.293Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="无刷电机控制">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://dengfoc.com/dengfoc/shouimage/1-1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>FOC无刷电机控制 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="FOC无刷电机控制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-15 00:00" pubdate>
+          2024年4月15日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">FOC无刷电机控制</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月31日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="FOC无刷电机控制"><a href="#FOC无刷电机控制" class="headerlink" title="FOC无刷电机控制"></a>FOC无刷电机控制</h1><h2 id="一、无刷电机基本理解"><a href="#一、无刷电机基本理解" class="headerlink" title="一、无刷电机基本理解"></a>一、无刷电机基本理解</h2><p>基本的航模无刷电机结构图如下图所示，<strong>分为前盖，中盖，后盖，磁铁，硅钢片，漆包线、轴承和转轴组成</strong>。</p>
+<img src="http://dengfoc.com/dengfoc/shouimage/1-1.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="无刷电机的组成" style="zoom:50%;" />
+
+<h3 id="1-可以直接把电机分为定子部分和转子部分："><a href="#1-可以直接把电机分为定子部分和转子部分：" class="headerlink" title="1.可以直接把电机分为定子部分和转子部分："></a>1.可以直接把电机分为定子部分和转子部分：</h3><ul>
+<li><strong>定子</strong>就是有线圈绕组，固定不动的部分；</li>
+<li><strong>转子</strong>就是电机旋转的部分，用于输出电机的转动和扭矩。</li>
+</ul>
+<h3 id="2-内外旋转类型区分："><a href="#2-内外旋转类型区分：" class="headerlink" title="2.内外旋转类型区分："></a>2.内外旋转类型区分：</h3><ul>
+<li><p><strong>内转子无刷电机</strong>就是转子在内部，轴进行旋转；</p>
+</li>
+<li><p><strong>外转子无刷电机</strong>就是转子在外面，外壳进行旋转。</p>
+</li>
+<li><p>而<strong>直流无刷电机的驱动</strong>，就是依靠<strong>改变电机定子线圈的电流交变频率和波形，在定子周围形成磁场，驱动转子永磁体转动</strong>，进而带动电机转起来。</p>
+</li>
+</ul>
+<h3 id="3-无刷电机跟有刷电机的区别"><a href="#3-无刷电机跟有刷电机的区别" class="headerlink" title="3.无刷电机跟有刷电机的区别"></a>3.<strong>无刷电机跟有刷电机的区别</strong></h3><ul>
+<li>顾名思义就是<strong>无刷电机没有了有刷电机里的电刷</strong>。因此它<strong>不能够如同有刷电机那样采用机械结构就可以进行电流的换向</strong>， 而是必须通过采用如MOS这样的器件实现<strong>电子换向</strong>。</li>
+</ul>
+<img src="http://dengfoc.com/dengfoc/shouimage/2-2.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="2-2" style="zoom: 33%;" />
+
+<img src="http://dengfoc.com/dengfoc/shouimage/2-4.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="2-4" style="zoom: 33%;" />
+
+<img src="http://dengfoc.com/dengfoc/shouimage/2-5.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="2-5" style="zoom: 50%;" />
+
+<ul>
+<li><strong>对电机的控制实际上就是对MOS管开关规律的控制</strong>。而MOS管的开关规律是需要用到单片机程序进行控制的，因此这就引出了我们的<strong>FOC控制算法，FOC控制就是一种对电机运动模型进行抽象化和简化，进而有规律控制各个MOS管开关和通断的过程</strong>。</li>
+</ul>
+<h2 id="二、克拉克变换"><a href="#二、克拉克变换" class="headerlink" title="二、克拉克变换"></a>二、克拉克变换</h2><h3 id="1-克拉克变换基本含义"><a href="#1-克拉克变换基本含义" class="headerlink" title="1.克拉克变换基本含义"></a>1.克拉克变换基本含义</h3><ul>
+<li>交替开关的MOS管可以实现电机的转动，而这些交替开关的MOS管是以极其快的速度在周期性进行的，把这些周期性的开启和关断过程联系起来，并且对其各个相进行单独观察，就可以得到三个相A、B、C的电流随时间变换的曲线，如下图所示，他们之间存在120°的相位差。换一个角度来思考此问题，实际上，我们只要能够<strong>控制这个相位差为120°的sin状波形，就能够实现针对电机的控制</strong>。</li>
+</ul>
+<p><img src="http://dengfoc.com/dengfoc/shouimage/3.1-1.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.1-1"></p>
+<ul>
+<li><p><strong>克拉克变换，实际上就是降维解耦的过程，把难以辨明和控制的三相相位差120°电机波形降维为两维矢量</strong>。</p>
+</li>
+<li><p><strong>第一就是把三相随时间变换的，相位差为120°的电流波形抽象化为三个间隔120°的矢量</strong>。</p>
+</li>
+<li><p><strong>第二就是利用三角函数对矢量进行降维，降维到两个坐标轴</strong>，从此复杂的三相变化问题就降解为了α-β坐标轴的坐标上的数值变化问题。</p>
+</li>
+</ul>
+<img src="http://dengfoc.com/dengfoc/shouimage/3.1-3.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.1-3" style="zoom:50%;" />
+
+<img src="http://dengfoc.com/dengfoc/shouimage/3.1-4.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.1-4" style="zoom:67%;" />
+
+<ul>
+<li>上图中，左边是我们把三相120度相位差的sin状波形抽象化为矢量之后的样子，而右边就是我们需要<strong>把这三个矢量进行投影的坐标轴。只要我们把三个矢量都投影到坐标轴上，那么，一个三矢量问题就变成一个二维坐标平面问题</strong>。</li>
+</ul>
+<h3 id="2-克拉克变换推导公式"><a href="#2-克拉克变换推导公式" class="headerlink" title="2.克拉克变换推导公式"></a>2.克拉克变换推导公式</h3><ul>
+<li><p><strong>克拉克变换的第一步，作投影</strong></p>
+</li>
+<li><p>针对α-β坐标系中α轴，有：</p>
+</li>
+</ul>
+<img src="https://s2.loli.net/2024/07/25/YO6LurHIQkSfV21.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318150726168.png" style="zoom:50%;" />
+
+<ul>
+<li>针对α-β坐标系中β轴，有：</li>
+</ul>
+<img src="https://s2.loli.net/2024/07/25/ZUyTqOcmRVtHSe7.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318150741335.png" style="zoom:50%;" />
+
+<ul>
+<li>把上面的投影结果列成矩阵形式，有：</li>
+</ul>
+<img src="https://s2.loli.net/2024/07/25/xR4twW1ynvGp2ou.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318150755362.png" style="zoom:50%;" />
+
+<h3 id="3-克拉克变换的等辐值形式"><a href="#3-克拉克变换的等辐值形式" class="headerlink" title="3.克拉克变换的等辐值形式"></a>3.克拉克变换的等辐值形式</h3><ul>
+<li>何为等幅值变换？用α相电流输入1A电流的特例来举例，当电流输入时候，根据基尔霍夫电流定律（电路中任一个节点上，在任意时刻，流入节点的电流之和等于流出节点的电流之和，如下图），有：</li>
+</ul>
+<img src="https://s2.loli.net/2024/07/25/fSHMDIEoRj4JsOl.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318151006334.png" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2024/07/25/1bvRp6E8T3Q5dPk.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318152249217.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/esquFgkWVyZpf4c.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240318152309335.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/58PAe2iML9I1uDW.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240319174421088.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/qxy9OB8GJH2frNj.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240319174945752.png" style="zoom:50%;" />
+
+<ul>
+<li>在式子中，我们消去了变量Ic，这是因为由于基尔霍夫电流定律的存在，我们并不需要知道所有三相电流，我们只需要知道两相电流就能够求解得到另外一相的电流，反映在硬件上，<strong>我们就可以省去一路的电流传感器！节省了成本！</strong></li>
+</ul>
+<h3 id="4-克拉克逆变换"><a href="#4-克拉克逆变换" class="headerlink" title="4.克拉克逆变换"></a>4.克拉克逆变换</h3><img src="https://s2.loli.net/2024/07/25/eYjA7Q6pOFBVcNo.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240319175252143.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/Rbtm5MOlFEc8k1d.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240319175403342.png" style="zoom:50%;" />
+
+<h3 id="5-克拉克变换总结"><a href="#5-克拉克变换总结" class="headerlink" title="5.克拉克变换总结"></a>5.克拉克变换总结</h3><ul>
+<li><p>克拉克变换首先将<strong>三相电流转换成两维度的矢量电流</strong>，因此我们就可以通过<strong>控制两维度的矢量电流来表达三项电流的变换情况</strong>，并且通过等幅值变换，我们就可以将<strong>电流进行消项，之后又可以消去一路Ic，优化处理速度</strong>；</p>
+</li>
+<li><p>而克拉克逆变换的目的是我们通<strong>过需求的两项矢量电流来反向求解三相电流，并且来控制无刷电机驱动。</strong></p>
+</li>
+</ul>
+<h2 id="三、帕克变换"><a href="#三、帕克变换" class="headerlink" title="三、帕克变换"></a>三、帕克变换</h2><h3 id="1-帕克变换基本定义"><a href="#1-帕克变换基本定义" class="headerlink" title="1.帕克变换基本定义"></a>1.帕克变换基本定义</h3><ul>
+<li><p>通过克拉克变换之后，我们就将三相电路降阶至二维矢量电流，但是电流和电机旋转角度的关系是未知的，还需要将这个理论和旋转电机对应起来，也就是<strong>建立电机旋转时的数学模型</strong>，这就是帕克变换的目的。</p>
+</li>
+<li><p>其实整个帕克变换的思路很简单，首先，我们把电机的定子t线圈上固定一个Iα−Iβ坐标系，这时候，我在坐标系的右边放上一个转子，如下图右边所示，如果此时转子被吸引且不动，那么在Iα−Iβ坐标系中就一定有一个Iα和Iβ值是能够对应转子现在的状态的</p>
+</li>
+</ul>
+<p><img src="http://dengfoc.com/dengfoc/shouimage/3.3-2.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.3-2"></p>
+<p><img src="http://dengfoc.com/dengfoc/shouimage/3.3-3.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.3-3"></p>
+<h3 id="2-帕克变换推导公式"><a href="#2-帕克变换推导公式" class="headerlink" title="2.帕克变换推导公式"></a>2.帕克变换推导公式</h3><ul>
+<li>根据上图，可以推导Iα−Iβ坐标系于Iq−Id坐标系的关系，这也就是帕克变换：</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/07/25/fahwsKAl9RnDUr6.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240320174459687.png"></p>
+<ul>
+<li>在实际的情况中，电角度是可以根据传感器求解得出，因此，我们只需要控制Iq和Id的电流，就可以控制无刷电机的旋转，而我们可以将Id设置成0，因此，我们只需要一个Iq的电流，就可以控制电机旋转。</li>
+</ul>
+<h2 id="四、推导原理总结"><a href="#四、推导原理总结" class="headerlink" title="四、推导原理总结"></a>四、推导原理总结</h2><img src="http://dengfoc.com/dengfoc/shouimage/3.4-1.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="3.4-1" style="zoom:50%;" />
+
+<ul>
+<li><strong>电机想要旋转，就需要三相电流相互作用，而三项电流可以通过克拉克变换转成二维的矢量，而这个二维的矢量通过和转子的电角度建立关系，即可得出控制的电流Iq（Id默认为0），因此我们仅仅只需要通过设定Iq就可以控制电机进行旋转。</strong></li>
+</ul>
+<h2 id="五、电压形式转换"><a href="#五、电压形式转换" class="headerlink" title="五、电压形式转换"></a>五、电压形式转换</h2><ul>
+<li>因为单片机的控制都是<strong>基于电压进行控制</strong>，包括PWM的控制，也是通过控制电压进行设定，因此我们需要将电流转换成电压形式，<strong>而电压和电流的转换可以直接等于，因为等号两边都需要除以电阻，可以直接消项。</strong></li>
+</ul>
+<img src="https://s2.loli.net/2024/07/25/GQ3qP7uYbaWCotK.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240320180833702.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/ZwqigGLHyDB9tFb.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240320181038012.png" style="zoom:50%;" />
+
+<h2 id="六、电角度于机械角度"><a href="#六、电角度于机械角度" class="headerlink" title="六、电角度于机械角度"></a>六、电角度于机械角度</h2><img src="https://s2.loli.net/2024/07/25/IqfPkovwQDlSTR9.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240320182308979.png" style="zoom:50%;" />
+
+<img src="https://s2.loli.net/2024/07/25/76QqI34TyP5rozm.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image-20240320182250898.png" style="zoom:50%;" />
+
+<ul>
+<li><p><strong>极对数：是N极和S极的对数数量</strong></p>
+</li>
+<li><p><strong>电角度：电角度是定子电流矢量与转子磁极矢量之间的夹角</strong></p>
+</li>
+<li><p><strong>机械角度：电机旋转一圈的空间几何角度，旋转一圈为360度</strong></p>
+</li>
+<li><p>如果只是刚刚的一级对电机，那么的机械角度转一圈，相位的一个周期是能够和机械角度一一对应的，此时电角度&#x3D;机械角度；但是，如果是多级电机，那么机械角度转一圈，相位的周期可能是很多个。</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1/" class="category-chain-item">控制设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" class="print-no-link">#无刷电机控制</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>FOC无刷电机控制</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/04/15/20240319ZYY-FOC无刷电机控制/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/05/17/20240429ZYY-Hi3861%E5%BC%80%E5%8F%91/" title="Hi3861开发">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hi3861开发</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/01/26/20240201ZYY-%E6%8E%A7%E5%88%B6%E5%B7%A5%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="控制工程学习笔记">
+                        <span class="hidden-mobile">控制工程学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

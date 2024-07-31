@@ -1,0 +1,815 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Markdown用法 要写一个好看的文档，格式和各种引用非常重要，Markdown作为开发过程中的记录文件，也是目前应用最广泛的一个格式，因此开篇先分享一下基本用法。 这边主要分享几种最常规的使用方法，主要有标题、换行、强调、代码块、分割线、链接、图片、表格这8种非常常用的用法，其余请参照官方网站  1.标题 一级标题：# ZYY 1 二级标题：## ZYY 2 三级标题：### ZYY 3 最简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown用法">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2023/11/30/20231204ZYY-Markdown%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="Markdown用法 要写一个好看的文档，格式和各种引用非常重要，Markdown作为开发过程中的记录文件，也是目前应用最广泛的一个格式，因此开篇先分享一下基本用法。 这边主要分享几种最常规的使用方法，主要有标题、换行、强调、代码块、分割线、链接、图片、表格这8种非常常用的用法，其余请参照官方网站  1.标题 一级标题：# ZYY 1 二级标题：## ZYY 2 三级标题：### ZYY 3 最简">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T01:35:41.293Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="Markdown">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Markdown用法 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Markdown用法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-30 00:00" pubdate>
+          2023年11月30日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          892 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Markdown用法</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月31日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Markdown用法"><a href="#Markdown用法" class="headerlink" title="Markdown用法"></a>Markdown用法</h1><ul>
+<li>要写一个好看的文档，格式和各种引用非常重要，Markdown作为开发过程中的记录文件，也是目前应用最广泛的一个格式，因此开篇先分享一下基本用法。</li>
+<li>这边主要分享几种最常规的使用方法，主要有标题、换行、强调、代码块、分割线、链接、图片、表格这8种非常常用的用法，其余请参照<a target="_blank" rel="noopener" href="https://markdown.com.cn/">官方网站</a></li>
+</ul>
+<h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h2><ul>
+<li>一级标题：<code># ZYY 1</code></li>
+<li>二级标题：<code>## ZYY 2</code></li>
+<li>三级标题：<code>### ZYY 3</code></li>
+<li>最简单的解释就是，<strong>n个#代表n级标题</strong>，空格之后加上标题就行</li>
+</ul>
+<h2 id="2-换行"><a href="#2-换行" class="headerlink" title="2.换行"></a>2.换行</h2><ul>
+<li>句子末尾加上 <code>&lt;br&gt;</code> 或者 <code>两个空格+Enter键</code><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">example1</span>：<span class="hljs-variable">ZYY</span> &lt;<span class="hljs-variable">br</span>&gt;<br><span class="hljs-variable">example2</span>：<span class="hljs-function"><span class="hljs-title">ZYY</span>(<span class="hljs-variable">Space</span>*<span class="hljs-number">2</span>+<span class="hljs-variable">Enter</span>，括号和汉字自动忽视)</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>最好用的还是2个空格+Enter键</strong>，但是你看不见它到底有没有换行，所以 <code>&lt;br&gt;</code> 这个是比较直观的，但是打字速度就慢了</li>
+</ul>
+<h2 id="3-强调"><a href="#3-强调" class="headerlink" title="3.强调"></a>3.强调</h2><ul>
+<li>粗体（Bold）： <code>**ZYY** 或者 __ZYY__</code></li>
+<li>斜体（Italic）： <code>*ZYY* 或者 _ZYY_</code></li>
+<li>粗斜体： <code>***ZYY*** 或者 ___ZYY___</code><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">example1：ZZZ <span class="hljs-strong">**YYY**</span> YYY  或者ZZZ <span class="hljs-emphasis">__YYY__</span> YYY<br>example2：ZZZ <span class="hljs-strong">*YYY*</span> YYY  或者ZZZ <span class="hljs-emphasis">_YYY_</span> YYY<br>example3：ZZZ <span class="hljs-strong">***YYY**</span>* YYY  或者ZZZ <span class="hljs-emphasis">___YYY__</span>_ YYY<br></code></pre></td></tr></table></figure></li>
+<li>这个没啥特殊要求，两种方法都可以，<strong>但是最好每种符号的前后都加上空格，不然有些会失灵</strong></li>
+</ul>
+<h2 id="4-代码块-and-代码"><a href="#4-代码块-and-代码" class="headerlink" title="4.代码块 and 代码"></a>4.代码块 and 代码</h2><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">代码： ` + ` 单个反引号做开头，单个反引号做结尾，中间就是特殊的代码区<br>代码块：``` + ``` 用三个反引号做开头，三个反引号做结尾，中间就是代码块<br><br>example1： ZZZ `YYY` YYY<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个代码块挺好用的，<strong>特别是想要强调说一些事情的时候，可以给他框出来</strong>，我上面的所有例子都是用代码块罗列的，清晰明了，代码块不一定写代码</li>
+</ul>
+<h2 id="5-分割线"><a href="#5-分割线" class="headerlink" title="5.分割线"></a>5.分割线</h2><ul>
+<li><code>*** 或者 --- 或者 ___</code><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">example1： <span class="hljs-strong">***</span><br>example2： ---<br>example3： <span class="hljs-emphasis">___</span><br></code></pre></td></tr></table></figure></li>
+<li>就会出现一个非常丑的线，<strong>这三根线的类型是一样的，不管用哪个都是一根线</strong></li>
+</ul>
+<h2 id="6-链接"><a href="#6-链接" class="headerlink" title="6.链接"></a>6.链接</h2><ul>
+<li>链接： <code>[超链接显示名](超链接地址 &quot;超链接title&quot;)</code></li>
+<li>直接上网址或者email地址：&lt;链接地址&gt;<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">example1</span>：<span class="hljs-selector-tag">ZZZ</span> <span class="hljs-selector-attr">[YYY]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//github.com/BraveYiYang) YYY</span><br>example2：ZZZ [YYY](<span class="hljs-attribute">https</span>:<span class="hljs-comment">//github.com/BraveYiYang &quot;Brave&quot;) YYY</span><br>example3：&lt;<span class="hljs-attribute">https</span>:<span class="hljs-comment">//github.com/BraveYiYang&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>这个还是很好用的，中括号里面的是你可以随便定义，然后把你小括号的链接赋值在你中括号的定义里面，小括号的双引号里面是你鼠标放上去，他会显示出来你的小标签</li>
+</ul>
+<h2 id="7-图片"><a href="#7-图片" class="headerlink" title="7.图片"></a>7.图片</h2><ul>
+<li>插入图片： <code>[![图片alt](图片链接 &quot;图片title&quot;)](超链接)</code><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">example1：!<span class="hljs-selector-attr">[ZYY]</span>(/ZYY/Z.jpg)<br>example2：!<span class="hljs-selector-attr">[ZYY]</span>(/ZYY/Z<span class="hljs-selector-class">.jpg</span> <span class="hljs-string">&quot;Brave&quot;</span>)<br>example3：<span class="hljs-selector-attr">[![ZYY]</span>(/ZYY/Z<span class="hljs-selector-class">.jpg</span> <span class="hljs-string">&quot;Brave&quot;</span>)](https:<span class="hljs-comment">//github.com/BraveYiYang)</span><br></code></pre></td></tr></table></figure></li>
+<li>这个图片的用处是很多的，我们可以随心所欲的插入图片，<strong>图文并茂</strong></li>
+</ul>
+<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h2><ul>
+<li>| 表示表格的线，用他来固定列数，几行就是表格的几行，</li>
+<li>— 来定义标题行，而且每一列的 — 数量不一样代表每一列的长度也不一样</li>
+<li>:— 表示左对齐 —: 表示右对齐 :—: 表示居中对齐<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">example1：<br>|<span class="hljs-string"> Syntax      </span>|<span class="hljs-string"> Description </span>|<br>|<span class="hljs-string"> ----------- </span>|<span class="hljs-string"> ----------- </span>|<br>|<span class="hljs-string"> Header      </span>|<span class="hljs-string"> Title       </span>|<br>|<span class="hljs-string"> Paragraph   </span>|<span class="hljs-string"> Text        </span>|<br>example2：<br>|<span class="hljs-string"> Syntax </span>|<span class="hljs-string"> Description </span>|<br>|<span class="hljs-string"> --- </span>|<span class="hljs-string"> ----------- </span>|<br>|<span class="hljs-string"> Header </span>|<span class="hljs-string"> Title </span>|<br>|<span class="hljs-string"> Paragraph </span>|<span class="hljs-string"> Text </span>|<br>example3：<br>|<span class="hljs-string"> Syntax      </span>|<span class="hljs-string"> Description </span>|<span class="hljs-string"> Test Text     </span>|<br>|<span class="hljs-string"> :---        </span>|<span class="hljs-string">    :----:   </span>|<span class="hljs-string">          ---: </span>|<br>|<span class="hljs-string"> Header      </span>|<span class="hljs-string"> Title       </span>|<span class="hljs-string"> Here&#x27;s this   </span>|<br>|<span class="hljs-string"> Paragraph   </span>|<span class="hljs-string"> Text        </span>|<span class="hljs-string"> And more      </span>|<br></code></pre></td></tr></table></figure></li>
+<li><strong>表格其实不是很常用，但是也是算作是一个基本的使用方法</strong></li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>markdown的使用方法其实不难，而且也很容易入门，只不过没有那么直观，但是大家用习惯之后，就非常容易上手，所以鼓励大家多使用，熟能生巧，多练才会掌握的快！</strong></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/%E8%B7%AF%E6%BC%94%E6%96%87%E4%B9%A6/" class="category-chain-item">路演文书</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/Markdown/" class="print-no-link">#Markdown</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Markdown用法</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2023/11/30/20231204ZYY-Markdown用法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/01/26/20240201ZYY-%E6%8E%A7%E5%88%B6%E5%B7%A5%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="控制工程学习笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">控制工程学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2023/11/26/20231204ZYY-%E7%94%B5%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/" title="电气路控制设计">
+                        <span class="hidden-mobile">电气路控制设计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

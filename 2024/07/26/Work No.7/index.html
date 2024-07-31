@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="3D打印机运行逻辑打印机初始化1.获取机器，连接网络，并且在设置里面打开root权限，获得root的账号和密码 12root  &#x2F;&#x2F;账号root  &#x2F;&#x2F;密码  2.需要获取机器的IP地址，然后用mobaxtem的ssh进行连接，连接时输入IP地址和账号 1172.xx.xxx.xx  &#x2F;&#x2F;IP地址  3.拷贝所需的文件夹进行安装 123456cp &#x2F;tmp&#x2F;udisk&#x2F;sda1&#x2F;fluidd&#x2F;fl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D打印机运行逻辑">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/07/26/Work%20No.7/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="3D打印机运行逻辑打印机初始化1.获取机器，连接网络，并且在设置里面打开root权限，获得root的账号和密码 12root  &#x2F;&#x2F;账号root  &#x2F;&#x2F;密码  2.需要获取机器的IP地址，然后用mobaxtem的ssh进行连接，连接时输入IP地址和账号 1172.xx.xxx.xx  &#x2F;&#x2F;IP地址  3.拷贝所需的文件夹进行安装 123456cp &#x2F;tmp&#x2F;udisk&#x2F;sda1&#x2F;fluidd&#x2F;fl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T01:35:41.293Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="3D打印机">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>3D打印机运行逻辑 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="3D打印机运行逻辑"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-26 00:00" pubdate>
+          2024年7月26日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">3D打印机运行逻辑</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月31日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="3D打印机运行逻辑"><a href="#3D打印机运行逻辑" class="headerlink" title="3D打印机运行逻辑"></a>3D打印机运行逻辑</h1><h3 id="打印机初始化"><a href="#打印机初始化" class="headerlink" title="打印机初始化"></a>打印机初始化</h3><p>1.获取机器，连接网络，并且在设置里面打开root权限，获得root的账号和密码</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">root  <span class="hljs-comment">//账号</span><br>root  <span class="hljs-comment">//密码</span><br></code></pre></td></tr></table></figure>
+
+<p>2.需要获取机器的IP地址，然后用mobaxtem的ssh进行连接，连接时输入IP地址和账号</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-number">172</span><span class="hljs-selector-class">.xx</span><span class="hljs-selector-class">.xxx</span><span class="hljs-selector-class">.xx</span>  <span class="hljs-comment">//IP地址</span><br></code></pre></td></tr></table></figure>
+
+<p>3.拷贝所需的文件夹进行安装</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">cp <span class="hljs-regexp">/tmp/u</span>disk<span class="hljs-regexp">/sda1/</span>fluidd<span class="hljs-regexp">/fluidd.sh /u</span>sr<span class="hljs-regexp">/data  /</span>/拷贝脚本文件<br>cp <span class="hljs-regexp">/tmp/u</span>disk<span class="hljs-regexp">/sda1/</span>fluidd<span class="hljs-regexp">/fluidd.tar /u</span>sr<span class="hljs-regexp">/data  /</span>/拷贝配置文件<br>	<br>cd <span class="hljs-regexp">/usr/</span>data  <span class="hljs-regexp">//</span>进入该文件夹下<br>	<br>.<span class="hljs-regexp">/fluidd.sh install  /</span>/执行安装指令<br></code></pre></td></tr></table></figure>
+
+<p>4.等待结束，即可登录fluidd网站</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-number">172</span><span class="hljs-selector-class">.xx</span><span class="hljs-selector-class">.xxx</span><span class="hljs-selector-class">.xx</span>:<span class="hljs-number">4408</span>  <span class="hljs-comment">//fluidd的网址</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="打印机操作"><a href="#打印机操作" class="headerlink" title="打印机操作"></a>打印机操作</h3><p>SET_VELOCITY_LIMIT 改变打印机配置文件中指定的速度限制。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">SET_VELOCITY_LIMIT</span> <span class="hljs-selector-attr">[VELOCITY=&lt;value&gt;]</span> <span class="hljs-selector-attr">[ACCEL=&lt;value&gt;]</span> <span class="hljs-selector-attr">[MINIMUM_CRUISE_RATIO=&lt;value&gt;]</span> <span class="hljs-selector-attr">[SQUARE_CORNER_VELOCITY=&lt;value&gt;]</span><br><br><span class="hljs-selector-attr">[VELOCITY=&lt;value&gt;]</span>  <span class="hljs-comment">//速度</span><br><span class="hljs-selector-attr">[ACCEL=&lt;value&gt;]</span>  <span class="hljs-comment">//加速度</span><br><span class="hljs-selector-attr">[MINIMUM_CRUISE_RATIO=&lt;value&gt;]</span>  <span class="hljs-comment">//最小巡航速度</span><br><span class="hljs-selector-attr">[SQUARE_CORNER_VELOCITY=&lt;value&gt;]</span>  <span class="hljs-comment">//角速度</span><br><span class="hljs-selector-attr">[ACCEL_TO_DECEL]</span>  <span class="hljs-comment">//加速减速</span><br></code></pre></td></tr></table></figure>
+
+<p>3D打印机Z轴正值是向下，负值是向上</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">G1</span> Z1  //K1-MAX向下位移<span class="hljs-number">1</span>mm<br><span class="hljs-attribute">G1</span> Z-.<span class="hljs-number">5</span>  //K1-MAX向上位移到-<span class="hljs-number">0</span>.<span class="hljs-number">5</span>mm<br></code></pre></td></tr></table></figure>
+
+<p>3D打印机X轴正值是向右，负值是向左</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">G1</span> X1  //K1-MAX向右位移<span class="hljs-number">1</span>mm<br><span class="hljs-attribute">G1</span> X-.<span class="hljs-number">5</span>  //K1-MAX向左位移到-<span class="hljs-number">0</span>.<span class="hljs-number">5</span>mm<br></code></pre></td></tr></table></figure>
+
+<p>3D打印机X轴正值是向后，负值是向前</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">G1</span> X1  //K1-MAX向后位移<span class="hljs-number">1</span>mm<br><span class="hljs-attribute">G1</span> X-.<span class="hljs-number">5</span>  //K1-MAX向前位移到-<span class="hljs-number">0</span>.<span class="hljs-number">5</span>mm<br></code></pre></td></tr></table></figure>
+
+<p>EXCLUDE_OBJECT_START 表示当前层上一个对象的gcode开始</p>
+<p>EXCLUDE_OBJECT_END 表示对象在该层的代码的结束</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">EXCLUDE_OBJECT_START <span class="hljs-attribute">NAME</span>=对象名称<br>EXCLUDE_OBJECT_END [<span class="hljs-attribute">NAME</span>=对象名称]<br></code></pre></td></tr></table></figure>
+
+<p>EXCLUDE_OBJECT_DEFINE</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs scss">EXCLUDE_OBJECT_DEFINE <span class="hljs-selector-attr">[NAME =对象名称[中心= X, Y]</span><span class="hljs-selector-attr">[多边形= [(X, Y),……[reset =1]</span> <span class="hljs-selector-attr">[json =1]</span>  <span class="hljs-comment">//提供文件中一个对象的摘要。</span><br><span class="hljs-comment">//如果没有提供参数，这将列出Klipper已知的已定义对象。返回字符串列表，除非给出了JSON参数，否则它将以JSON格式返回对象详细信息。</span><br><br>&lt;NAME&gt;  <span class="hljs-comment">//当包含NAME参数时，将定义要排除的对象。</span><br><br>&lt;CENTER&gt;  <span class="hljs-comment">//对象的 X，Y 坐标。</span><br><br>&lt;<span class="hljs-selector-tag">POLYGON</span>&gt;  <span class="hljs-comment">//提供对象轮廓的 X,Y 坐标数组</span><br><br><span class="hljs-comment">//当提供RESET参数时，将清除所有已定义的对象，并重置[exclude_object]模块。</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="G-code-打印流程"><a href="#G-code-打印流程" class="headerlink" title="G-code 打印流程"></a>G-code 打印流程</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-comment">//这个干嘛没搞明白</span><br><span class="hljs-symbol">EXCLUDE_OBJECT_DEFINE</span>  NAME<span class="hljs-symbol">=Square_columns_Z_axis</span>.stl_id_0_copy_0 CENTER<span class="hljs-number">=163</span>.<span class="hljs-number">166</span>,<span class="hljs-number">143</span>.<span class="hljs-number">573</span> POLYGON=[[<span class="hljs-number">58</span>.<span class="hljs-number">702</span>,<span class="hljs-number">39</span>.<span class="hljs-number">1091</span>],[<span class="hljs-number">267</span>.<span class="hljs-number">631</span>,<span class="hljs-number">39</span>.<span class="hljs-number">1091</span>],[<span class="hljs-number">267</span>.<span class="hljs-number">631</span>,<span class="hljs-number">248</span>.<span class="hljs-number">038</span>],[<span class="hljs-number">58</span>.<span class="hljs-number">702</span>,<span class="hljs-number">248</span>.<span class="hljs-number">038</span>],[<span class="hljs-number">58</span>.<span class="hljs-number">702</span>,<span class="hljs-number">39</span>.<span class="hljs-number">1091</span>]]<br><br><span class="hljs-comment">//报告当前进度给控制器，P0是进度为0%，R1210是当前设定的剩余时间</span><br><span class="hljs-symbol">M73</span> <span class="hljs-built_in">P0</span> R1210<br><br><span class="hljs-comment">//关闭P0风扇，没有P参数，默认P0，S代表风扇的模拟量为0，范围是0~255，</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//关闭P2风扇</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">P2</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//关闭热床温度，不进行等待</span><br><span class="hljs-symbol">M140</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//关闭喷头温度，不进行等待，继续执行</span><br><span class="hljs-symbol">M104</span> <span class="hljs-built_in">S0</span> <br><br><span class="hljs-comment">//执行宏定义，在gcode_macro.cfg配置文件中有宏定义函数，作用为开始打印，对打印机进行自动，调节热床和喷头温度</span><br><span class="hljs-symbol">START_PRINT</span> EXTRUDER_TEMP<span class="hljs-number">=220</span> BED_TEMP<span class="hljs-number">=50</span><br><br><span class="hljs-comment">//设定机箱温度为35摄氏度</span><br><span class="hljs-symbol">M141</span> S35<br><br><span class="hljs-comment">//将打印机三轴设为绝对坐标系</span><br><span class="hljs-symbol">G90</span><br><br><span class="hljs-comment">//设置移动单位为毫米</span><br><span class="hljs-symbol">G21</span><br><br><span class="hljs-comment">//设置挤出头为绝对坐标系</span><br><span class="hljs-symbol">M83</span><br><br><span class="hljs-comment">//关闭P0风扇</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//关闭P2风扇</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">P2</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//设置挤出头当前位置为零点</span><br><span class="hljs-symbol">G92</span> E0<br><br><span class="hljs-comment">//使用G1直线移动方式，将挤出头回抽0.6mm，速度为2400mm/min</span><br><span class="hljs-symbol">G1</span> E-.<span class="hljs-number">6</span> F2400<br><br><span class="hljs-comment">//设置加速度为1000mm/min，加减速速度为1000mm/min</span><br><span class="hljs-symbol">SET_VELOCITY_LIMIT</span> ACCEL<span class="hljs-number">=1000</span> ACCEL_TO_DECEL<span class="hljs-number">=1000</span><br><br><span class="hljs-comment">//设置角加速度为20rad/min</span><br><span class="hljs-symbol">SET_VELOCITY_LIMIT</span> SQUARE_CORNER_VELOCITY<span class="hljs-number">=20</span><br><br><span class="hljs-comment">//表示当前层开始打印</span><br><span class="hljs-symbol">EXCLUDE_OBJECT_START</span> NAME<span class="hljs-symbol">=Square_columns_Z_axis</span>.stl_id_0_copy_0<br><br><span class="hljs-comment">//开始打印，G1直线位移到坐标为(49.789，32.953)位置，速度为30000mm/min</span><br><span class="hljs-symbol">G1</span> X49.<span class="hljs-number">789</span> Y32.<span class="hljs-number">952</span> F30000<br><br><span class="hljs-comment">//Z轴向下移动0.4mm</span><br><span class="hljs-symbol">G1</span> Z.<span class="hljs-number">4</span><br><br><span class="hljs-comment">//开始重复性打印操作</span><br><span class="hljs-symbol">G1</span> X50.<span class="hljs-number">408</span> Y32.<span class="hljs-number">135</span> E.<span class="hljs-number">037</span><br><span class="hljs-symbol">G1</span> X51.<span class="hljs-number">103</span> Y31.<span class="hljs-number">381</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X51.<span class="hljs-number">866</span> Y30.<span class="hljs-number">696</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X52.<span class="hljs-number">691</span> Y30.<span class="hljs-number">087</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X53.<span class="hljs-number">57</span> Y29.<span class="hljs-number">56</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X54.<span class="hljs-number">494</span> Y29.<span class="hljs-number">119</span> E.<span class="hljs-number">03697</span><br><span class="hljs-symbol">G1</span> X55.<span class="hljs-number">682</span> Y28.<span class="hljs-number">701</span> E.<span class="hljs-number">04545</span><br><span class="hljs-symbol">G1</span> X56.<span class="hljs-number">731</span> Y28.<span class="hljs-number">45</span> E.<span class="hljs-number">03897</span><br><span class="hljs-symbol">G1</span> X57.<span class="hljs-number">747</span> Y28.<span class="hljs-number">311</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X58.<span class="hljs-number">707</span> Y28.<span class="hljs-number">268</span> E.<span class="hljs-number">0347</span><br><span class="hljs-symbol">G1</span> X267.<span class="hljs-number">625</span> Y28.<span class="hljs-number">268</span> E7.<span class="hljs-number">5432</span><br><span class="hljs-symbol">G1</span> X268.<span class="hljs-number">655</span> Y28.<span class="hljs-number">317</span> E.<span class="hljs-number">03721</span><br><span class="hljs-symbol">G1</span> X269.<span class="hljs-number">669</span> Y28.<span class="hljs-number">463</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X270.<span class="hljs-number">665</span> Y28.<span class="hljs-number">706</span> E.<span class="hljs-number">03702</span><br><span class="hljs-symbol">G1</span> X271.<span class="hljs-number">632</span> Y29.<span class="hljs-number">041</span> E.<span class="hljs-number">03696</span><br><span class="hljs-symbol">G1</span> X272.<span class="hljs-number">832</span> Y29.<span class="hljs-number">612</span> E.<span class="hljs-number">04796</span><br><span class="hljs-symbol">G1</span> X273.<span class="hljs-number">788</span> Y30.<span class="hljs-number">196</span> E.<span class="hljs-number">04045</span><br><span class="hljs-symbol">...</span><br><br><span class="hljs-comment">//打印进度和时长标记位</span><br><span class="hljs-symbol">M73</span> <span class="hljs-built_in">P0</span> R1208<br><br><span class="hljs-comment">//表示上一层已经打印结束</span><br><span class="hljs-symbol">EXCLUDE_OBJECT_END</span> NAME<span class="hljs-symbol">=Square_columns_Z_axis</span>.stl_id_0_copy_0<br><br><span class="hljs-comment">//表示当前层开始打印</span><br><span class="hljs-symbol">EXCLUDE_OBJECT_START</span> NAME<span class="hljs-symbol">=Square_columns_Z_axis</span>.stl_id_0_copy_0<br><br><span class="hljs-comment">//关闭P0、P2风扇</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">S0</span><br><span class="hljs-symbol">M106</span> <span class="hljs-built_in">P2</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//结束打印，在gcode_macro.cfg配置文件中有宏定义函数，表示结束打印</span><br><span class="hljs-symbol">END_PRINT</span><br><br><span class="hljs-comment">//设置机箱温度为0</span><br><span class="hljs-symbol">M141</span> <span class="hljs-built_in">S0</span><br><br><span class="hljs-comment">//上传打印进度</span><br><span class="hljs-symbol">M73</span> P100 <span class="hljs-built_in">R0</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/3D%E6%89%93%E5%8D%B0%E6%9C%BA/" class="category-chain-item">3D打印机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/3D%E6%89%93%E5%8D%B0%E6%9C%BA/" class="print-no-link">#3D打印机</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>3D打印机运行逻辑</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/07/26/Work No.7/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/07/30/STM32%E7%9A%84USART%E5%8F%91%E9%80%81%E6%B5%8B%E8%AF%95/" title="STM32的USART发送测试">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">STM32的USART发送测试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/07/25/STM32%E7%9A%84%E6%97%B6%E9%92%9F%E5%AD%A6%E4%B9%A0/" title="STM32的时钟学习">
+                        <span class="hidden-mobile">STM32的时钟学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

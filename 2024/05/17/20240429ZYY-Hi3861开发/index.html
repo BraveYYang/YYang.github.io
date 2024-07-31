@@ -1,0 +1,826 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hi3861开发一、学习资料 【UART串口使用】HI3861学习笔记（18）——UART串口使用_hi3861 uart-CSDN博客  【开发环境搭建】[2.1 Pegasus开发环境搭建.md · HiSpark&#x2F;HiSpark_NICU2023 - Gitee.com](https:&#x2F;&#x2F;gitee.com&#x2F;HiSpark&#x2F;HiSpark_NICU2023&#x2F;blob&#x2F;master&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hi3861开发">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/05/17/20240429ZYY-Hi3861%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="Hi3861开发一、学习资料 【UART串口使用】HI3861学习笔记（18）——UART串口使用_hi3861 uart-CSDN博客  【开发环境搭建】[2.1 Pegasus开发环境搭建.md · HiSpark&#x2F;HiSpark_NICU2023 - Gitee.com](https:&#x2F;&#x2F;gitee.com&#x2F;HiSpark&#x2F;HiSpark_NICU2023&#x2F;blob&#x2F;master&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T01:35:41.293Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="Hi3861">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hi3861开发 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hi3861开发"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-17 00:00" pubdate>
+          2024年5月17日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Hi3861开发</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月31日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Hi3861开发"><a href="#Hi3861开发" class="headerlink" title="Hi3861开发"></a>Hi3861开发</h1><h2 id="一、学习资料"><a href="#一、学习资料" class="headerlink" title="一、学习资料"></a>一、学习资料</h2><ul>
+<li><p>【UART串口使用】<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36347513/article/details/121603716">HI3861学习笔记（18）——UART串口使用_hi3861 uart-CSDN博客</a></p>
+</li>
+<li><p>【开发环境搭建】[2.1 Pegasus开发环境搭建.md · HiSpark&#x2F;HiSpark_NICU2023 - Gitee.com](<a target="_blank" rel="noopener" href="https://gitee.com/HiSpark/HiSpark_NICU2023/blob/master/2.1">https://gitee.com/HiSpark/HiSpark_NICU2023/blob/master/2.1</a> Pegasus开发环境搭建.md)</p>
+</li>
+<li><p>【入门demo】<a target="_blank" rel="noopener" href="https://docs.openharmony.cn/pages/v4.0/zh-cn/device-dev/quick-start/quickstart-ide-3861-helloworld.md">编写 Hello World”程序 (openharmony.cn)</a></p>
+</li>
+<li><p>【UART串口读取】<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/detail/281809">HarmonyOS小熊派 | HarmonyOS基础外设开发–UART数据读写-云社区-华为云 (huaweicloud.com)</a></p>
+</li>
+<li><p>【QT转EXE格式】<a target="_blank" rel="noopener" href="https://www.cnblogs.com/JinShanCheShen/p/16194526.html">QT打包成exe详细步骤 - 西北小蚂蚁 - 博客园 (cnblogs.com)</a></p>
+</li>
+<li><p>【QT转EXE格式编译报错】<a target="_blank" rel="noopener" href="https://blog.csdn.net/weijifen000/article/details/102537640">Qt软件打包后报错“无法定位程序输入点_ZN10QArrayData10deallocateEPs_jj于动态链接库….. .exe上。”解决办法-CSDN博客</a></p>
+</li>
+</ul>
+<h2 id="二、QT开发"><a href="#二、QT开发" class="headerlink" title="二、QT开发"></a>二、QT开发</h2><ul>
+<li><p>geometry里的宽度、高度是分辨率，比如geometry设置为宽<em>高为1920</em>1080</p>
+</li>
+<li><p>【窗口自适应】<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2286080">【QT】QT Designer控件随窗口大小自适应-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+<li><p>【串口发送】<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26904271/article/details/132646641">QT串口助手：识别串口号，发送，接收，十六进制_qt串口发送16进制数据-CSDN博客</a></p>
+</li>
+<li><p>foreach是QT中的一个关键字，其作用是对第二个参数中的对象进行遍历，把遍历过程中的每个对象依次赋给第一个参数，并执行花括号中的内容。在这里，就是把可获取的串口列表availablePorts()中的串口，逐个将其串口号添加到combobox中。</p>
+</li>
+</ul>
+<h3 id="1-串口设定"><a href="#1-串口设定" class="headerlink" title="1.串口设定"></a>1.串口设定</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xl"> 	<span class="hljs-comment">//mainwindow.h文件调用串口头文件</span><br> 	<span class="hljs-comment">//串口头文件</span><br> 	#include &lt;QSerialPort&gt;<br>#include &lt;QSerialPortInfo&gt;<br> 	<br> 	<span class="hljs-comment">//mainwindow.cpp文件中的MainWindow::MainWindow(QWidget *parent)初始化函数内设定，打开即设定查找</span><br> 	<span class="hljs-comment">//使用foreach函数查找串口信息</span><br>foreach (const QSerialPortInfo &amp;portInfo,QSerialPortInfo::availablePorts()) <br> 	&#123;<br>     <span class="hljs-comment">//将所有搜索的值写入serialport端口当中</span><br>     <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">serialport</span>-&gt;</span>addItem(portInfo.portName());<br> 	&#125;<br> 	<span class="hljs-comment">//打开串口</span><br> 	<span class="hljs-function"><span class="hljs-title">serialPort</span>-&gt;</span>open();<br> 	<span class="hljs-comment">//关闭串口</span><br> 	<span class="hljs-function"><span class="hljs-title">serialPort</span>-&gt;</span>close();<br> 	<br> 	<span class="hljs-comment">//串口写入</span><br> 	<span class="hljs-function"><span class="hljs-title">serialPort</span>-&gt;</span>write(<span class="hljs-string">&quot;*****&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-读取下拉选项内容并赋予"><a href="#2-读取下拉选项内容并赋予" class="headerlink" title="2.读取下拉选项内容并赋予"></a>2.读取下拉选项内容并赋予</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-comment">//mainwindow.cpp文件中，自定义函数设定</span><br><br><span class="hljs-comment">//定义参数格式为QString</span><br>QString mBaudrate;<span class="hljs-comment">//波特率</span><br>QString mStopBits;<span class="hljs-comment">//停止位字节</span><br>   QString mDataBits;<span class="hljs-comment">//数据字节</span><br>   QString mParity;<span class="hljs-comment">//奇偶校验</span><br>   <br><span class="hljs-comment">//读取baudrate槽中currentText()所选定的内容，后续类似</span><br><span class="hljs-function"><span class="hljs-title">mBaudrate</span> = ui-&gt;</span><span class="hljs-function"><span class="hljs-title">baudrate</span>-&gt;</span>currentText();<br><span class="hljs-function"><span class="hljs-title">mStopBits</span> = ui-&gt;</span><span class="hljs-function"><span class="hljs-title">stopbits</span>-&gt;</span>currentText();<br>   <span class="hljs-function"><span class="hljs-title">mDataBits</span> = ui-&gt;</span><span class="hljs-function"><span class="hljs-title">databits</span>-&gt;</span>currentText();<br>   <span class="hljs-function"><span class="hljs-title">mParity</span> = ui-&gt;</span><span class="hljs-function"><span class="hljs-title">parity</span>-&gt;</span>currentText();<br><br><span class="hljs-comment">//判断起选定内容是否符合需求，并赋予相应操作</span><br><span class="hljs-keyword">if</span>(mBaudrate == <span class="hljs-string">&quot;9600&quot;</span>) <br>&#123;<br>	<span class="hljs-comment">//将串口波特率设定为9600</span><br>       mSerialPort.setBaudRate(QSerialPort::Baud9600);<span class="hljs-comment">//Baud9600、Baud115200</span><br>       mSerialPort.setStopBits(QSerialPort::OneStop);<span class="hljs-comment">//OneStop-1、OneAndHalfStop-1.5、TwoStop-2</span><br>       mSerialPort.setDataBits(QSerialPort::Data5);<span class="hljs-comment">//Data5、Data6、Data7、Data8</span><br>       mSerialPort.setParity(QSerialPort::OddParity);<span class="hljs-comment">//OddParity-奇校验、EvenParity-偶校验、NoParity无校验</span><br>   &#125; <br>   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mBaudrate == <span class="hljs-string">&quot;115200&quot;</span>) <br>   &#123;<br>   	<span class="hljs-comment">//将串口波特率设定为115200</span><br>       mSerialPort.setBaudRate(QSerialPort::Baud19200);<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-摄像头设定"><a href="#3-摄像头设定" class="headerlink" title="3.摄像头设定"></a>3.摄像头设定</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">//***.pro格式文件加入multimediawidgets</span><br>QT       += core gui multimediawidgets<br><br><span class="hljs-comment">//mainwindow.h文件调用摄像头头文件</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QCameraImageCapture&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QCamera&gt;</span></span><br><br><span class="hljs-comment">//mainwindow.cpp文件中的MainWindow::MainWindow(QWidget *parent)初始化函数内设定，打开即设定查找</span><br><span class="hljs-comment">//获取系统的所有可用的摄像头</span><br>foreach(const QCameraInfo <span class="hljs-variable">&amp;</span>cameraInfo , QCameraInfo::availableCameras())<br>   <span class="hljs-punctuation">&#123;</span><br>       <span class="hljs-comment">//将所有搜索的值写入cameraBox端口当中</span><br>       ui-&gt;cameraBox-&gt;addItem(cameraInfo.deviceName())<span class="hljs-punctuation">;</span><br>   <span class="hljs-punctuation">&#125;</span><br>   <br>   <span class="hljs-comment">//打开摄像头</span><br>   cameraPort-&gt;start()<span class="hljs-punctuation">;</span><br>   <span class="hljs-comment">//关闭摄像头</span><br>   cameraPort-&gt;stop()<span class="hljs-punctuation">;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-QT中setCheckable-的作用"><a href="#4-QT中setCheckable-的作用" class="headerlink" title="4.QT中setCheckable()的作用"></a>4.QT中setCheckable()的作用</h3><p>setCheckable()设置为True时才有可能使得status为True（即设置后按钮想点灯开关一样，能够按一下保持一直开，再按下保持一直关），否则开关点击一下后仍为关闭状态，status一直为False。</p>
+<h3 id="5-TCP通讯"><a href="#5-TCP通讯" class="headerlink" title="5.TCP通讯"></a>5.TCP通讯</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-comment">//***.pro格式文件加入network</span><br>QT       += network<br><br><span class="hljs-comment">//mainwindow.h头文件中引用</span><br>#include &lt;QTcpServer&gt;<br>#include &lt;QTcpSocket&gt;<br><span class="hljs-comment">//定义*socket和*server用来存放服务器的套接字和监听，用于与客户端进行通信</span><br>QTcpSocket *socket;<br>   QTcpServer *server;<br><br><span class="hljs-comment">//mainwindow.cpp文件中MainWindow::MainWindow(QWidget *parent)初始化函数内设定，打开即设定查找</span><br><span class="hljs-comment">//setCheckable()设置为True时才有可能使得status为True（即设置后按钮想点灯开关一样，能够按一下保持一直开，再按下保持一直关），否则开关点击一下后仍为关闭状态，status一直为False。</span><br>ui-&gt;Monitor_OPEN-&gt;setCheckable(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//简而言之就是按键的常开和常闭切换</span><br><span class="hljs-comment">//创建服务器的套接字，用于与客户端进行通信</span><br>socket = <span class="hljs-keyword">new</span> QTcpSocket();<br><span class="hljs-comment">//声明一个QTcpserver的对象，用于监听</span><br>   server = <span class="hljs-keyword">new</span> QTcpServer();<br>   <span class="hljs-comment">//信号：新的客户端连接建立 槽函数：获取客户端套接字，允许写入数据</span><br>   connect(server,SIGNAL(newConnection()),this,SLOT(newConnection_SLOT()));<br>   <br>   <span class="hljs-comment">//定义新函数MainWindow::newConnection_SLOT()，用于新的客户端连接建立槽函数：获取客户端套接字，允许写入数据</span><br>   void MainWindow::newConnection_SLOT()<br>   &#123;<br>       socket = server-&gt;nextPendingConnection(); <span class="hljs-comment">//获取已经连接的客户端套接字</span><br>       connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead_SLOT()));<span class="hljs-comment">//如果socket中有缓存消息，触发槽函数</span><br>   &#125;<br>   <br>   <span class="hljs-comment">//定义新函数MainWindow::readyRead_SLOT()，用于接收消息并显示到接收框</span><br>   void MainWindow::readyRead_SLOT()<br>   &#123;<br>       qDebug() &lt;&lt; <span class="hljs-string">&quot;Server Received!&quot;</span>;<br>       QString buffer;<span class="hljs-comment">//定义容器</span><br>       <span class="hljs-comment">//读取缓冲区数据</span><br>       buffer = socket-&gt;readAll();<br>       <span class="hljs-keyword">if</span>(!buffer.isEmpty())<br>       &#123;<br>           <span class="hljs-comment">//刷新显示，写入Receive_text组件，组件类型为Plain Text Line</span><br>           ui-&gt;Receive_text-&gt;appendPlainText(buffer);<br>       &#125;<br>   &#125;<br>   <br>   <span class="hljs-comment">//连接组件函数，按下开始监听组件Monitor_OPEN，类型为clicked(bool checked)，执行监听程序</span><br>   void MainWindow::on_Monitor_OPEN_clicked(<span class="hljs-keyword">bool</span> checked)<br>   &#123;<br>       <span class="hljs-keyword">if</span>(checked)<span class="hljs-comment">//如果按下了</span><br>       &#123;<br>           <span class="hljs-keyword">int</span> port = ui-&gt;PORT_TEXT-&gt;text().toUInt();<br>           <span class="hljs-comment">//如果未监听到</span><br>           <span class="hljs-keyword">if</span>(!server-&gt;listen(QHostAddress::Any, port))<br>           &#123;<br>               qDebug() &lt;&lt; server-&gt;errorString();<br>               <span class="hljs-comment">//连接失败，再次点击则重新连接，将checked恢复为true</span><br>               ui-&gt;Monitor_OPEN-&gt;toggle();<br>               <span class="hljs-keyword">return</span>;<br>           &#125;<br>           qDebug() &lt;&lt; <span class="hljs-string">&quot;Listen Successfully! Message from port:&quot;</span> &lt;&lt; port;<br>           <span class="hljs-comment">//修改按钮文字</span><br>           ui-&gt;Monitor_OPEN-&gt;setText(<span class="hljs-string">&quot;停止监听&quot;</span>);<br>           <span class="hljs-comment">//发送键使能</span><br>           ui-&gt;Send_Button-&gt;setEnabled(<span class="hljs-keyword">true</span>);<br>       &#125;<br>       <span class="hljs-keyword">else</span><br>       &#123;<br>            qDebug() &lt;&lt; <span class="hljs-string">&quot;Stop Listening!&quot;</span>;<br>           <span class="hljs-comment">//如果已经连接则断开连接</span><br>           <span class="hljs-keyword">if</span>(socket-&gt;state() == QAbstractSocket::ConnectedState)<br>           &#123;<br>               <span class="hljs-comment">//断开连接</span><br>               socket-&gt;disconnectFromHost();<br>           &#125;<br>           <span class="hljs-comment">//关闭倾听服务</span><br>           server-&gt;close();<br>           <span class="hljs-comment">//修改按钮文字&amp;发送键静默</span><br>           ui-&gt;Monitor_OPEN-&gt;setText(<span class="hljs-string">&quot;开始监听&quot;</span>);<br>           ui-&gt;Send_Button-&gt;setEnabled(<span class="hljs-keyword">false</span>);<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-滑动槽设定"><a href="#6-滑动槽设定" class="headerlink" title="6.滑动槽设定"></a>6.滑动槽设定</h3><ul>
+<li>首先使用setRange()方法设置了滑动条的范围为0到100，然后使用setValue()方法设置了滑动条的当前值为50。通过value()方法可以获取当前滑动条的值。最后，使用connect()方法监听了滑动条的值变化，当值发生变化时，会调用onSliderValueChanged()槽函数。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text">// 假设有一个QSlider对象名为slider<br>// 设置滑动条的范围<br>slider-&gt;setRange(-180, 180);<br><br>// 设置滑动条的当前值<br>slider-&gt;setValue(0);<br><br>// 获取滑动条的当前值<br>int currentValue = slider-&gt;value();<br><br>// 监听滑动条的值变化<br>connect(slider, SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>slider 提供了两个自然的步长；较大的步长用 pageStep 表示，相当于按下键盘上的 PageDown 和 PageUp，也相当于鼠标点击时移动的步进值:；较小的步长用 singleStep 表示，相当于按下键盘上的上、下键；</li>
+</ul>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-comment">// 设置移动每页的步长，滑块提供的两个自然步长中较大的那一个，相当于键盘上的 PageUp 和 PageDown；</span><br><span class="hljs-function"><span class="hljs-title">horizontalSlider</span>-&gt;</span>setPageStep(<span class="hljs-number">10</span>);<br><br><span class="hljs-comment">// 获取 每页的步长</span><br><span class="hljs-function"><span class="hljs-title">int</span> step = horizontalSlider-&gt;</span>pageStep();<br><br><span class="hljs-comment">// 设置移动单步的步长，滑块提供的两个自然步长中较小的那一个，相当于键盘上的上、下箭头；</span><br><span class="hljs-function"><span class="hljs-title">horizontalSlider</span>-&gt;</span>setSingleStep(<span class="hljs-number">2</span>);<br><br><span class="hljs-comment">// 获取 单步的步长</span><br><span class="hljs-function"><span class="hljs-title">int</span> step =horizontalSlider-&gt;</span>singleStep();<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>设置是否启用滑块追踪：</li>
+</ul>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-comment">// 设置是否启动滑块追踪：true 表示启动追踪；false 表示禁用追踪；</span><br><span class="hljs-comment">// 如果启用了滑块追踪，则滑块在拖动过程中会一直触发 valueChanged 信号；</span><br><span class="hljs-comment">// 如果禁用了滑块追踪，则滑块在拖动过程中不会触发 valueChanged 信号，</span><br><span class="hljs-comment">// 只有在用户释放滑块时，才触发 valueChanged 信号。</span><br><span class="hljs-function"><span class="hljs-title">horizontalSlider</span>-&gt;</span>setTracking(<span class="hljs-literal">true</span>);<br><span class="hljs-comment">// 可以通过 hasTracking 属性获取是否启用了追踪：</span><br><span class="hljs-function"><span class="hljs-title">bool</span> isTrack = horizontalSlider-&gt;</span>hasTracking();<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>槽函数设定</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">valueChanged</span>()<span class="hljs-comment">//值被改变</span><br><span class="hljs-built_in">sliderPressed</span>()<span class="hljs-comment">//滑块被点击</span><br><span class="hljs-built_in">sliderMoved</span>()<span class="hljs-comment">//滑块移动</span><br><span class="hljs-built_in">sliderReleased</span>();<span class="hljs-comment">//滑块被释放</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三、TCP通讯"><a href="#三、TCP通讯" class="headerlink" title="三、TCP通讯"></a>三、TCP通讯</h2><p>【TCP通信】<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36347513/article/details/123099617">HI3861学习笔记（20）——TCP客户端_hi3861 at tcp 指令 erre-CSDN博客</a></p>
+<p>【TCP通信】<a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_29900103/article/details/117970891">教你动手写TCP上位机与小熊派通信_小熊派设备的tcp通信-CSDN博客</a></p>
+<h2 id="四、下位机代码"><a href="#四、下位机代码" class="headerlink" title="四、下位机代码"></a>四、下位机代码</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iot_gpio_ex.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ohos_init.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;cmsis_os2.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iot_gpio.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iot_uart.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hi_uart.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iot_watchdog.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;iot_errno.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hal_bsp_pcf8574.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hal_bsp_wifi.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;wifi_device.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;lwip/netifapi.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;lwip/sockets.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;lwip/api_shell.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span>    ABS(x)    ((x) &gt; 0 ? (x) : -(x))</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> UART_BUFF_SIZE 100</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> U_SLEEP_TIME   500000</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> UART_TIMEOUT_MS 20   <span class="hljs-comment">// 设置超时时间为100毫秒</span></span><br><br>osThreadId_t Task1_ID; <span class="hljs-comment">// 任务1设置为低优先级任务</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TASK_STACK_SIZE (1024 * 10)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TCP_SERVER_IP <span class="hljs-string">&quot;192.168.245.23&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TCP_SERVER_PORT 8888</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DIR_pos 1 <span class="hljs-comment">// 正方向</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DIR_neg 0 <span class="hljs-comment">// 反方向</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Speed_acc 1000 <span class="hljs-comment">// 加速度</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Speed_dec 1000 <span class="hljs-comment">// 减速度</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Speed_max 2000.0f <span class="hljs-comment">// 最大速度</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> motor_raf_0 0 <span class="hljs-comment">// 相位位置标志</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> motor_raf_1 1 <span class="hljs-comment">//绝对位置标志</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> motor_snf_0 0 <span class="hljs-comment">// 多机同步运动标志</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> motor_snf_1 0 <span class="hljs-comment">// 单机运动标志</span></span><br><br><span class="hljs-comment">//读取数据的枚举值</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">enum</span> &#123;<br>  S_VER   = <span class="hljs-number">0</span>,      <span class="hljs-comment">/* 读取固件版本和对应的硬件版本 */</span><br>  S_RL    = <span class="hljs-number">1</span>,      <span class="hljs-comment">/* 读取读取相电阻和相电感 */</span><br>  S_PID   = <span class="hljs-number">2</span>,      <span class="hljs-comment">/* 读取PID参数 */</span><br>  S_ORG   = <span class="hljs-number">3</span>,      <span class="hljs-comment">/* 读取回零参数 */</span><br>  S_VBUS  = <span class="hljs-number">4</span>,      <span class="hljs-comment">/* 读取总线电压 */</span><br>  S_CBUS  = <span class="hljs-number">5</span>,      <span class="hljs-comment">/* 读取总线电流 */</span><br>  S_CPHA  = <span class="hljs-number">6</span>,      <span class="hljs-comment">/* 读取相电流 */</span><br>  S_ENC   = <span class="hljs-number">7</span>,      <span class="hljs-comment">/* 读取编码器原始值 */</span><br>  S_CPUL  = <span class="hljs-number">8</span>,      <span class="hljs-comment">/* 读取实时脉冲数（根据实时位置计算得到的脉冲数） */</span><br>  S_ENCL  = <span class="hljs-number">9</span>,      <span class="hljs-comment">/* 读取经过线性化校准后的编码器值 */</span><br>  S_TPUL  = <span class="hljs-number">10</span>,     <span class="hljs-comment">/* 读取输入脉冲数 */</span><br>  S_TPOS  = <span class="hljs-number">11</span>,     <span class="hljs-comment">/* 读取电机目标位置 */</span><br>  S_OPOS  = <span class="hljs-number">12</span>,     <span class="hljs-comment">/* 读取电机实时设定的目标位置（开环模式的实时位置） */</span><br>  S_VEL   = <span class="hljs-number">13</span>,     <span class="hljs-comment">/* 读取电机实时转速 */</span><br>  S_CPOS  = <span class="hljs-number">14</span>,     <span class="hljs-comment">/* 读取电机实时位置（基于角度编码器累加的电机实时位置） */</span><br>  S_PERR  = <span class="hljs-number">15</span>,     <span class="hljs-comment">/* 读取电机位置误差 */</span><br>  S_TEMP  = <span class="hljs-number">16</span>,     <span class="hljs-comment">/* 读取电机实时温度 */</span><br>  S_SFLAG = <span class="hljs-number">17</span>,     <span class="hljs-comment">/* 读取状态标志位 */</span><br>  S_OFLAG = <span class="hljs-number">18</span>,     <span class="hljs-comment">/* 读取回零状态标志位 */</span><br>  S_Conf  = <span class="hljs-number">19</span>,     <span class="hljs-comment">/* 读取驱动参数 */</span><br>  S_State = <span class="hljs-number">20</span>,     <span class="hljs-comment">/* 读取系统状态参数 */</span><br>&#125;SysParams_t;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Uart1GpioInit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><span class="hljs-comment">//对UART和LED引脚进行初始化</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">IoTGpioInit</span>(IOT_IO_NAME_GPIO_6);<br>    <span class="hljs-comment">// 设置GPIO0的管脚复用关系为UART1_TX Set the pin reuse relationship of GPIO0 to UART1_ TX</span><br>    <span class="hljs-built_in">IoSetFunc</span>(IOT_IO_NAME_GPIO_6, IOT_IO_FUNC_GPIO_6_UART1_TXD);<br>    <br>    <span class="hljs-built_in">IoTGpioInit</span>(IOT_IO_NAME_GPIO_5);<br>    <span class="hljs-comment">// 设置GPIO1的管脚复用关系为UART1_RX Set the pin reuse relationship of GPIO1 to UART1_ RX</span><br>    <span class="hljs-built_in">IoSetFunc</span>(IOT_IO_NAME_GPIO_5, IOT_IO_FUNC_GPIO_5_UART1_RXD);<br><br>    <span class="hljs-comment">// LED3的GPIO初始化 GPIO initialization of LED3</span><br>    <span class="hljs-built_in">IoTGpioInit</span>(IOT_IO_NAME_GPIO_2);<br>    <span class="hljs-comment">// 设置GPIO9的管脚复用关系为GPIO Set the pin reuse relationship of GPIO9 to GPIO</span><br>    <span class="hljs-built_in">IoSetFunc</span>(IOT_IO_NAME_GPIO_2, IOT_IO_FUNC_GPIO_2_GPIO);<br>    <span class="hljs-comment">// GPIO方向设置为输出 GPIO direction set to output</span><br>    <span class="hljs-built_in">IoTGpioSetDir</span>(IOT_IO_NAME_GPIO_2, IOT_GPIO_DIR_OUT);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Uart1Config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><span class="hljs-comment">//对UART配置初始化</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">uint32_t</span> ret;<br>    <span class="hljs-comment">/* 初始化UART配置，波特率 115200，数据bit为8,停止位1，奇偶校验为NONE */</span><br>    <span class="hljs-comment">/* Initialize UART configuration, baud rate is 9600, data bit is 8, stop bit is 1, parity is NONE */</span><br>    IotUartAttribute uart_attr = &#123;<br>        .baudRate = <span class="hljs-number">115200</span>,<br>        .dataBits = <span class="hljs-number">8</span>,<br>        .stopBits = <span class="hljs-number">1</span>,<br>        .parity = <span class="hljs-number">0</span>,<br>    &#125;;<br><br>    <span class="hljs-comment">//uart初始化返回值</span><br>    ret = <span class="hljs-built_in">IoTUartInit</span>(HI_UART_IDX_1, &amp;uart_attr);<br>    <span class="hljs-comment">//判断uart是否连接成功</span><br>    <span class="hljs-keyword">if</span> (ret != IOT_SUCCESS) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Init Uart1 Falied Error No : %d\n&quot;</span>, ret);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_En_Control</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, <span class="hljs-type">int</span> state, <span class="hljs-type">uint8_t</span> snF)</span><span class="hljs-comment">//电机使能控制函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义接收值以及数据长度</span><br>    <span class="hljs-type">uint32_t</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint32_t</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> uartReadBuff[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>    <span class="hljs-comment">//定义发送命令数组</span><br>    <span class="hljs-type">uint8_t</span> cmd[<span class="hljs-number">16</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>  <br>    <span class="hljs-comment">// 装载命令</span><br>    cmd[<span class="hljs-number">0</span>] =  addr;                       <span class="hljs-comment">// 地址</span><br>    cmd[<span class="hljs-number">1</span>] =  <span class="hljs-number">0xF3</span>;                       <span class="hljs-comment">// 功能码</span><br>    cmd[<span class="hljs-number">2</span>] =  <span class="hljs-number">0xAB</span>;                       <span class="hljs-comment">// 辅助码</span><br>    cmd[<span class="hljs-number">3</span>] =  (<span class="hljs-type">uint8_t</span>)state;             <span class="hljs-comment">// 使能状态</span><br>    cmd[<span class="hljs-number">4</span>] =  snF;                        <span class="hljs-comment">// 多机同步运动标志</span><br>    cmd[<span class="hljs-number">5</span>] =  <span class="hljs-number">0x6B</span>;                       <span class="hljs-comment">// 校验字节</span><br><br>    <span class="hljs-comment">//通过UART的Write函数发送cmd的参数</span><br>    <span class="hljs-built_in">IoTUartWrite</span>(HI_UART_IDX_1, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)cmd, <span class="hljs-number">6</span>);<br>&#125;<br><br><span class="hljs-comment">//电机驱动函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_Traj_Position_Control</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, <span class="hljs-type">uint8_t</span> dir, <span class="hljs-type">uint16_t</span> acc, <span class="hljs-type">uint16_t</span> dec, <span class="hljs-type">float</span> velocity, <span class="hljs-type">float</span> position, <span class="hljs-type">uint8_t</span> raf, <span class="hljs-type">uint8_t</span> snF)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义接收值以及数据长度</span><br>    <span class="hljs-type">uint32_t</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint32_t</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> uartReadBuff[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <br>    <span class="hljs-comment">//定义发送命令数组</span><br>    <span class="hljs-type">uint8_t</span> cmd[<span class="hljs-number">32</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">uint16_t</span> vel = <span class="hljs-number">0</span>; <span class="hljs-type">uint32_t</span> pos = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// 将速度和位置放大10倍发送过去</span><br>    vel = (<span class="hljs-type">uint16_t</span>)<span class="hljs-built_in">ABS</span>(velocity * <span class="hljs-number">10.0f</span>); <br>    pos = (<span class="hljs-type">uint32_t</span>)<span class="hljs-built_in">ABS</span>(position * <span class="hljs-number">10.0f</span>);<br><br>    <span class="hljs-comment">// 装载命令</span><br>    cmd[<span class="hljs-number">0</span>]  =  addr;                      <span class="hljs-comment">// 地址</span><br>    cmd[<span class="hljs-number">1</span>]  =  <span class="hljs-number">0xFD</span>;                      <span class="hljs-comment">// 功能码</span><br>    cmd[<span class="hljs-number">2</span>]  =  dir;                       <span class="hljs-comment">// 符号（方向）</span><br>    cmd[<span class="hljs-number">3</span>]  =  (<span class="hljs-type">uint8_t</span>)(acc &gt;&gt; <span class="hljs-number">8</span>);       <span class="hljs-comment">// 加速加速度(RPM/s)高8位字节</span><br>    cmd[<span class="hljs-number">4</span>]  =  (<span class="hljs-type">uint8_t</span>)(acc &gt;&gt; <span class="hljs-number">0</span>);       <span class="hljs-comment">// 加速加速度(RPM/s)低8位字节  </span><br>    cmd[<span class="hljs-number">5</span>]  =  (<span class="hljs-type">uint8_t</span>)(dec &gt;&gt; <span class="hljs-number">8</span>);       <span class="hljs-comment">// 减速加速度(RPM/s)高8位字节</span><br>    cmd[<span class="hljs-number">6</span>]  =  (<span class="hljs-type">uint8_t</span>)(dec &gt;&gt; <span class="hljs-number">0</span>);       <span class="hljs-comment">// 减速加速度(RPM/s)低8位字节  </span><br>    cmd[<span class="hljs-number">7</span>]  =  (<span class="hljs-type">uint8_t</span>)(vel &gt;&gt; <span class="hljs-number">8</span>);       <span class="hljs-comment">// 最大速度(RPM)高8位字节</span><br>    cmd[<span class="hljs-number">8</span>]  =  (<span class="hljs-type">uint8_t</span>)(vel &gt;&gt; <span class="hljs-number">0</span>);       <span class="hljs-comment">// 最大速度(RPM)低8位字节 </span><br>    cmd[<span class="hljs-number">9</span>]  =  (<span class="hljs-type">uint8_t</span>)(pos &gt;&gt; <span class="hljs-number">24</span>);      <span class="hljs-comment">// 位置(bit24 - bit31)</span><br>    cmd[<span class="hljs-number">10</span>] =  (<span class="hljs-type">uint8_t</span>)(pos &gt;&gt; <span class="hljs-number">16</span>);      <span class="hljs-comment">// 位置(bit16 - bit23)</span><br>    cmd[<span class="hljs-number">11</span>] =  (<span class="hljs-type">uint8_t</span>)(pos &gt;&gt; <span class="hljs-number">8</span>);       <span class="hljs-comment">// 位置(bit8  - bit15)</span><br>    cmd[<span class="hljs-number">12</span>] =  (<span class="hljs-type">uint8_t</span>)(pos &gt;&gt; <span class="hljs-number">0</span>);       <span class="hljs-comment">// 位置(bit0  - bit7 )</span><br>    cmd[<span class="hljs-number">13</span>] =  raf;                       <span class="hljs-comment">// 相位位置/绝对位置标志</span><br>    cmd[<span class="hljs-number">14</span>] =  snF;                       <span class="hljs-comment">// 多机同步运动标志</span><br>    cmd[<span class="hljs-number">15</span>] =  <span class="hljs-number">0x6B</span>;                      <span class="hljs-comment">// 校验字节</span><br><br>    <span class="hljs-comment">//通过UART的Write函数发送cmd的参数</span><br>    <span class="hljs-built_in">IoTUartWrite</span>(HI_UART_IDX_1, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)cmd, <span class="hljs-number">16</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_Origin_Trigger_Return</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, <span class="hljs-type">uint8_t</span> o_mode, <span class="hljs-type">bool</span> snF)</span><span class="hljs-comment">//电机归零函数，没啥用，需要外界碰撞或者限位，该文件未使用此函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义接收值以及数据长度</span><br>    <span class="hljs-type">uint32_t</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint32_t</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> uartReadBuff[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>    <span class="hljs-type">uint8_t</span> cmd[<span class="hljs-number">16</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <br>    <span class="hljs-comment">// 装载命令</span><br>    cmd[<span class="hljs-number">0</span>] =  addr;                       <span class="hljs-comment">// 地址</span><br>    cmd[<span class="hljs-number">1</span>] =  <span class="hljs-number">0x9A</span>;                       <span class="hljs-comment">// 功能码</span><br>    cmd[<span class="hljs-number">2</span>] =  o_mode;                     <span class="hljs-comment">// 回零模式，0为单圈就近回零，1为单圈方向回零，2为多圈无限位碰撞回零，3为多圈有限位开关回零</span><br>    cmd[<span class="hljs-number">3</span>] =  snF;                        <span class="hljs-comment">// 多机同步运动标志，false为不启用，true为启用</span><br>    cmd[<span class="hljs-number">4</span>] =  <span class="hljs-number">0x6B</span>;                       <span class="hljs-comment">// 校验字节</span><br><br>    <span class="hljs-comment">//通过UART的Write函数发送cmd的参数</span><br>    <span class="hljs-built_in">IoTUartWrite</span>(HI_UART_IDX_1, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)cmd, <span class="hljs-number">5</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_Stop_Now</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, <span class="hljs-type">uint8_t</span> snF)</span><span class="hljs-comment">//立即停机</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义接收值以及数据长度</span><br>    <span class="hljs-type">uint32_t</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint32_t</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> uartReadBuff[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>    <span class="hljs-type">uint8_t</span> cmd[<span class="hljs-number">16</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <br>    <span class="hljs-comment">// 装载命令</span><br>    cmd[<span class="hljs-number">0</span>] =  addr;                       <span class="hljs-comment">// 地址</span><br>    cmd[<span class="hljs-number">1</span>] =  <span class="hljs-number">0xFE</span>;                       <span class="hljs-comment">// 功能码</span><br>    cmd[<span class="hljs-number">2</span>] =  <span class="hljs-number">0x98</span>;                       <span class="hljs-comment">// 辅助码</span><br>    cmd[<span class="hljs-number">3</span>] =  snF;                        <span class="hljs-comment">// 多机同步运动标志</span><br>    cmd[<span class="hljs-number">4</span>] =  <span class="hljs-number">0x6B</span>;                       <span class="hljs-comment">// 校验字节</span><br><br>    <span class="hljs-comment">//通过UART的Write函数发送cmd的参数</span><br>    <span class="hljs-built_in">IoTUartWrite</span>(HI_UART_IDX_1, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)cmd, <span class="hljs-number">5</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> <span class="hljs-title">IoTUartFlush</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> id)</span> <span class="hljs-comment">//串口清空函数，用于进行清空UART内部缓存，不然会出现读取错误</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义要存储数组</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> buffer[<span class="hljs-number">128</span>];<br><br>    <span class="hljs-comment">//定义读取值</span><br>    <span class="hljs-type">int</span> read;<br><br>    <span class="hljs-keyword">do</span> &#123;<br>        <span class="hljs-comment">//将读取值全部存入数组当中，从而达到清空效果</span><br>        read = <span class="hljs-built_in">IoTUartRead</span>(id, buffer, <span class="hljs-built_in">sizeof</span>(buffer));<br>    &#125; <span class="hljs-keyword">while</span> (read &gt; <span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">return</span> IOT_SUCCESS;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_Read_Sys_Params</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, SysParams_t s)</span><span class="hljs-comment">//读取电机的实时位置</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//定义发送数组</span><br>    <span class="hljs-type">uint8_t</span> cmd[<span class="hljs-number">16</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>  <br>    <span class="hljs-comment">// 装载命令</span><br>    cmd[<span class="hljs-number">0</span>] =  addr;                       <span class="hljs-comment">// 地址</span><br><br>    <span class="hljs-comment">//对功能码进行选择</span><br>    <span class="hljs-keyword">switch</span>(s)                             <span class="hljs-comment">// 功能码</span><br>    &#123;<br>        <span class="hljs-keyword">case</span> S_VER   : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x1F</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取固件版本和对应的硬件版本 */</span><br>        <span class="hljs-keyword">case</span> S_RL    : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x20</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取读取相电阻和相电感 */</span><br>        <span class="hljs-keyword">case</span> S_PID   : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x21</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取PID参数 */</span><br>        <span class="hljs-keyword">case</span> S_ORG   : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x22</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取回零参数 */</span><br>        <span class="hljs-keyword">case</span> S_VBUS  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x24</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取总线电压 */</span><br>        <span class="hljs-keyword">case</span> S_CBUS  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x26</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取总线电流 */</span><br>        <span class="hljs-keyword">case</span> S_CPHA  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x27</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取相电流 */</span><br>        <span class="hljs-keyword">case</span> S_ENC   : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x29</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取编码器原始值 */</span><br>        <span class="hljs-keyword">case</span> S_CPUL  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x30</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取实时脉冲数（根据实时位置计算得到的脉冲数） */</span><br>        <span class="hljs-keyword">case</span> S_ENCL  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x31</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取经过线性化校准后的编码器值 */</span><br>        <span class="hljs-keyword">case</span> S_TPUL  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x32</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取输入脉冲数 */</span><br>        <span class="hljs-keyword">case</span> S_TPOS  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x33</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机目标位置 */</span><br>        <span class="hljs-keyword">case</span> S_OPOS  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x34</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机实时设定的目标位置（开环模式的实时位置） */</span><br>        <span class="hljs-keyword">case</span> S_VEL   : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x35</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机实时转速 */</span><br>        <span class="hljs-keyword">case</span> S_CPOS  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x36</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机实时位置（基于角度编码器累加的电机实时位置） */</span><br>        <span class="hljs-keyword">case</span> S_PERR  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x37</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机位置误差 */</span><br>        <span class="hljs-keyword">case</span> S_TEMP  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x39</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取电机实时温度 */</span><br>        <span class="hljs-keyword">case</span> S_SFLAG : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x3A</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取状态标志位 */</span><br>        <span class="hljs-keyword">case</span> S_OFLAG : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x3B</span>; <span class="hljs-keyword">break</span>;                  <span class="hljs-comment">/* 读取回零状态标志位 */</span><br>        <span class="hljs-keyword">case</span> S_Conf  : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x42</span>; cmd[<span class="hljs-number">2</span>] = <span class="hljs-number">0x6C</span>; <span class="hljs-keyword">break</span>;   <span class="hljs-comment">/* 读取驱动参数 */</span><br>        <span class="hljs-keyword">case</span> S_State : cmd[<span class="hljs-number">1</span>] = <span class="hljs-number">0x43</span>; cmd[<span class="hljs-number">2</span>] = <span class="hljs-number">0x7A</span>; <span class="hljs-keyword">break</span>;   <span class="hljs-comment">/* 读取系统状态参数 */</span><br>        <span class="hljs-keyword">default</span>: <span class="hljs-keyword">break</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 如果需要四字节，将校验字节放在 cmd[3]</span><br>    cmd[<span class="hljs-number">2</span>] = <span class="hljs-number">0x6B</span>; <br><br>    <span class="hljs-comment">//通过UART的Write函数发送cmd的参数</span><br>    <span class="hljs-built_in">IoTUartWrite</span>(HI_UART_IDX_1, (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)cmd, <span class="hljs-number">3</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ZDT_X42_V2_Receive_Data</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> addr, <span class="hljs-type">uint8_t</span> *rxCmd, <span class="hljs-type">uint32_t</span> *rxCount)</span> </span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">uint32_t</span> startTime = <span class="hljs-built_in">osKernelGetTickCount</span>();  <span class="hljs-comment">// 获取当前系统时间</span><br>    <span class="hljs-type">uint8_t</span> buffer[UART_BUFF_SIZE];<br>    <span class="hljs-type">int</span> len;<br><br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        len = <span class="hljs-built_in">IoTUartRead</span>(HI_UART_IDX_1, buffer, <span class="hljs-built_in">sizeof</span>(buffer));  <span class="hljs-comment">// 从UART读取数据</span><br>        <span class="hljs-keyword">if</span> (len &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-comment">// 将读取的数据复制到rxCmd数组中，确保不会溢出</span><br>            <span class="hljs-type">uint32_t</span> copySize = (*rxCount + len &gt; UART_BUFF_SIZE) ? (UART_BUFF_SIZE - *rxCount) : len;<br>            <span class="hljs-built_in">memcpy</span>(rxCmd + *rxCount, buffer, copySize);<br>            *rxCount += copySize;<br><br>            startTime = <span class="hljs-built_in">osKernelGetTickCount</span>();  <span class="hljs-comment">// 更新最后一次接收数据的时间</span><br>        &#125;<br><br>        <span class="hljs-comment">// 检查是否超时</span><br>        <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">osKernelGetTickCount</span>() - startTime) &gt; UART_TIMEOUT_MS) &#123;<br>            <span class="hljs-keyword">break</span>;  <span class="hljs-comment">// 如果超过设定的超时时间，则停止接收数据</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">float</span> <span class="hljs-title">absolute</span><span class="hljs-params">(<span class="hljs-type">float</span> value)</span> <span class="hljs-comment">//找不到绝对值的函数值定义，自己创建一个函数用于进行绝对值计算</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> (value &lt; <span class="hljs-number">0</span>) ? -value : value;<span class="hljs-comment">//判断如何取正</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">float</span> <span class="hljs-title">ReadMotorAngle</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> sliderId)</span> <span class="hljs-comment">//定义读取角度，并计算和输出角度值</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//清空缓存区</span><br>    <span class="hljs-built_in">IoTUartFlush</span>(HI_UART_IDX_1);<br><br>    <span class="hljs-comment">//定义角度取值为小数点后一位</span><br>    <span class="hljs-type">float</span> pos = <span class="hljs-number">0.0f</span>, Motor_Cur_Pos = <span class="hljs-number">0.0f</span>;<br><br>    <span class="hljs-comment">// 定义接收数据数组、接收数据长度</span><br>    <span class="hljs-type">uint8_t</span> rxCmd[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">uint32_t</span> rxCount = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// 读取电机实时位置</span><br>    <span class="hljs-built_in">ZDT_X42_V2_Read_Sys_Params</span>(sliderId, S_CPOS);<br><br>    <span class="hljs-comment">// 等待返回命令，命令数据缓存在数组rxCmd上，长度为rxCount</span><br>    <span class="hljs-built_in">ZDT_X42_V2_Receive_Data</span>(sliderId, rxCmd, &amp;rxCount);<br><br>    <span class="hljs-comment">//将读取的rxCmd[]十六进制编码打印，用于测试调试</span><br>    <span class="hljs-comment">// printf(&quot;Received bytes: &quot;);</span><br>    <span class="hljs-comment">// for (int i = 0; i &lt; 8; i++) &#123;</span><br>    <span class="hljs-comment">//     printf(&quot;%02X &quot;, rxCmd[i]);</span><br>    <span class="hljs-comment">// &#125;</span><br>    <span class="hljs-comment">// printf(&quot;\n&quot;);</span><br><br>    <span class="hljs-comment">// 获取电机实时角度返回值（电机实时角度返回值放大了10倍返回的，因为要保留1位小数）</span><br>    pos = ((<span class="hljs-type">uint32_t</span>)rxCmd[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-number">24</span>) | ((<span class="hljs-type">uint32_t</span>)rxCmd[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-number">16</span>) | ((<span class="hljs-type">uint32_t</span>)rxCmd[<span class="hljs-number">5</span>] &lt;&lt; <span class="hljs-number">8</span>) | (<span class="hljs-type">uint32_t</span>)rxCmd[<span class="hljs-number">6</span>];<br><br>    <span class="hljs-comment">// 缩小10倍，并判断符号，得到真正的实时角度，存放在浮点数变量Motor_Cur_Pos中</span><br>    Motor_Cur_Pos = pos * <span class="hljs-number">0.1f</span>;<br>    <span class="hljs-keyword">if</span> (rxCmd[<span class="hljs-number">2</span>]) &#123;<br>        Motor_Cur_Pos = -Motor_Cur_Pos;<br>    &#125;<br><br>    <span class="hljs-comment">// 打印解析后的角度值</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Current position (as angle): %.1f degrees\n&quot;</span>, Motor_Cur_Pos);<br><br>    <span class="hljs-keyword">return</span> Motor_Cur_Pos;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ResetMotorToOrigin</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> sliderId)</span> <span class="hljs-comment">//电机归零函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//读取电机目前角度</span><br>    <span class="hljs-type">float</span> Motor_Cur_Pos = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);<br><br>    <span class="hljs-type">float</span> targetPosition = <span class="hljs-number">0</span>; <span class="hljs-comment">// 目标位置，这里假设为0度</span><br><br>    <span class="hljs-comment">// 根据当前角度和目标位置计算需要移动的距离</span><br>    <span class="hljs-type">float</span> delta = targetPosition - Motor_Cur_Pos;<br><br>    <span class="hljs-comment">// 将 delta 四舍五入到小数点后一位</span><br>    <span class="hljs-comment">//delta = ((int)(delta * 10 + 0.5)) / 10.0f;</span><br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;delta: %.1f degrees\n&quot;</span>, delta);<br><br>    <span class="hljs-comment">// 调用轨迹位置控制函数将电机移动到目标位置</span><br>    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, (delta &lt; <span class="hljs-number">0</span>) ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta), motor_raf_0, motor_snf_0);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ParseJson</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span>* json)</span><span class="hljs-comment">//电机uart运行主函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 定义JSON键的字符串，根据上位机所需进行定义，格式类型相同</span><br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* labelStr = <span class="hljs-string">&quot;\&quot;label\&quot;:&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* motor_EnStr = <span class="hljs-string">&quot;\&quot;motor_En\&quot;:&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* sliderIdStr = <span class="hljs-string">&quot;\&quot;sliderId\&quot;:&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* valueStr = <span class="hljs-string">&quot;\&quot;value\&quot;:&quot;</span>;<br>    <br><br>    <span class="hljs-comment">// 找到JSON字符串中键的位置，用于进行键的连接，等于找到对应的标签</span><br>    <span class="hljs-type">char</span>* labelPos = <span class="hljs-built_in">strstr</span>(json, labelStr);<br>    <span class="hljs-type">char</span>* motor_EnPos = <span class="hljs-built_in">strstr</span>(json, motor_EnStr);<br>    <span class="hljs-type">char</span>* sliderIdPos = <span class="hljs-built_in">strstr</span>(json, sliderIdStr);<br>    <span class="hljs-type">char</span>* valuePos = <span class="hljs-built_in">strstr</span>(json, valueStr);<br><br>    <span class="hljs-comment">// 如果找到键，解析其对应的值</span><br>    <span class="hljs-keyword">if</span> (labelPos != <span class="hljs-literal">NULL</span> &amp;&amp; motor_EnPos != <span class="hljs-literal">NULL</span> &amp;&amp; sliderIdPos != <span class="hljs-literal">NULL</span> &amp;&amp; valuePos != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-type">int</span> label = <span class="hljs-built_in">atoi</span>(labelPos + <span class="hljs-built_in">strlen</span>(labelStr)); <span class="hljs-comment">// 将label转换为整数</span><br>        <span class="hljs-type">int</span> sliderId = <span class="hljs-built_in">atoi</span>(sliderIdPos + <span class="hljs-built_in">strlen</span>(sliderIdStr)); <span class="hljs-comment">// 将sliderId转换为整数</span><br><br>        <span class="hljs-comment">//放大30倍，对应谐波减速器</span><br>        <span class="hljs-type">int</span> value = <span class="hljs-built_in">atof</span>(valuePos + <span class="hljs-built_in">strlen</span>(valueStr));<br>        <span class="hljs-type">int</span> motor_En = <span class="hljs-built_in">atoi</span>(motor_EnPos + <span class="hljs-built_in">strlen</span>(motor_EnStr));<br><br>        <span class="hljs-comment">// 打印解析出的值</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;label: %d, motor_En: %d, Slider ID: %d, Value: %d\n&quot;</span>, label, motor_En, sliderId, value);<br><br>        <span class="hljs-comment">// 根据Slider ID和Value执行相应的操作</span><br>        <span class="hljs-keyword">if</span> (label == <span class="hljs-number">1</span>) <br>        &#123;<br>            <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">1</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125; <br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">2</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">3</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">4</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">5</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">6</span>)&#123;<br>                <span class="hljs-keyword">if</span>(motor_En == <span class="hljs-number">1</span>)&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 使能</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">ZDT_X42_V2_En_Control</span>(sliderId, motor_En, motor_snf_0);  <span class="hljs-comment">// 失能</span><br>                &#125;<br>            &#125;<br>        &#125; <br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (label == <span class="hljs-number">2</span>) <br>        &#123;<br>            <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">1</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125; <br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">2</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">3</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">4</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">5</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sliderId == <span class="hljs-number">6</span>)&#123;<br>                <span class="hljs-type">float</span> value_before = <span class="hljs-built_in">ReadMotorAngle</span>(sliderId);  <span class="hljs-comment">//读取电机现在角度值</span><br>                <span class="hljs-type">float</span> delta_value = value - value_before;  <span class="hljs-comment">// 计算想要的变化值</span><br>                <span class="hljs-keyword">if</span> (delta_value &lt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//利用值的正负，判断电机正反转</span><br>                    <span class="hljs-comment">//正转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_pos, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 0);  //LED灯调试代码</span><br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//反转</span><br>                    <span class="hljs-built_in">ZDT_X42_V2_Traj_Position_Control</span>(sliderId, DIR_neg, Speed_acc, Speed_dec, Speed_max, <span class="hljs-built_in">absolute</span>(delta_value), motor_raf_0, motor_snf_0);<br>                    <span class="hljs-comment">//IoTGpioSetOutputVal(IOT_IO_NAME_GPIO_2, 1);  //LED灯调试代码</span><br>                &#125;<br>            &#125;<br>            <br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (label == <span class="hljs-number">3</span>) <span class="hljs-comment">//电机紧急停机</span><br>        &#123;<br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);  <span class="hljs-comment">//调用停机函数</span><br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);  <span class="hljs-comment">//延时确保函数依次执行</span><br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ZDT_X42_V2_Stop_Now</span>(<span class="hljs-number">6</span>, <span class="hljs-number">0</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (label == <span class="hljs-number">4</span>) <span class="hljs-comment">//电机复位函数</span><br>        &#123;<br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">1</span>);  <span class="hljs-comment">//调用复位函数</span><br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);  <span class="hljs-comment">//延时确保函数依次执行</span><br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">2</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">3</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">4</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">5</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>            <span class="hljs-built_in">ResetMotorToOrigin</span>(<span class="hljs-number">6</span>);<br>            <span class="hljs-built_in">usleep</span>(<span class="hljs-number">50</span>);<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Task1</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><span class="hljs-comment">//系统主函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> socket_fd = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">char</span> buff[<span class="hljs-number">256</span>];<br>    <span class="hljs-type">int</span> re = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-type">uint32_t</span> count_0 = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint32_t</span> len_0 = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> uartReadBuff_0[UART_BUFF_SIZE] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>    <span class="hljs-comment">// 对UART1的一些初始化 Some initialization of UART1</span><br>    <span class="hljs-built_in">Uart1GpioInit</span>();<br>    <span class="hljs-comment">// 对UART1参数的一些配置 Some configurations of UART1 parameters</span><br>    <span class="hljs-built_in">Uart1Config</span>();<br><br>    <span class="hljs-comment">// 连接Wifi</span><br>    <span class="hljs-built_in">WiFi_connectHotspots</span>(<span class="hljs-string">&quot;esp32&quot;</span>, <span class="hljs-string">&quot;12345678&quot;</span>);<br>    socket_fd = <span class="hljs-built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>); <span class="hljs-comment">// 创建套接字（TCP）</span><br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> addr;<br>    addr.sin_family = AF_INET;<br>    addr.sin_port = <span class="hljs-built_in">htons</span>(TCP_SERVER_PORT);<br>    addr.sin_addr.s_addr = <span class="hljs-built_in">inet_addr</span>(TCP_SERVER_IP); <span class="hljs-comment">// 填写服务器的IP地址</span><br><br>    re = <span class="hljs-built_in">connect</span>(socket_fd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;addr, <span class="hljs-built_in">sizeof</span>(addr)); <span class="hljs-comment">// 连接服务器</span><br>    <span class="hljs-keyword">if</span> (re == <span class="hljs-number">-1</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to connect to the server\r\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Connection to server successful\r\n&quot;</span>);<br><br>    <span class="hljs-comment">// 发送第一条数据</span><br>    <span class="hljs-built_in">send</span>(socket_fd, <span class="hljs-string">&quot;Connection to server successful.&quot;</span>, <span class="hljs-built_in">strlen</span>(<span class="hljs-string">&quot;Connection to server successful.&quot;</span>), <span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-built_in">memset_s</span>(buff, <span class="hljs-built_in">sizeof</span>(buff), <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(buff));<br>        re = <span class="hljs-built_in">recv</span>(socket_fd, buff, <span class="hljs-built_in">sizeof</span>(buff), <span class="hljs-number">0</span>); <span class="hljs-comment">//	接收客户端发送过来的消息</span><br>        <span class="hljs-keyword">if</span> (re &lt;= <span class="hljs-number">0</span>) <br>        &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-built_in">ParseJson</span>(buff);<span class="hljs-comment">//执行控制主函数</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">close</span>(socket_fd);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UartExampleEntry</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><span class="hljs-comment">//配置上报函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//osThreadAttr_t attr;</span><br>    <span class="hljs-built_in">IoTWatchDogDisable</span>();<br><br>    osThreadAttr_t options;<br>    options.name = <span class="hljs-string">&quot;thread_1&quot;</span>;<br>    options.attr_bits = <span class="hljs-number">0</span>;<br>    options.cb_mem = <span class="hljs-literal">NULL</span>;<br>    options.cb_size = <span class="hljs-number">0</span>;<br>    options.stack_mem = <span class="hljs-literal">NULL</span>;<br>    options.stack_size = TASK_STACK_SIZE;<br>    options.priority = osPriorityNormal;<br><br>    Task1_ID = <span class="hljs-built_in">osThreadNew</span>((osThreadFunc_t)Task1, <span class="hljs-literal">NULL</span>, &amp;options);<br>    <span class="hljs-keyword">if</span> (Task1_ID != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ID = %d, Create Task1_ID is OK!\r\n&quot;</span>, Task1_ID);<br>    &#125;<br>&#125;<br><br><span class="hljs-built_in">APP_FEATURE_INIT</span>(UartExampleEntry);<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/Hi3861/" class="print-no-link">#Hi3861</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hi3861开发</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/05/17/20240429ZYY-Hi3861开发/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/05/27/20240529ZYY-1_TCP%E9%80%9A%E4%BF%A1/" title="TCP通信">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TCP通信</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/04/15/20240319ZYY-FOC%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="FOC无刷电机控制">
+                        <span class="hidden-mobile">FOC无刷电机控制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
