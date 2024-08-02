@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="C语言指针学习计算机的语言表示在现代的计算机中主要采用的数字集成电路完成，数字电路通过高低电平只能表示0和1，所以就出现了，计算机只会识别0和1。无论是存储还是计算，计算机均采用二进制体系完成。 例如：十进制 4 ———- 用二进制表示为 00000100 在C语言中，一个int类型的整数占用的字节数是固定的，并且与具体数值（例如1）无关。通常情况下，int类型的大小是4字节（32位）。不过，这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言指针学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/02/Work%20No.13/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="C语言指针学习计算机的语言表示在现代的计算机中主要采用的数字集成电路完成，数字电路通过高低电平只能表示0和1，所以就出现了，计算机只会识别0和1。无论是存储还是计算，计算机均采用二进制体系完成。 例如：十进制 4 ———- 用二进制表示为 00000100 在C语言中，一个int类型的整数占用的字节数是固定的，并且与具体数值（例如1）无关。通常情况下，int类型的大小是4字节（32位）。不过，这个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/07/31/b1YNChod7EyzTsF.jpg">
+<meta property="article:published_time" content="2024-08-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-02T03:53:23.305Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/07/31/b1YNChod7EyzTsF.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>C语言指针学习 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C语言指针学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-02 00:00" pubdate>
+          2024年8月2日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">C语言指针学习</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月2日 中午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="C语言指针学习"><a href="#C语言指针学习" class="headerlink" title="C语言指针学习"></a>C语言指针学习</h1><h3 id="计算机的语言表示"><a href="#计算机的语言表示" class="headerlink" title="计算机的语言表示"></a>计算机的语言表示</h3><p>在现代的计算机中主要采用的数字集成电路完成，数字电路通过高低电平只能表示<strong>0和1</strong>，所以就出现了，计算机只会识别<strong>0和1</strong>。无论是存储还是计算，计算机均采用二进制体系完成。</p>
+<p>例如：十进制 <strong>4</strong> ———- 用二进制表示为 00000<strong>100</strong></p>
+<p>在C语言中，一个<code>int</code>类型的整数占用的字节数是固定的，并且与具体数值（例如<code>1</code>）无关。通常情况下，<code>int</code>类型的大小是4字节（32位）。不过，这个大小可能会因平台或编译器的不同而有所变化。</p>
+<h3 id="计算机基础单位和数据类型"><a href="#计算机基础单位和数据类型" class="headerlink" title="计算机基础单位和数据类型"></a><strong>计算机基础单位和数据类型</strong></h3><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">1</span><span class="hljs-string">.</span> <span class="hljs-comment">bit</span><span class="hljs-literal">------------</span> <span class="hljs-comment">比特</span> <span class="hljs-literal">-------------</span> <span class="hljs-comment">位</span><br>  <span class="hljs-comment">2</span><span class="hljs-string">.</span> <span class="hljs-comment">byte</span> <span class="hljs-literal">---------</span> <span class="hljs-comment">字节</span> <span class="hljs-literal">-------------</span> <span class="hljs-comment">1byte = 8bit</span><br>  <span class="hljs-comment">3</span><span class="hljs-string">.</span> <span class="hljs-comment">KB</span> <span class="hljs-literal">------------</span> <span class="hljs-comment">千字节</span> <span class="hljs-literal">----------</span> <span class="hljs-comment">1KB = 1024byte</span><br>  <span class="hljs-comment">4</span><span class="hljs-string">.</span> <span class="hljs-comment">MB</span> <span class="hljs-literal">-----------</span> <span class="hljs-comment">兆</span> <span class="hljs-literal">----------------</span> <span class="hljs-comment">1MB = 1024KB</span><br>  <span class="hljs-comment">5</span><span class="hljs-string">.</span> <span class="hljs-comment">GB</span> <span class="hljs-literal">-----------</span> <span class="hljs-comment">吉字节</span> <span class="hljs-literal">----------</span> <span class="hljs-comment">1GB = 1024MB</span><br>  <span class="hljs-comment">6</span><span class="hljs-string">.</span> <span class="hljs-comment">TB</span>  <span class="hljs-literal">-----------</span> <span class="hljs-comment">太字节</span> <span class="hljs-literal">----------</span> <span class="hljs-comment">1TB = 1024GB</span><br>  <span class="hljs-comment">7</span><span class="hljs-string">.</span> <span class="hljs-comment">PB</span> <span class="hljs-literal">-----------</span> <span class="hljs-comment">拍字节</span> <span class="hljs-literal">-----------</span> <span class="hljs-comment">1PB = 1024TB</span><br></code></pre></td></tr></table></figure>
+
+<p>其中在C语言中的一些特定的数据类型存储也是有一定的范围的：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-number">1.</span> <span class="hljs-keyword">char</span> <span class="hljs-comment">-------- 1字节</span><br><span class="hljs-number">2.</span> <span class="hljs-keyword">short</span> <span class="hljs-comment">--------- 2字节</span><br><span class="hljs-number">3.</span> int <span class="hljs-comment">-------- 4字节   </span><br><span class="hljs-number">4.</span> <span class="hljs-keyword">long</span> <span class="hljs-comment">---------- 4字节</span><br><span class="hljs-number">5.</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> <span class="hljs-comment">-------- 8字节</span><br><span class="hljs-number">6.</span> float <span class="hljs-comment">---------- 4字节</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="二进制数"><a href="#二进制数" class="headerlink" title="二进制数"></a><strong>二进制数</strong></h3><p>  <strong>1. 二进制数是带符号的，即分正、负数。其中若是正数最高位显示 0 ，若是负数最高位显示 1</strong></p>
+<p>  <strong>2. 二进制位通常也会受到数据类型的限制，比如 char 型 1 个字节 8 个比特位。</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">举例：<span class="hljs-type">int</span> <span class="hljs-number">2</span> ;  <span class="hljs-comment">------------------二进制表示：00000000 00000000 00000000 00000010</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p><strong>int *p;</strong> – 首先从 p 处开始，先与 ***** 结合，所以说明 p 是一个指针, 然后再与 int 结合, 说明指针所指向的内容的类型为 int 型。所以 p 是一个返回整型数据的指针。</p>
+<p> <strong>int *p[3];</strong> – 首先从 p 处开始, 先与 [] 结合，因为其优先级比 ***** 高,所以 p 是一个数组, 然后再与 * 结合, 说明数组里的元素是指针类型, 然后再与 int 结合, 说明指针所指向的内容的类型是整型的, 所以 p 是一个由返回整型数据的指针所组成的数组。</p>
+<p>*<em>int *<em>p;</em></em> – 首先从 p 开始, 先与 * 结合, 说是 p 是一个指针, 然后再与 * 结合, 说明指针所指向的元素是指针, 然后再与 int 结合, 说明该指针所指向的元素是整型数据。由于二级指针以及更高级的指针极少用在复杂的类型中, 所以后面更复杂的类型我们就不考虑多级指针了, 最多只考虑一级指针</p>
+<p>我们说一个指针的值是XX，就相当于说该指针指向了以XX 为首地址的一片内存区域；</p>
+<p>指针的类型(即指针本身的类型)和指针所指向的类型是两个概念</p>
+<p>只要把指针声明语句里的指针名字去掉，剩下的部分就是这个指针的类型。这是指针本身所具有的类型</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-number">1</span>、int *ptr; : 指针的类型是 int*<br><span class="hljs-number">2</span>、char *ptr; : 指针的类型是 char*<br><span class="hljs-number">3</span>、int **ptr; : 指针的类型是 int**<br><span class="hljs-number">4</span>、int <span class="hljs-comment">(*ptr)[3]; : 指针的类型是 int(*)</span>[<span class="hljs-number">3</span>]<br><span class="hljs-number">5</span>、int *<span class="hljs-comment">(*ptr)[4]; : 指针的类型是 int*(*)</span>[<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+
+<p>指针所指向的类型决定了编译器将把那片内存区里的内容当做什么来看待。</p>
+<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nim"><span class="hljs-number">1</span>、<span class="hljs-type">int</span>*<span class="hljs-keyword">ptr</span>; : 指针所指向的类型是 <span class="hljs-type">int</span><br><span class="hljs-number">2</span>、<span class="hljs-type">char</span>*<span class="hljs-keyword">ptr</span>; : 指针所指向的的类型是 <span class="hljs-type">char</span><br><span class="hljs-number">3</span>、<span class="hljs-type">int</span>**<span class="hljs-keyword">ptr</span>; : 指针所指向的的类型是 <span class="hljs-type">int</span>*<br><span class="hljs-number">4</span>、<span class="hljs-type">int</span>(*<span class="hljs-keyword">ptr</span>)[<span class="hljs-number">3</span>]; : 指针所指向的的类型是 <span class="hljs-type">int</span>()[<span class="hljs-number">3</span>]<br><span class="hljs-number">5</span>、<span class="hljs-type">int</span>*(*<span class="hljs-keyword">ptr</span>)[<span class="hljs-number">4</span>]; : 指针所指向的的类型是 <span class="hljs-type">int</span>*()[<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+
+<p>指针本身占了多大的内存？你只要用函数sizeof(指针的类型)测一下就知道了。在 32 位平台里，指针本身占据了 4 个字节的长度</p>
+<p>&amp;符号代表地址的符号，是内存地址，然后内存地址上面会存放内容，地址不代表是内存空间</p>
+<p>*代表指向，p代表内存地址，<code>*p</code>指向这片内存地址上面的内容</p>
+<h4 id="指针是什么？"><a href="#指针是什么？" class="headerlink" title="指针是什么？"></a>指针是什么？</h4><p>内存：就是存放东西的空间</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/8eafbb6548c929bc99f94ef018128c1a.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="img"><img src="https://i-blog.csdnimg.cn/blog_migrate/dba3cdc29d8127ee60c8ca0446bf23fe.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="img"></p>
+<p>左图就是内存，这个内存中有9个空间，一个空间代表一个字节</p>
+<p>右图就是在这个内存空间中，去创建两个变量 int a 和一个 char ch 根据基础知识，可以知道int 占4个字节 char 占1个字节，注意内存中间的每一个小空间（就是1个字节）是有编号的（1，2，3，4，5，6，7，8，9），内存的编号就是地址，地址也叫指针。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 内存的编号就是地址，地址也叫指针。<br><span class="hljs-bullet">2.</span> 指针是内存中最小单元的编号，也就是地址。<br><span class="hljs-bullet">3.</span> 编号--------&gt;地址----------&gt;指针<br></code></pre></td></tr></table></figure>
+
+<h4 id="指针的类型"><a href="#指针的类型" class="headerlink" title="指针的类型"></a>指针的类型</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 指针类型：决定了指针进行解引用操作的时候，访问几个字节（权限）<br><span class="hljs-bullet">2.</span> char * 的指针引用字节访问1个字节<br><span class="hljs-bullet">3.</span> int * 的指针引用字节访问4个字节<br><span class="hljs-bullet">4.</span> double * 的指针引用字节访问8个字节<br></code></pre></td></tr></table></figure>
+
+<p>0x开头的就表示十六进制，1个十六进制位表示4个二进制位</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">int</span> a = <span class="hljs-number">0x11223344</span>; <span class="hljs-regexp">//</span>这是一个<span class="hljs-number">16</span>进制数，一共是<span class="hljs-number">8</span>位，所以代表二进制的<span class="hljs-number">32</span>位，换算也就是<span class="hljs-number">4</span>个字节，一个字节<span class="hljs-number">8</span>位<br><span class="hljs-keyword">int</span> *pa=&amp;a; <span class="hljs-regexp">//</span>定义成<span class="hljs-keyword">int</span>类型，就可以访问<span class="hljs-number">4</span>个字节的权限<br>*pa = <span class="hljs-number">0</span>; <span class="hljs-regexp">//</span>重新替换成零，所以结果是<span class="hljs-number">0x00000000</span><br><br>char* pc = &amp;a;  <span class="hljs-regexp">//</span>定义成<span class="hljs-keyword">int</span>类型，就可以访问<span class="hljs-number">1</span>个字节的权限<br>*pc = <span class="hljs-number">0</span>;  <span class="hljs-regexp">//</span>重新替换成零，所以结果是<span class="hljs-number">0x11223300</span>，他只能替换一个字节，也就是八位，两个十六进制位<br></code></pre></td></tr></table></figure>
+
+<h4 id="指针打印数组"><a href="#指针打印数组" class="headerlink" title="指针打印数组"></a>指针打印数组</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> a[<span class="hljs-number">10</span>] = &#123; <span class="hljs-number">0</span> &#125;;  <span class="hljs-comment">//内存中创建了10个整型，所以一个数组所占的空间就是40个字节，40b</span><br><br><span class="hljs-type">int</span>* pa = a;  <span class="hljs-comment">//数组名就是首元素的地址</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)<br>&#123;<br>	*pa = i + <span class="hljs-number">1</span>;   <span class="hljs-comment">// 数值+1</span><br>	 pa++;         <span class="hljs-comment">//地址+1</span><br>	 <span class="hljs-comment">//*(pa+i)=i+1</span><br>	 <span class="hljs-comment">// pa表示pa中存放的地址  *pa表示：指向存放地址的内容，也就是解用</span><br>&#125;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)<br>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, a[i]);<br>	<span class="hljs-comment">//printf(&quot;%d &quot;, *(pa+i));如果要使用这种输出的话，需要考虑的是，在上一个for循环后，*pa就已经不是指向首地址，而是指向尾地址</span><br>&#125;<br><br><span class="hljs-type">int</span> a[<span class="hljs-number">5</span>] = &#123;<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>&#125;;<span class="hljs-comment">//定义一个数组</span><br><span class="hljs-type">int</span>* arr = &amp;a[<span class="hljs-number">4</span>];<span class="hljs-comment">//这个指向的是地址类型上面的内容，也就是数组a的第五个数据</span><br><span class="hljs-comment">//输出结果：9</span><br><br><span class="hljs-type">int</span> *arr = &amp;a;<span class="hljs-comment">//这个指向的是数组a的地址类型上面的内容，也就是数组里面的全部数据</span><br><span class="hljs-comment">//输出结果：5，6，7，8，9</span><br><br><span class="hljs-type">int</span> *arr;<span class="hljs-comment">//定义指针类型为int</span><br>arr = a;<span class="hljs-comment">//指向的是数组a的全部数据地址</span><br><span class="hljs-comment">//输出结果：000000000061FDF0 000000000061FDF4 000000000061FDF8 000000000061FDFC 000000000061FE00</span><br></code></pre></td></tr></table></figure>
+
+<p><code>void aaaaaa(char* name)</code> 和 <code>void aaaaaa(char *name)</code> 这两种函数声明在 C 语言中实际上是等效的。它们的功能和行为是相同的。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/C-C/" class="category-chain-item">C/C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/C-C/" class="print-no-link">#C/C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C语言指针学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/02/Work No.13/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/08/01/Work%20No.12/" title="Json数据包收发测试">
+                        <span class="hidden-mobile">Json数据包收发测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
