@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="C语言结构体学习结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。 结构体的大小不是结构体元素单纯相加就行的，因为我们现在主流的计算机使用的都是32Bit字长的CPU，对这类型的CP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言结构体学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/05/Work%20No.15/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="C语言结构体学习结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。 结构体的大小不是结构体元素单纯相加就行的，因为我们现在主流的计算机使用的都是32Bit字长的CPU，对这类型的CP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/02/huNLZglFzj65MmO.jpg">
+<meta property="article:published_time" content="2024-08-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-05T11:31:53.480Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/02/huNLZglFzj65MmO.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>C语言结构体学习 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C语言结构体学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-05 00:00" pubdate>
+          2024年8月5日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">C语言结构体学习</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月5日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="C语言结构体学习"><a href="#C语言结构体学习" class="headerlink" title="C语言结构体学习"></a>C语言结构体学习</h1><h3 id="结构体理论知识"><a href="#结构体理论知识" class="headerlink" title="结构体理论知识"></a>结构体理论知识</h3><p>结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。</p>
+<p>研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。</p>
+<p><strong>结构体的大小不是结构体元素单纯相加就行的</strong>，因为我们现在主流的计算机使用的都是32Bit字长的CPU，<strong>对这类型的CPU取4个字节的数要比取一个字节要高效</strong>，也更方便。所以在结构体中每个成员的首地址都是4的整数倍的话，取数据元素时就会相对更高效，这就是<strong>内存对齐</strong>的由来。每个特定平台上的编译器都有自己的默认“对齐系数”(也叫对齐模数)。<strong>程序员可以通过预编译命令#pragmapack(n)，n&#x3D;1,2,4,8,16来改变这一系数，其中的n就是你要指定的“对齐系数”。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">S1</span><br>&#123;<br>	<span class="hljs-type">char</span> c1;<br>	<span class="hljs-type">int</span> i;<br>	<span class="hljs-type">char</span> c2<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">S2</span><br>&#123;<br>	<span class="hljs-type">char</span> c1;<br>	<span class="hljs-type">char</span> c2;<br>	<span class="hljs-type">int</span> i;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><code>S1</code>和<code>S2</code>类型的成员一样，但是<code>S1</code>和<code>S2</code>所占用的空间不一样，<code>S2</code>相较于<code>S1</code>所占空间较小。</p>
+<p><strong>所以，让占用空间小的成员尽量集中在一起，这样会使整个内存空间变小</strong></p>
+<p>在C语言中，可以定义结构体类型，将多个相关的变量包装成为一个整体使用。在结构体中的变量，可以是相同、部分相同，或完全不同的数据类型。</p>
+<p>在C语言中，结构体不能包含函数。在面向对象的程序设计中，对象具有状态（属性）和行为，状态保存在成员变量中，行为通过成员方法（函数）来实现。C语言中的结构体只能描述一个对象的状态，不能描述一个对象的行为。</p>
+<p>在C++中，考虑到C语言到C++语言过渡的连续性，对结构体进行了扩展，C++的结构体可以包含函数，这样，C++的结构体也具有类的功能，与class不同的是，结构体包含的函数默认为public，而不是private。</p>
+<h3 id="结构体声明"><a href="#结构体声明" class="headerlink" title="结构体声明"></a>结构体声明</h3><p>使用匿名结构体类型创建变量就<strong>只能在变量列表中创建，而且只能一次</strong>，不能在<code>main()</code>函数中创建变量了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//匿名结构体类型，不完全声明</span><br><span class="hljs-keyword">struct</span><br>&#123;<br>	<span class="hljs-type">char</span> c;<br>	<span class="hljs-type">int</span> i;<br>	<span class="hljs-type">double</span> d;<br>&#125;s1,s2;<span class="hljs-comment">//匿名结构体类型创建变量的唯一方式，就是在变量列表中创建</span><br></code></pre></td></tr></table></figure>
+
+<p>首先使用关键字struct，它表示接下来是一个结构体。在结构体声明中，struct book所起到的作用就像int等基础数据类型名作用一样。</p>
+<p>后面是一个可选的标志（student），它是用来引用该结构体的快速标记。</p>
+<p>接下来就是一个花括号，括起了结构体成员列表，及每个成员变量，使用的都是其自己的声明方式来描述，用分号来结束描述；</p>
+<p>在结束花括号后的分号表示结构体设计定义的结束</p>
+<p>封号后面额外添加使用字符例如CXSW，这个变量就包含了其student结构体中的所有元素</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-keyword">struct</span> <span class="hljs-keyword">tag</span> &#123;<span class="hljs-comment">//tag 是结构体标签。</span><br>    <span class="hljs-keyword">member</span><span class="hljs-operator">-</span>list<span class="hljs-comment">//member-list 是标准的变量定义，比如 int i; 或者 float f;，或者其他有效的变量定义。</span><br>    <span class="hljs-keyword">member</span><span class="hljs-operator">-</span>list<br>    <span class="hljs-keyword">member</span><span class="hljs-operator">-</span>list  <br>    <span class="hljs-operator">...</span><br>&#125; variable<span class="hljs-operator">-</span>list ;<span class="hljs-comment">//variable-list 结构变量，定义在结构的末尾，最后一个分号之前，您可以指定一个或多个结构变量。</span><br><br><span class="hljs-keyword">struct</span> tag variable<span class="hljs-operator">-</span>list;<span class="hljs-comment">//等效于上面定义</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="结构体初始化"><a href="#结构体初始化" class="headerlink" title="结构体初始化"></a>结构体初始化</h3><p>结构体变量的<strong>初始化</strong>有2种方式，但是也有区别：</p>
+<p>在结构体变量的创建时，用<code>&#123;&#125;</code>进行初始化。此时必须严格按声明中成员变量的顺序来初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stu</span><br>&#123;<br> <span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<span class="hljs-comment">//名字</span><br> <span class="hljs-type">int</span> age;<span class="hljs-comment">//年龄</span><br> <span class="hljs-type">char</span> sex[<span class="hljs-number">5</span>];<span class="hljs-comment">//性别</span><br> <span class="hljs-type">char</span> id[<span class="hljs-number">20</span>];<span class="hljs-comment">//学号</span><br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stu</span> s = &#123; <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">20</span>, <span class="hljs-string">&quot;男&quot;</span>, <span class="hljs-string">&quot;20230818001&quot;</span> &#125;;<br></code></pre></td></tr></table></figure>
+
+<p>或者在结构体后直接定义</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Books</span><br>&#123;<br>   <span class="hljs-type">char</span>  title[<span class="hljs-number">50</span>];<br>   <span class="hljs-type">char</span>  author[<span class="hljs-number">50</span>];<br>   <span class="hljs-type">char</span>  subject[<span class="hljs-number">100</span>];<br>   <span class="hljs-type">int</span>   book_id;<br>&#125; book = &#123;<span class="hljs-string">&quot;C 语言&quot;</span>, <span class="hljs-string">&quot;RUNOOB&quot;</span>, <span class="hljs-string">&quot;编程语言&quot;</span>, <span class="hljs-number">123456</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>用<code>&#123;.成员变量 = , .成员变量 = &#125;</code>(使用到<code>.</code>操作符)来初始化变量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stu</span><br>&#123;<br> <span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<span class="hljs-comment">//名字</span><br> <span class="hljs-type">int</span> age;<span class="hljs-comment">//年龄</span><br> <span class="hljs-type">char</span> sex[<span class="hljs-number">5</span>];<span class="hljs-comment">//性别</span><br> <span class="hljs-type">char</span> id[<span class="hljs-number">20</span>];<span class="hljs-comment">//学号</span><br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stu</span> s2 = &#123; .age = <span class="hljs-number">18</span>, .name = <span class="hljs-string">&quot;lisi&quot;</span>, .id = <span class="hljs-string">&quot;20230818002&quot;</span>, .sex = <span class="hljs-string">&quot;⼥&quot;</span> &#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>浮点数在内存中有可能是不能精确保存的。</strong>那根据这一点，在我们对浮点数进行比较大小时，我们就不能简单地对2个数据进行 <code>==</code>是否相等的判断，而是有<strong>一定的误差</strong>。</p>
+<h3 id="结构体的引用"><a href="#结构体的引用" class="headerlink" title="结构体的引用"></a>结构体的引用</h3><p>结构体的成员可以包含其他结构体，也可以包含指向自己结构体类型的指针，而通常这种指针的应用是为了实现一些更高级的数据结构如链表和树等。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">//此结构体的声明包含了其他的结构体</span><br><span class="hljs-keyword">struct</span> <span class="hljs-type">COMPLEX</span><br>&#123;<br>    char <span class="hljs-keyword">string</span>[<span class="hljs-number">100</span>];<br>    <span class="hljs-keyword">struct</span> <span class="hljs-type">SIMPLE</span> a;<br>&#125;;<br><br><span class="hljs-comment">//此结构体的声明包含了指向自己类型的指针</span><br><span class="hljs-keyword">struct</span> <span class="hljs-type">NODE</span><br>&#123;<br>    char <span class="hljs-keyword">string</span>[<span class="hljs-number">100</span>];<br>    <span class="hljs-keyword">struct</span> <span class="hljs-type">NODE</span> *next_node;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>在结构中包含一个类型为该结构本身的成员</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">//错误的定义<br>struct <span class="hljs-keyword">Node</span><span class="hljs-title">//定义了一个节点。节点本身要包涵自己的数据，和指向下一节点</span><br><span class="hljs-title">&#123;</span><br><span class="hljs-title"> 	int</span> data;<br> 	struct <span class="hljs-keyword">Node</span> <span class="hljs-title">next</span>;//“next”使用未定义的 struct“<span class="hljs-keyword">Node</span><span class="hljs-title">”,这是错误的写法</span><br><span class="hljs-title">&#125;;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个结构体类型的大小我们是否可以得出来,通过<code>sizeof(struct Node)</code>分析可以知道因为<strong>一个结构体中再包含一个同类型的结构体变量</strong>，这样会使得结构体的大小<strong>无穷大</strong>，这是不合理的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//正确的定义</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span><span class="hljs-comment">//定义了一个节点。节点本身要包涵，自己的数据和指向下一节点的指针</span><br>&#123;<br> 	<span class="hljs-type">int</span> data;<span class="hljs-comment">//数据域,大小为4个字节</span><br> 	<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span>* next;<span class="hljs-comment">//指针域，大小为4或8个字节</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>我们需要定义一个指针类型，准确的指向所需要的位置，这样的结构体大小是可以进行计算的，就不会出现错误</p>
+<h3 id="typedef-重定义结构体"><a href="#typedef-重定义结构体" class="headerlink" title="typedef 重定义结构体"></a>typedef 重定义结构体</h3><p>该结构体就有了两种创建变量的方式<code>struct human man</code>和<code>hu man</code>都行，只是将<code>struct human</code>重新取个名字叫<code>hu</code>。本质上还是类型是不占用空间的，只有创建变量时才会开辟空间。当然使用<code>typedef</code>就不能在声明结构体的后面直接创建全局变量了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">human</span><br>&#123;<br>	<span class="hljs-type">char</span> name[<span class="hljs-number">20</span>];<br>	<span class="hljs-type">int</span> age;<br>	<span class="hljs-type">char</span> sex[<span class="hljs-number">10</span>];<br>	<span class="hljs-type">char</span> id[<span class="hljs-number">20</span>];<br>&#125;hu;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//1.</span><br>	<span class="hljs-keyword">struct</span> <span class="hljs-title class_">human</span> man;<br>	<span class="hljs-comment">//2.</span><br>    hu man;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="结构体访问"><a href="#结构体访问" class="headerlink" title="结构体访问"></a>结构体访问</h3><p>有的时候有可能我们得到的是一个指向该结构体的指针。这时候我们就需要操作符<code>-&gt;</code>，同样也是两个操作数，<code>-&gt;</code>是专门在访问结构体时使用指针的方法，更高效。</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ocaml"><span class="hljs-keyword">struct</span> <span class="hljs-type">S</span> &#123;<br>	<span class="hljs-built_in">int</span> a;<br>	<span class="hljs-built_in">char</span> c;<br>	double d;<br>&#125;;<br><span class="hljs-keyword">struct</span> <span class="hljs-type">T</span> &#123;<br>	<span class="hljs-keyword">struct</span> <span class="hljs-type">S</span> s;<br>	<span class="hljs-built_in">char</span> name[<span class="hljs-number">20</span>];<br>	<span class="hljs-built_in">int</span> num;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-type">T</span> t = &#123; &#123;<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;x&#x27;</span>, <span class="hljs-number">1.00</span>&#125;, <span class="hljs-string">&quot;yourfriendyo&quot;</span>, <span class="hljs-number">21</span> &#125;;<br><span class="hljs-keyword">struct</span> <span class="hljs-type">T</span>* pt = &amp;t;<br>printf(<span class="hljs-string">&quot;%d %c %lf %s %d\n&quot;</span>, pt-&gt;s.a, pt-&gt;s.c, pt-&gt;s.d, pt-&gt;name, pt-&gt;num);<br></code></pre></td></tr></table></figure>
+
+<h3 id="结构体的位段"><a href="#结构体的位段" class="headerlink" title="结构体的位段"></a>结构体的位段</h3><p>位段就是限制结构体里面每个参数所要占用的字节，比如一个变量<code>age</code>表示一个人的年龄，设定1-100岁，<strong>那么给int变量占4个字节就有点浪费空间了，那么我们可以限制一下</strong>。<code>位段</code>可以在一定程度上减少空间的浪费</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">struct</span> A1<br>&#123;<br> <span class="hljs-built_in">int</span> _a:<span class="hljs-number">2</span>;<span class="hljs-comment">//数字部分表示变量只占多少个2进制位，也就是占多少比特位</span><br> <span class="hljs-built_in">int</span> _b:<span class="hljs-number">5</span>;<br> <span class="hljs-built_in">int</span> _c:<span class="hljs-number">10</span>;<br> <span class="hljs-built_in">int</span> _d:<span class="hljs-number">30</span>;<br> <span class="hljs-built_in">int</span> _e:<span class="hljs-number">50</span>;<span class="hljs-comment">//这一行是错误的，int类型的比特位数就只有32位，50超出了限制，会报错</span><br>&#125;;<br><br><span class="hljs-keyword">struct</span> A2<br>&#123;<br> <span class="hljs-built_in">int</span> _a;<br> <span class="hljs-built_in">int</span> _b;<br> <span class="hljs-built_in">int</span> _c;<br> <span class="hljs-built_in">int</span> _d;<br>&#125;;<br><br><br><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">main</span>()</span><br>&#123;<br>	printf(<span class="hljs-string">&quot;%zd\n&quot;</span>,<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> A1));<span class="hljs-comment">//结果为8</span><br>	printf(<span class="hljs-string">&quot;%zd\n&quot;</span>,<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> A2));<span class="hljs-comment">//结果为16</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><p>枚举就是一一列举，把所有可能的值都按照顺序罗列，其实也就是统一的宏定义，而且不需要从1输到100，他会自己安装顺序进行排序，并且如果在中间进行取值定义，后面的值也会发送改变，可以从下面看出来整体的变化，<strong>修改了初始值的常量</strong>开始后面的枚举常量表示的数字都递增+1，前面的保持不变</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">enum</span> Sex<span class="hljs-comment">//性别</span><br>&#123;<br>	<span class="hljs-comment">//该枚举类型的三种可能取值</span><br>	<span class="hljs-comment">//它们都是常量，被称为枚举常量,默认从0开始，递增+1</span><br> 	MALE,<span class="hljs-comment">//0</span><br> 	FEMALE,<span class="hljs-comment">//1</span><br> 	SECRET<span class="hljs-comment">//2</span><br>&#125;;<br><span class="hljs-keyword">enum</span> Sex<span class="hljs-comment">//性别</span><br>&#123;<br>	<br> 	MALE=<span class="hljs-number">7</span>,<span class="hljs-comment">//7</span><br> 	FEMALE=<span class="hljs-number">9</span>,<span class="hljs-comment">//9</span><br> 	SECRET=<span class="hljs-number">6</span><span class="hljs-comment">//6</span><br>&#125;;<br><span class="hljs-keyword">enum</span> Sex<span class="hljs-comment">//性别</span><br>&#123;<br>	<br> 	MALE,<span class="hljs-comment">//0</span><br> 	FEMALE=<span class="hljs-number">8</span>,<span class="hljs-comment">//8</span><br> 	SECRET<span class="hljs-comment">//9</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>并且，枚举也遵循typedef的重定义，可以利用变量进行对其中的值进行输入或者调整</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef enum &#123;<br>	<span class="hljs-type">X</span>,<br>	<span class="hljs-type">Y</span>,<br>    <span class="hljs-type">SIZE</span><br>&#125;t;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/C-C/" class="category-chain-item">C/C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/C-C/" class="print-no-link">#C/C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C语言结构体学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/05/Work No.15/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/08/05/Work%20No.14/" title="C语言数组学习">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C语言数组学习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/08/02/Work%20No.13/" title="C语言指针学习">
+                        <span class="hidden-mobile">C语言指针学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
