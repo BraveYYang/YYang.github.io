@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="STM32的USART接收测试printf()和getchar()的重定义这两个函数在STM32里面并没有进行强定义，因为他的意思是输出和输入，但是输出输入的位置并没有确定，所以无法定义，因此我们要使用的时候，需要对这两个函数进行指定定义，比如定义到USART1，通过电脑或者其他上位机进行读取或者发送数据 1234567891011121314151617181920&#x2F;&#x2F;重定向c库函数printf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32的USART接收测试">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/07/31/STM32%E7%9A%84USART%E6%8E%A5%E6%94%B6%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="STM32的USART接收测试printf()和getchar()的重定义这两个函数在STM32里面并没有进行强定义，因为他的意思是输出和输入，但是输出输入的位置并没有确定，所以无法定义，因此我们要使用的时候，需要对这两个函数进行指定定义，比如定义到USART1，通过电脑或者其他上位机进行读取或者发送数据 1234567891011121314151617181920&#x2F;&#x2F;重定向c库函数printf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/07/31/CsbJKkLaQt9OgVu.jpg">
+<meta property="article:published_time" content="2024-07-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-01T00:54:52.489Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="USART">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/07/31/CsbJKkLaQt9OgVu.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>STM32的USART接收测试 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32的USART接收测试"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-31 00:00" pubdate>
+          2024年7月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">STM32的USART接收测试</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月1日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="STM32的USART接收测试"><a href="#STM32的USART接收测试" class="headerlink" title="STM32的USART接收测试"></a>STM32的USART接收测试</h1><h2 id="printf-和getchar-的重定义"><a href="#printf-和getchar-的重定义" class="headerlink" title="printf()和getchar()的重定义"></a>printf()和getchar()的重定义</h2><p>这两个函数在STM32里面并没有进行强定义，因为他的意思是输出和输入，但是输出输入的位置并没有确定，所以无法定义，因此我们要使用的时候，需要对这两个函数进行指定定义，比如定义到USART1，通过电脑或者其他上位机进行读取或者发送数据</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//重定向c库函数printf到串口，重定向后可使用printf函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fputc</span><span class="hljs-params">(<span class="hljs-type">int</span> ch, FILE *f)</span></span><br><span class="hljs-function"></span>&#123;<br>		<span class="hljs-comment">/* 发送一个字节数据到串口 */</span><br>		<span class="hljs-built_in">USART_SendData</span>(USART1, (<span class="hljs-type">uint8_t</span>) ch);<br>		<br>		<span class="hljs-comment">/* 等待发送完毕 */</span><br>		<span class="hljs-keyword">while</span> (<span class="hljs-built_in">USART_GetFlagStatus</span>(USART1, USART_FLAG_TXE) == RESET);		<br>	<br>		<span class="hljs-keyword">return</span> (ch);<br>&#125;<br><br><span class="hljs-comment">//重定向c库函数scanf到串口，重写向后可使用scanf、getchar等函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fgetc</span><span class="hljs-params">(FILE *f)</span></span><br><span class="hljs-function"></span>&#123;<br>		<span class="hljs-comment">/* 等待串口输入数据 */</span><br>		<span class="hljs-keyword">while</span> (<span class="hljs-built_in">USART_GetFlagStatus</span>(USART1, USART_FLAG_RXNE) == RESET);<br><br>		<span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)<span class="hljs-built_in">USART_ReceiveData</span>(USART1);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="中断直接接收数据"><a href="#中断直接接收数据" class="headerlink" title="中断直接接收数据"></a>中断直接接收数据</h2><p>USART接收一共有两种方法，第一种是利用中断直接接收数据，这种方式的优先级可以自定义，如果有特殊需要时可以采用这种方式，还有一种方法是正常接收，按照程序流程进行接收</p>
+<p>接收数据需要随时进行触发，在函数运行时也有可能收到数据，所以需要对USART进行中断配置，当然如果不需要使用中断接收数据，可以不进行中断配置，直接读取USART_RX串口的数据即可，但是需要把所有中断注释</p>
+<p>中断接收数据需要对中断函数进行配置</p>
+<h4 id="中断优先级配置"><a href="#中断优先级配置" class="headerlink" title="中断优先级配置"></a>中断优先级配置</h4><p>这个跟中断配置代码的一样，可以参照中断配置，这个主要为内部中断配置，而不是外部中断配置，因为外部中断是真的中断，USART有属于自己的额外的中断线，所以配置USART约等于配置了外部中断，所以只需要内部中断即可</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-comment">//定义结构体</span><br>NVIC_InitTypeDef  NVIC_InitStruct<span class="hljs-punctuation">;</span><br><br><span class="hljs-comment">//NVIC初始化</span><br>NVIC_PriorityGroupConfig<span class="hljs-punctuation">(</span>NVIC_PriorityGroup_2<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span><span class="hljs-comment">//配置组优先级（0，1，2，3，4，5）</span><br>NVIC_InitStruct.NVIC_IRQChannel <span class="hljs-punctuation">=</span> USART1_IRQn<span class="hljs-punctuation">;</span><span class="hljs-comment">//配置内部中断线</span><br>NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority <span class="hljs-punctuation">=</span> <span class="hljs-number">1</span><span class="hljs-punctuation">;</span><span class="hljs-comment">//配置抢占优先级</span><br>NVIC_InitStruct.NVIC_IRQChannelSubPriority <span class="hljs-punctuation">=</span> <span class="hljs-number">1</span><span class="hljs-punctuation">;</span><span class="hljs-comment">//配置子优先级</span><br>NVIC_InitStruct.NVIC_IRQChannelCmd <span class="hljs-punctuation">=</span> ENABLE<span class="hljs-punctuation">;</span><span class="hljs-comment">//使能中断通道</span><br>NVIC_Init<span class="hljs-punctuation">(</span><span class="hljs-meta">&amp;NVIC_InitStruct);<span class="hljs-comment">//将结构体进行定义</span></span><br></code></pre></td></tr></table></figure>
+
+<h4 id="中断串口和串口使能"><a href="#中断串口和串口使能" class="headerlink" title="中断串口和串口使能"></a>中断串口和串口使能</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// 使能串口接收中断</span><br><span class="hljs-built_in">USART_ITConfig</span>(USART1, USART_IT_RXNE, ENABLE);	<br><span class="hljs-comment">// 使能串口空闲中断</span><br><span class="hljs-built_in">USART_ITConfig</span>(USART1, USART_IT_IDLE, ENABLE);<br></code></pre></td></tr></table></figure>
+
+<h4 id="USART中断服务函数"><a href="#USART中断服务函数" class="headerlink" title="USART中断服务函数"></a>USART中断服务函数</h4><p>这个是需要在stm32f10x_it.c文件里面进行设置，跟按键中断一致，所有的中断函数的触发都是需要在这个文件里面进行定义，中断函数的函数名需要查询中断表格，不能自定义</p>
+<p>USART_IT_IDLE标志位会在RX总线从busy状态转换到free状态时被触发，也就是只有接收到数据后连续一个数据帧时间内不再有数据发送过来的时候触发，常用于判断单次数据接收完成。</p>
+<p>USART_IT_IDLE标志位只能在中断中进行使用</p>
+<p>中断标志位由硬件触发（代表USART_RX端口接收数据检测），软件清零（需要使用USART_IT_IDLE函数判断是否完成传输，是否有空闲线路，再使用USART_ReceiveData(USART1)进行软件标志位清零），清零方法时读取一遍USART_SR寄存器然后读取一遍USART_DR寄存器，也就是不能简单的用USART_ClearITPendingBit()来清除就完事。</p>
+<p>如果想实现长数据的接收，可以定义直接在中断里面定义一个字节长度的数组，然后不断的往里面塞数据，用中断空闲标志位来判断什么时候停止接收退出循环（判断最后一位是否为“\0”，如果是的话，则中断停止回到原有程序中）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;bsp_usart.h&quot;</span><span class="hljs-comment">//必须在stm32f10x_it.c文件里面包含头文件，否则会报错</span></span><br><br><span class="hljs-comment">// USART1中断服务函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">USART1_IRQHandler</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//定义接收缓存区</span><br>	<span class="hljs-type">uint8_t</span> ucTemp;<br>	<span class="hljs-comment">//判断中断接收标志位，进入该函数，说明有数据进入</span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">USART_GetITStatus</span>(USART1, USART_IT_RXNE) != RESET)<br>	&#123;<br>		<span class="hljs-comment">//读取数据并储存</span><br>		ucTemp = <span class="hljs-built_in">USART_ReceiveData</span>(USART1);<br>		<span class="hljs-comment">//将数据发送到USART1进行查看</span><br>    	<span class="hljs-built_in">USART_SendData</span>(USART1,ucTemp);<br>    	<br>    	<span class="hljs-comment">//做各种函数接收数据处理</span><br>    	<span class="hljs-comment">/*.................*/</span><br>    	<br>	&#125; <br>	<span class="hljs-comment">//判断中断是否接收完毕</span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">USART_GetITStatus</span>(USART1, USART_IT_IDLE) != RESET)<br>	&#123;	<br>    	<span class="hljs-built_in">USART_ReceiveData</span>(USART1);<span class="hljs-comment">//软件序列清除标志位流程</span><br><br>		<span class="hljs-comment">//做各种函数接收数据结束标志位处理</span><br>    	<span class="hljs-comment">/*.................*/</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="不通过中断直接接收发数据"><a href="#不通过中断直接接收发数据" class="headerlink" title="不通过中断直接接收发数据"></a>不通过中断直接接收发数据</h2><p>不通过中断的话就不需要定义中断，直接再函数里面调用getchar()函数进行读取数据即可</p>
+<p>但是这种方式有比较大的缺陷，就是只能读取1字节的数据，因为缺少了判断的标志位，无法获取是否完成读取，但是很多时候一个字符就已经足够判断</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs axapta">uint8_t <span class="hljs-built_in">str</span>;<br><span class="hljs-built_in">str</span> = getchar();<br>printf(<span class="hljs-string">&quot;str:%c\n&quot;</span>, <span class="hljs-built_in">str</span>);<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/STM32/" class="category-chain-item">STM32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/USART/" class="print-no-link">#USART</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>STM32的USART接收测试</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/07/31/STM32的USART接收测试/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/07/31/Work%20No.8/" title="C语言学习">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C语言学习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/07/30/STM32%E7%9A%84USART%E5%8F%91%E9%80%81%E6%B5%8B%E8%AF%95/" title="STM32的USART发送测试">
+                        <span class="hidden-mobile">STM32的USART发送测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
