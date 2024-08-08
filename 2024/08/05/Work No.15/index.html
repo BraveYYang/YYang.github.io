@@ -16,16 +16,16 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="C语言结构体学习结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。 结构体的大小不是结构体元素单纯相加就行的，因为我们现在主流的计算机使用的都是32Bit字长的CPU，对这类型的CP">
+    <meta name="description" content="C语言结构体学习感谢博主：C语言详解：结构体_c语言结构体语法-CSDN博客 C语言结构体（struct）最全的讲解（万字干货）_struct a *b(const char *name)-CSDN博客 结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言结构体学习">
 <meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/05/Work%20No.15/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="C语言结构体学习结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。 结构体的大小不是结构体元素单纯相加就行的，因为我们现在主流的计算机使用的都是32Bit字长的CPU，对这类型的CP">
+<meta property="og:description" content="C语言结构体学习感谢博主：C语言详解：结构体_c语言结构体语法-CSDN博客 C语言结构体（struct）最全的讲解（万字干货）_struct a *b(const char *name)-CSDN博客 结构体理论知识结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。 研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/02/huNLZglFzj65MmO.jpg">
 <meta property="article:published_time" content="2024-08-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-05T11:31:53.480Z">
+<meta property="article:modified_time" content="2024-08-07T02:27:02.747Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
         
         
         
-          19 分钟
+          20 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月5日 晚上
+                    本文最后更新于 2024年8月7日 上午
                   
                 
               </p>
@@ -293,7 +293,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="C语言结构体学习"><a href="#C语言结构体学习" class="headerlink" title="C语言结构体学习"></a>C语言结构体学习</h1><h3 id="结构体理论知识"><a href="#结构体理论知识" class="headerlink" title="结构体理论知识"></a>结构体理论知识</h3><p>结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。</p>
+                <h1 id="C语言结构体学习"><a href="#C语言结构体学习" class="headerlink" title="C语言结构体学习"></a>C语言结构体学习</h1><h3 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yourfriendyo/article/details/119544221">C语言详解：结构体_c语言结构体语法-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyh290188/article/details/104326450">C语言结构体（struct）最全的讲解（万字干货）_struct a *b(const char *name)-CSDN博客</a></p>
+<h3 id="结构体理论知识"><a href="#结构体理论知识" class="headerlink" title="结构体理论知识"></a>结构体理论知识</h3><p>结构体(struct)是由一系列具有相同类型或不同类型的数据构成的数据集合，也叫结构。</p>
 <p>研发人员常使用结构体来封装一些属性来组成新的类型。由于C语言无法操作数据库，所以在项目中通过对结构体内部变量的操作将大量的数据存储在内存中，以完成对数据的存储和操作。</p>
 <p><strong>结构体的大小不是结构体元素单纯相加就行的</strong>，因为我们现在主流的计算机使用的都是32Bit字长的CPU，<strong>对这类型的CPU取4个字节的数要比取一个字节要高效</strong>，也更方便。所以在结构体中每个成员的首地址都是4的整数倍的话，取数据元素时就会相对更高效，这就是<strong>内存对齐</strong>的由来。每个特定平台上的编译器都有自己的默认“对齐系数”(也叫对齐模数)。<strong>程序员可以通过预编译命令#pragmapack(n)，n&#x3D;1,2,4,8,16来改变这一系数，其中的n就是你要指定的“对齐系数”。</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">S1</span><br>&#123;<br>	<span class="hljs-type">char</span> c1;<br>	<span class="hljs-type">int</span> i;<br>	<span class="hljs-type">char</span> c2<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">S2</span><br>&#123;<br>	<span class="hljs-type">char</span> c1;<br>	<span class="hljs-type">char</span> c2;<br>	<span class="hljs-type">int</span> i;<br>&#125;;<br></code></pre></td></tr></table></figure>
