@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux系统进程线程学习感谢博主Linux之进程与线程详解(一文足矣)_linux下进程和线程-CSDN博客 进程和线程的区别(超详细)-CSDN博客 进程、子进程、线程-CSDN博客 进程与线程的基本知识一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。 进程中的一个执行任务（控制单元），负责">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统进程线程学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/09/Work%20No.17/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="Linux系统进程线程学习感谢博主Linux之进程与线程详解(一文足矣)_linux下进程和线程-CSDN博客 进程和线程的区别(超详细)-CSDN博客 进程、子进程、线程-CSDN博客 进程与线程的基本知识一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。 进程中的一个执行任务（控制单元），负责">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/02/1PqnXLKIcmsuZzO.png">
+<meta property="article:published_time" content="2024-08-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-09T09:03:20.220Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="进程和线程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/02/1PqnXLKIcmsuZzO.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Linux系统进程线程学习 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux系统进程线程学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-09 00:00" pubdate>
+          2024年8月9日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux系统进程线程学习</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月9日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Linux系统进程线程学习"><a href="#Linux系统进程线程学习" class="headerlink" title="Linux系统进程线程学习"></a>Linux系统进程线程学习</h1><h2 id="感谢博主"><a href="#感谢博主" class="headerlink" title="感谢博主"></a>感谢博主</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53447537/article/details/129372775">Linux之进程与线程详解(一文足矣)_linux下进程和线程-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/102021274">进程和线程的区别(超详细)-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/msg1122/article/details/82911644">进程、子进程、线程-CSDN博客</a></p>
+<h2 id="进程与线程的基本知识"><a href="#进程与线程的基本知识" class="headerlink" title="进程与线程的基本知识"></a>进程与线程的基本知识</h2><p>一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。</p>
+<p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p>
+<p>同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
+<p>进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p>
+<p>Linux 进程之间的通信和同步需要使用进程间通信机制（如<strong>管道、信号、共享内存</strong>等），因为它们之间是相互独立的。而线程之间可以直接共享进程的地址空间，因此它们之间的通信和同步要比进程更加高效。</p>
+<p><strong>在调试时，进程比线程更容易处理</strong>。由于进程是相互独立的，因此可以分别调试每个进程，而线程共享进程的地址空间和资源，因此在调试线程时，需要特别注意线程之间的交互和影响，这使得调试线程变得更加困难。</p>
+<h2 id="进程与线程的区别总结"><a href="#进程与线程的区别总结" class="headerlink" title="进程与线程的区别总结"></a>进程与线程的区别总结</h2><p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p>
+<p><strong>根本区别：</strong>进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p>
+<p><strong>资源开销：</strong>每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
+<p><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
+<p><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p>
+<p><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p>
+<p><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p>
+<h3 id="父进程、子进程、线程的区别"><a href="#父进程、子进程、线程的区别" class="headerlink" title="父进程、子进程、线程的区别"></a>父进程、子进程、线程的区别</h3><p>在Windows下开一个IE浏览器，这个IE浏览器是一个进程。你用浏览器去打开一个pdf，IE就去调用Acrobat去打开，这时Acrobat是一个独立的进程，就是IE的子进程。而IE自己本身同时用同一个进程开了2个网页，并且同时在跑两个网页上的脚本，这两个网页的执行就是IE自己通过两个线程实现的。</p>
+<p>一个独立程序的运行称为一个进程， 在进程里并发执行的不同部分称为线程。 由这个进程引发的另外的独立程序运行为这个进程的子进程</p>
+<p>父进程还是可以通过和子进程通信来获得一些信息的。 拿上面的例子来说，IE可以通过一些进程间通信的接口来知道Acrobat是否顺利的把pdf打开了之类的信息。但有一点我觉得你的理解基本正确，就是父进程和子进程是独立的。假如IE开了一个病毒子进程，子进程不听话，父进程也没什么特别的办法，除了向系统申请去关闭它之外。</p>
+<h2 id="进程创建和使用"><a href="#进程创建和使用" class="headerlink" title="进程创建和使用"></a>进程创建和使用</h2><h3 id="进程的创建函数"><a href="#进程的创建函数" class="headerlink" title="进程的创建函数"></a>进程的创建函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><br><span class="hljs-comment">//创建一个进程</span><br><span class="hljs-function"><span class="hljs-type">pid_t</span> <span class="hljs-title">fork</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>;<br><span class="hljs-comment">//在父进程中，fork返回新创建子进程的进程ID；</span><br><span class="hljs-comment">//在子进程中，fork返回0；</span><br><span class="hljs-comment">//如果出现错误，fork返回一个负值;</span><br><br><span class="hljs-comment">//得到一个进程的父进程的PID;</span><br><span class="hljs-built_in">getppid</span>();<br><span class="hljs-comment">//得到当前进程的PID;</span><br><span class="hljs-built_in">getpid</span>();<br></code></pre></td></tr></table></figure>
+
+<p>fork函数执行完毕后，如果创建新进程成功，则出现两个进程，一个是子进程，一个是父进程。在子进程中，fork函数返回0，在父进程中，fork返回新创建子进程的进程ID。我们可以通过fork返回的值来判断当前进程是子进程还是父进程。</p>
+<h3 id="进程退出"><a href="#进程退出" class="headerlink" title="进程退出"></a>进程退出</h3><p>在main函数中使用 <code>return关键字</code> ，使用 <code>return</code> 后系统会调用 <code>exit()</code>函数来终止进程。或者调用 <code>_exit()</code> 来终止进程。</p>
+<p>_exit会立刻结束进程将缓存释放掉，而exit先查看当前进程有没有文件缓存区，如果有，会先处理缓存区的数据，然后释放内存</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">void _exit(int status);<br><br>void <span class="hljs-keyword">exit</span>(int status);<br><span class="hljs-regexp">//</span><span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>):表示运行正常结束进程；<span class="hljs-keyword">exit</span>(<span class="hljs-number">1</span>):表示异常退出，返回值<span class="hljs-number">1</span>是给操作系统的<br></code></pre></td></tr></table></figure>
+
+<p>return 是关键字，是语言级别，表示调用堆栈的返回，并将控制权移交给控制的前一级；exit是函数，表示系统级别，表示进程的结束。</p>
+<h3 id="子进程等待和销毁处理"><a href="#子进程等待和销毁处理" class="headerlink" title="子进程等待和销毁处理"></a>子进程等待和销毁处理</h3><p>父进程一旦调用了wait就立即阻塞自己，由wait自动分析是否当前进程的某个子进程已经退出，如果让它找到了这样一个已经变成僵尸的子进程，wait就会收集这个子进程的信息，并把它彻底销毁后返回；如果没有找到这样一个子进程，wait就会一直阻塞在这里，直到有一个出现为止。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/wait.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">pid_t</span> <span class="hljs-title">wait</span><span class="hljs-params">(<span class="hljs-type">int</span> *wstatus)</span></span>;<br><span class="hljs-comment">//正常情况下，wait的返回值为子进程的PID，如果调用进程没有子进程，调用就会失败，此时wait返回-1，同时errno被置为ECHILD</span><br></code></pre></td></tr></table></figure>
+
+<p>当父进程忘了用wait()函数等待已终止的子进程时,子进程就会进入一种无父进程的状态,此时子进程就是僵尸进程.</p>
+<p>如果先终止父进程,子进程将继续正常进行，只是它将由init进程(PID 1)继承,当子进程终止时,init进程捕获这个状态.</p>
+<p>参数status用来保存被收集进程退出时的一些状态，它是一个指向int类型的指针。但如果我们对这个子进程是如何死掉毫不在意，只想把这个僵尸进程消灭掉，（事实上绝大多数情况下，我们都会这样想），我们就可以设定这个参数为NULL，</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">pid = <span class="hljs-keyword">wait</span>(NULL);<br><span class="hljs-regexp">//</span>如果成功，<span class="hljs-keyword">wait</span>会返回被收集的子进程的进程ID，如果调用进程没有子进程，调用就会失败，此时<span class="hljs-keyword">wait</span>返回-<span class="hljs-number">1</span>，同时errno被置为ECHILD。<br></code></pre></td></tr></table></figure>
+
+<p>如果参数status的值不是NULL，wait就会把子进程退出时的状态取出并存入其中， 这是一个整数值（int），指出了子进程是正常退出还是被非正常结束的，以及正常结束时的返回值，或被哪一个信号结束的等信息。由于这些信息 被存放在一个整数的不同二进制位中，所以用常规的方法读取会非常麻烦，人们就设计了一套专门的宏（macro）来完成这项工作</p>
+<p>WIFEXITED(status) 这个宏用来指出子进程是否为正常退出的，如果是，它会返回一个非零值。这里的参数status并不同于wait唯一的参数–指向整数的指针status，而是那个指针所指向的整数</p>
+<p>WEXITSTATUS(status) 当WIFEXITED返回非零值时，我们可以用这个宏来提取子进程的返回值，如果子进程调用exit(5)退出，WEXITSTATUS(status) 就会返回5；如果子进程调用exit(7)，WEXITSTATUS(status)就会返回7。如果进程不是正常退出的，也就是说， WIFEXITED返回0，这个值就毫无意义。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs awk">/*<br>下面的程序没有调用wait函数，那么子进程会成为无父进程状态，也就是僵尸进程，可以根据程序运行后<br>所打印的PID，然后命令行输 ps -aux 查看进程状态，<br>发现这个子进程依然存在，所以要调用wait来进行所谓的收尸<br>*/<br><br>int main()&#123;<br>	pid_t pid;<span class="hljs-regexp">//</span>定义fork的返回值,存储在相同类型的变量pid中<br><span class="hljs-regexp">//</span>如果创建成功，在父进程中fork返回新创建的子进程的进程号，在子进程中返回<span class="hljs-number">0</span><br>	printf(<span class="hljs-string">&quot;hello world\n&quot;</span>);<br>	pid=fork();<span class="hljs-regexp">//</span>fork创建子进程，将返回值给pid<br>	<span class="hljs-keyword">if</span>(pid&lt;<span class="hljs-number">0</span>)<span class="hljs-regexp">//</span>如果出错，fork返回一个负值并设置错误码<br>		perror(<span class="hljs-string">&quot;fork error&quot;</span>);<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid==<span class="hljs-number">0</span>)<span class="hljs-regexp">//</span>判断pid==<span class="hljs-number">0</span>就是子进程<br>		printf(<span class="hljs-string">&quot;I am child,my pid:%d\n&quot;</span>,getpid());<span class="hljs-regexp">//g</span>etpid得到当前进程的进程号,getppid()是得到父进程的进程ID<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid&gt;<span class="hljs-number">0</span>)<span class="hljs-regexp">//</span>如果pid&gt;<span class="hljs-number">0</span>是父进程<br>		printf(<span class="hljs-string">&quot;I am father,my pid:%d\n&quot;</span>,pid);<span class="hljs-regexp">//</span><br> <br>	puts(<span class="hljs-string">&quot;hi &quot;</span>);<span class="hljs-regexp">//</span>这里是父子进程都执行的部分,运行结果可以看到两个hi,<br>	<span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">/*</span><br><span class="hljs-comment">下面的程序调用了wait来为孩子收尸，这样再ps -aux会发现进程结束，没有尸体残留</span><br><span class="hljs-comment">*/</span><br><br>int main()&#123;<br>	pid_t pid;<span class="hljs-comment">//定义fork的返回值,存储在相同类型的变量pid中</span><br>	printf(<span class="hljs-string">&quot;hello world<span class="hljs-subst">\n</span>&quot;</span>);<br>	pid<span class="hljs-operator">=</span>fork();<span class="hljs-comment">//fork创建子进程，将返回值给pid</span><br>	<span class="hljs-keyword">if</span>(pid<span class="hljs-operator">&lt;</span><span class="hljs-number">0</span>)<span class="hljs-comment">//如果出错，fork返回一个负值并设置错误码</span><br>		perror(<span class="hljs-string">&quot;fork error&quot;</span>);<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid<span class="hljs-operator">==</span><span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//如果创建成功,在子进程中，返回的pid==0  是子进程</span><br>		printf(<span class="hljs-string">&quot;I am child,my pid:%d<span class="hljs-subst">\n</span>&quot;</span>,getpid());<span class="hljs-comment">//getpid得到当前进程的进程号,getppid()得到父进程的进程号</span><br>		printf(<span class="hljs-string">&quot;my father&#x27;s pid:%d<span class="hljs-subst">\n</span>&quot;</span>,getppid());<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid<span class="hljs-operator">&gt;</span><span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//如果pid&gt;0是父进程，返回的pid 为创建的子进程的ID</span><br>		printf(<span class="hljs-string">&quot;I am father,my son&#x27;s pid:%d<span class="hljs-subst">\n</span>&quot;</span>,pid);<br>		printf(<span class="hljs-string">&quot;my pid:%d<span class="hljs-subst">\n</span>&quot;</span>,getpid());<br>		int status;<br>		pid_t sonpid<span class="hljs-operator">=</span>wait(<span class="hljs-type">NULL</span>);<br>		<span class="hljs-keyword">if</span>(sonpid<span class="hljs-operator">&lt;</span><span class="hljs-number">0</span>)puts(<span class="hljs-string">&quot;调用进程没有子进程&quot;</span>);<br>		<span class="hljs-keyword">else</span> printf(<span class="hljs-string">&quot;等到了孩子的尸体，孩子进程号为:%d<span class="hljs-subst">\n</span>&quot;</span>,sonpid);<br> <br>	&#125;<br>	puts(<span class="hljs-string">&quot;hi &quot;</span>);<span class="hljs-comment">//这里是父子进程都执行的部分,运行结果可以看到两个hi,</span><br>	exit(<span class="hljs-number">0</span>);<br>&#125;<br><br><span class="hljs-comment">//output</span><br>hello world<br><span class="hljs-type">I</span> am father,my son&#x27;s pid:<span class="hljs-number">12345</span><br>my pid:<span class="hljs-number">6789</span><br>hi <br><span class="hljs-type">I</span> am child,my pid:<span class="hljs-number">12345</span><br>my father&#x27;s pid:<span class="hljs-number">6789</span><br>hi <br>等到了孩子的尸体，孩子进程号为:<span class="hljs-number">12345</span><br></code></pre></td></tr></table></figure>
+
+<p>这个程序在子进程创建的时候，等于开了另一个main函数，用于执行这个函数指令，但是子进程不会重新创建子进程，只会执行子进程创建后的命令，比如进行函数判断和输出puts，而父进程也是会执行该操作，因此会输出两个hi</p>
+<h3 id="exec函数族"><a href="#exec函数族" class="headerlink" title="exec函数族"></a>exec函数族</h3><p>exec函数族提供一个在进程中启动另一个程序执行的方法。它可以根据指定的文件名或目录名找到可执行文件，并用它来取代原调用进程的数据段、代码段和堆栈段，在执行完之后，原调用进程的内容除了进程号外，其他全部被新程序的内容替换了。另外，这里的可执行文件既可以是二进制文件，也可以是Linux下任何可执行脚本文件。<br><code>fork()</code> 创建一个子进程后，父进程和子进程共享同一个代码段（程序），但在有些情况下，我们希望子进程运行一个完全不同的程序，而不是继续执行父进程的代码。<strong>子进程执行完新的程序后，它依然需要父进程wait收尸!!!</strong></p>
+<p>exec函数族的函数执行成功后不会返回，调用失败时，会设置errno并返回-1，然后从原程序的调用点接着往下执行。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">exec</span>函数族：<span class="hljs-selector-tag">execl</span> 、<span class="hljs-selector-tag">execlp</span>、<span class="hljs-selector-tag">execvp</span><br><span class="hljs-selector-tag">exec</span>族函数参数极难记忆和分辨，函数名中的字符会给我们一些帮助： <br><span class="hljs-selector-tag">l</span> : 使用参数列表 <br><span class="hljs-selector-tag">p</span>：使用文件名，并从<span class="hljs-selector-tag">PATH</span>环境进行寻找可执行文件 ,自动搜索环境变量<span class="hljs-selector-tag">PATH</span><br><span class="hljs-selector-tag">v</span>：应先构造一个指向各参数的指针数组，然后将该数组的地址作为这些函数的参数。 <br><span class="hljs-selector-tag">e</span>：多了<span class="hljs-selector-tag">envp</span><span class="hljs-selector-attr">[]</span>数组，使用新的环境变量代替调用进程的环境变量,表示自己维护环境变量<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//exec_test.c  中的代码，这个程序会在主函数中进程的子进程里面进行替换执行</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;<span class="hljs-number">6</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;正在执行exec_test.out,此时i:%d\n&quot;</span>,i++);<br>		<span class="hljs-built_in">sleep</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//exec.c  文件</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/wait.h&gt;</span></span><br> <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;这是刚开始的父进程,进程号:%d\n&quot;</span>,<span class="hljs-built_in">getpid</span>());<br>	<span class="hljs-type">pid_t</span> pid=fork();<span class="hljs-comment">//创建子进程</span><br>	<span class="hljs-keyword">if</span>(pid&lt;<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//判断是否成功</span><br>		<span class="hljs-built_in">perror</span>(<span class="hljs-string">&quot;fork error&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid==<span class="hljs-number">0</span>)&#123;<br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;接下来执行子进程&quot;</span>);<br>		<span class="hljs-comment">//执行该语句的话，后续父进程的puts就不再执行</span><br>		<span class="hljs-type">int</span> ret=<span class="hljs-built_in">execl</span>(<span class="hljs-string">&quot;./exec_test.out&quot;</span>,<span class="hljs-string">&quot;exec_test.out&quot;</span>,<span class="hljs-literal">NULL</span>,<span class="hljs-literal">NULL</span>);<span class="hljs-comment">//将子进程即将执行的程序进行替换</span><br>		<span class="hljs-keyword">if</span>(ret&lt;<span class="hljs-number">0</span>)<span class="hljs-built_in">perror</span>(<span class="hljs-string">&quot;exec error&quot;</span>);<span class="hljs-comment">//判断是否失败，成功的话都无法来到这个指令</span><br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;子进程执行结束&quot;</span>);<span class="hljs-comment">//如果执行失败，则会输出该log</span><br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid&gt;<span class="hljs-number">0</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;这是父进程,父进程pid:%d\n&quot;</span>,<span class="hljs-built_in">getpid</span>());<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;我创建的子进程的pid:%d\n&quot;</span>,pid);<br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;接下来调用wait&quot;</span>);<br>		  <span class="hljs-type">pid_t</span> sonpid=<span class="hljs-built_in">wait</span>(<span class="hljs-literal">NULL</span>); <br>        <span class="hljs-keyword">if</span>(sonpid&lt;<span class="hljs-number">0</span>)<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;调用进程没有子进程&quot;</span>); <br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;等到了孩子的尸体，孩子进程号为:%d\n&quot;</span>,sonpid);<br>	&#125;<br><span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;准备结束父进程&quot;</span>);<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">//output</span><br>这是刚开始的父进程,进程号:<span class="hljs-number">4588</span><br>这是父进程,父进程pid:<span class="hljs-number">4588</span><br>创建的子进程的pid:<span class="hljs-number">4589</span><br>接下来调用wait<br>接下来执行子进程<br><br>正在执行exec_test.out,此时i<br>...<br>...<br>...<br><br>等到了孩子的尸体，孩子进程号为:<br>准备结束父进程<br></code></pre></td></tr></table></figure>
+
+<p><strong>有了exec函数族我们就可以用它来调用任何程序，也就是说，你还可以在C&#x2F;C++，可以调用其他任何语言，比如python，Java等程序；</strong></p>
+<h2 id="线程的创建和使用"><a href="#线程的创建和使用" class="headerlink" title="线程的创建和使用"></a>线程的创建和使用</h2><p>当我们使用进程的时候，我们不自主的使用if else嵌套来判断pid，使得程序结构繁琐，但是当我们使用线程的时候，基本上可以甩掉它，当然程序内部执行功能单元需要使用的时候还是要使用，所以线程对程序结构的改善有很大帮助。</p>
+<h3 id="线程创建函数"><a href="#线程创建函数" class="headerlink" title="线程创建函数"></a>线程创建函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//创建一个线程</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pthread_create</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> *thread, <span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span> *attr,<span class="hljs-type">void</span> *(*start_routine)(<span class="hljs-type">void</span> *), <span class="hljs-type">void</span> *arg)</span></span>;<br><span class="hljs-comment">//函数返回值：成功返回0；失败返回错误码</span><br><br>参数解释：<br>第一个参数：<span class="hljs-type">pthread_t</span> *thread<br>    <span class="hljs-type">pthread_t</span>是类型，在linux下被定义为“<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">int</span>”，是一种用于表示线程的数据类型；<br>    <span class="hljs-type">phtread_t</span> *thread:传递一个<span class="hljs-type">pthread_t</span>类型的指针变量，也可以传递这个类型变量的地址<br>第二个参数： <span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span> *attr<br>    <span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span>：该类型以结构体的形式定义在&lt;pthread.h&gt;头文件中，专门表示线程的属性<br>    <span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span> *attr：用于手动设置新建线程的属性，例如线程的调用策略、线程所能使用的栈内存的大小等。大部分场景中，我们都不需要手动修改线程的属性，将 attr 参数赋值为 <span class="hljs-literal">NULL</span>，<span class="hljs-built_in">pthread_create</span>() 函数会采用系统默认的属性值创建线程。<br> <br>第三个参数：<span class="hljs-type">void</span> *(*start_routine)(<span class="hljs-type">void</span> *)<br>    以函数指针的方式指明新建线程需要执行的函数，该函数的参数最多有 <span class="hljs-number">1</span> 个（可以省略不写），形参和返回值的类型都必须为 <span class="hljs-type">void</span> 类型。<span class="hljs-type">void</span> 类型又称空指针类型，表明指针所指数据的类型是未知的。使用此类型指针时，我们通常需要先对其进行强制类型转换，然后才能正常访问指针指向的数据。<br>    如果该函数有返回值，则线程执行完函数后，函数的返回值可以由 <span class="hljs-built_in">pthread_join</span>() 函数接收<br>第四个参数：<span class="hljs-type">void</span> *arg<br>    <span class="hljs-type">void</span> *arg：指定传递给 start_routine 函数的实参，当不需要传递任何数据时，将 arg 赋值为 <span class="hljs-literal">NULL</span> 即可。<br></code></pre></td></tr></table></figure>
+
+<h3 id="线程退出函数"><a href="#线程退出函数" class="headerlink" title="线程退出函数"></a>线程退出函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//线程退出函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pthread_exit</span><span class="hljs-params">(<span class="hljs-type">void</span> *retval)</span></span>;<br> <br>功能说明：主动结束当前线程（终止调用它的线程并返回一个指向某个对象的指针）<br> <br>参数：<br> <span class="hljs-type">void</span> *retval：函数的返回指针，只要pthread_join中的第二个参数retval不是<span class="hljs-literal">NULL</span>，这个值将被传递给retval<br></code></pre></td></tr></table></figure>
+
+<h3 id="线程等待函数"><a href="#线程等待函数" class="headerlink" title="线程等待函数"></a>线程等待函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//线程等待也叫阻塞</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pthread_join</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> thread, <span class="hljs-type">void</span> **retval)</span></span>;<br><br>功能说明：<br>    这个函数是一个线程阻塞的函数，调用它的函数将一直等待到被等待的线程结束为止，当函数返回时，被等待线程的资源被收回，可以理解为进程当中的wait收尸<br> <br>参数：<br>    <span class="hljs-type">pthread_t</span> thread  被等待的线程标识符<br>    <span class="hljs-type">void</span> **retval     一个用户定义的指针，它可以用来存储被等待线程的返回值<br>返回值：<br>On success, <span class="hljs-built_in">pthread_join</span>() returns <span class="hljs-number">0</span>; on error,  it  returns  an  error number.<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//以下是这三个函数的程序实例：</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;pthread.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> *<span class="hljs-title">thread1fun</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;进入线程1&quot;</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;执行线程1&quot;</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;hello i am thread1&quot;</span>);<br>	<span class="hljs-type">char</span> *p=<span class="hljs-string">&quot;线程1已经退出，返回指针char *p&quot;</span>;<br>	<span class="hljs-built_in">pthread_exit</span>(p);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> *<span class="hljs-title">thread2fun</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;进入线程2&quot;</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;执行线程2&quot;</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;hello i am thread2&quot;</span>);<br>	<span class="hljs-type">char</span> *p=<span class="hljs-string">&quot;线程2已经退出，返回指针char *p&quot;</span>;<br>	<span class="hljs-built_in">pthread_exit</span>(p);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">pthread_t</span> thread1;<br>	<span class="hljs-type">pthread_t</span> thread2;<span class="hljs-comment">//定义两个线程类型变量</span><br>	<span class="hljs-comment">//创建线程，开始执行其他线程函数thread1fun</span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">pthread_create</span>(&amp;thread1,<span class="hljs-literal">NULL</span>,thread1fun,<span class="hljs-literal">NULL</span>)!=<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//判断是否错误</span><br>		<span class="hljs-built_in">perror</span>(<span class="hljs-string">&quot;thread1_create error&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;线程1创建成功&quot;</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;线程1线程号：%lu\n&quot;</span>,thread1);<br>	&#125;<br> 	<span class="hljs-comment">//创建线程，开始执行其他线程函数thread2fun</span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">pthread_create</span>(&amp;thread2,<span class="hljs-literal">NULL</span>,thread2fun,<span class="hljs-literal">NULL</span>)!=<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//判断是否错误</span><br>		<span class="hljs-built_in">perror</span>(<span class="hljs-string">&quot;thread1_create error&quot;</span>);<br>       <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;线程2创建成功&quot;</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;线程2线程号：%lu\n&quot;</span>,thread2);<br>	&#125;<br>	<br>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;阻塞等待回收线程&quot;</span>);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">pthread_join</span>(thread1,(<span class="hljs-type">void</span>**)&amp;thread1)==<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;等到了，打印返回指针&quot;</span>);<br>    	<span class="hljs-built_in">puts</span>((<span class="hljs-type">char</span>*) *(&amp;thread1));<br>    &#125;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">pthread_join</span>(thread2,(<span class="hljs-type">void</span> **)&amp;thread2)==<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;等到了，打印返回指针&quot;</span>);<br>    	<span class="hljs-built_in">puts</span>((<span class="hljs-type">char</span>*) *(&amp;thread2));<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">//output</span><br>线程<span class="hljs-number">1</span>创建成功<br>线程<span class="hljs-number">1</span>线程号：&lt;thread1的线程ID&gt;<br>线程<span class="hljs-number">2</span>创建成功<br>线程<span class="hljs-number">2</span>线程号：&lt;thread2的线程ID&gt;<br>进入线程<span class="hljs-number">1</span><br>执行线程<span class="hljs-number">1</span><br>hello i am thread1<br>进入线程<span class="hljs-number">2</span><br>执行线程<span class="hljs-number">2</span><br>hello i am thread2<br>阻塞等待回收线程<br>等到了，打印返回指针<br>线程<span class="hljs-number">1</span>已经退出，返回指针<span class="hljs-type">char</span> *p<br>等到了，打印返回指针<br>线程<span class="hljs-number">2</span>已经退出，返回指针<span class="hljs-type">char</span> *p<br></code></pre></td></tr></table></figure>
+
+<p>在执行线程1的时候，主函数和线程2仍然在执行。</p>
+<h3 id="线程取消函数"><a href="#线程取消函数" class="headerlink" title="线程取消函数"></a>线程取消函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//取消某个线程的执行</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pthread_cancel</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> thread)</span></span>;<br><br><span class="hljs-comment">//返回值：成功返回0，否则返回perror</span><br><span class="hljs-comment">//参数：要取消线程的标识符ID</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="获取线程当前ID"><a href="#获取线程当前ID" class="headerlink" title="获取线程当前ID"></a>获取线程当前ID</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//获取当前调用线程的ID</span><br><span class="hljs-function"><span class="hljs-type">pthread_t</span> <span class="hljs-title">pthread_self</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>;<br><br><span class="hljs-comment">//返回值：当前线程的线程ID标识</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="线程互斥锁"><a href="#线程互斥锁" class="headerlink" title="线程互斥锁"></a>线程互斥锁</h2><p>互斥锁的初始化和销毁：在使用互斥锁之前，需要先对其进行初始化，使用完毕后需要将其销毁。初始化可以使用 <code>pthread_mutex_init</code>() 函数，销毁可以使用 <code>pthread_mutex_destroy</code>() 函数。</p>
+<p>加锁和解锁的配对：在使用 <code>pthread_mutex_lock</code>() 和 <code>pthread_mutex_unlock</code>() 函数时，需要保证加锁和解锁的配对性，即每次加锁后都必须要对应的解锁。</p>
+<p>避免死锁：死锁是指两个或多个线程互相等待对方释放锁，导致程序无法继续执行。为了避免死锁，需要确保<strong>加锁的顺序一致</strong>，并且<strong>不要在加锁的状态下等待其他锁。</strong></p>
+<p>不要重复加锁：重复加锁会导致线程阻塞，无法进行下去，需要注意避免。</p>
+<p>对共享资源的访问必须要在加锁状态下进行：为了确保多个线程访问共享资源的互斥性，需要在对共享资源进行访问之前，先获取对应的互斥锁，以避免多个线程同时访问共享资源。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">pthread_mutex_init</span><span class="hljs-params">()</span></span>：用于初始化一个互斥锁。可以使用默认属性或者自定义属性进行初始化。<br><span class="hljs-function"><span class="hljs-title">pthread_mutex_destroy</span><span class="hljs-params">()</span></span>：用于销毁一个互斥锁，释放相关资源。<br><span class="hljs-function"><span class="hljs-title">pthread_mutex_lock</span><span class="hljs-params">()</span></span>：用于获取一个互斥锁，如果该锁已经被其他线程获取，则当前线程将阻塞，直到该锁被释放为止。<br><span class="hljs-function"><span class="hljs-title">pthread_mutex_unlock</span><span class="hljs-params">()</span></span>：用于释放一个互斥锁，如果该锁当前没有被任何线程获取，则此函数将返回一个错误。<br></code></pre></td></tr></table></figure>
+
+<h2 id="线程锁（读写锁）"><a href="#线程锁（读写锁）" class="headerlink" title="线程锁（读写锁）"></a>线程锁（读写锁）</h2><p>上面是互斥锁，但是线程并不只有互斥锁，在实际的多线程编程中，我们应该选择合适的线程锁。</p>
+<p>互斥锁（Mutex）：互斥锁是一种二元锁，只有两个状态：锁定和未锁定。当一个线程持有互斥锁时，其他线程必须等待该线程释放锁之后才能继续执行。如果多个线程同时竞争锁，只有一个线程可以获得锁，其他线程将被阻塞，直到获得锁的线程释放锁。互斥锁提供了一种简单而有效的方法，用于确保多个线程之间对共享资源的互斥访问。</p>
+<p>读写锁（Reader-Writer Lock）：读写锁是一种更高效的锁，适用于读多写少的场景。读写锁允许多个线程同时读取共享资源，但是只有一个线程可以写入共享资源。当一个线程持有读锁时，其他线程也可以持有读锁，但是当一个线程持有写锁时，其他线程必须等待该线程释放写锁之后才能继续执行。读写锁的优点是在读取共享资源时可以允许多个线程同时进行，从而提高了程序的并发性和性能。</p>
+<p>自旋锁（Spin Lock）：自旋锁是一种非阻塞锁，线程在尝试获取锁时不会被挂起，而是一直循环尝试获取锁。当锁被其他线程持有时，线程会一直尝试获取锁，直到锁被释放。自旋锁适用于锁被持有时间很短的场景，因为在等待锁的过程中，线程会消耗大量的CPU资源。</p>
+<p>条件变量（Condition Variable）：条件变量用于在某个条件满足时通知等待线程。线程可以在条件变量上等待，直到满足条件后才被唤醒。条件变量通常与互斥锁一起使用，以确保在修改共享资源时不会出现竞态条件。</p>
+<p>信号量（Semaphore）：信号量是一种计数器，用于控制多个线程对共享资源的访问。当计数器大于零时，线程可以访问资源，并将计数器减一；当计数器等于零时，线程就必须等待。信号量可以用来实现读写锁和生产者-消费者模型等并发编程模型。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">//此函数用于初始化读写锁对象。读写锁对象在使用前必须被初始化，可以使用静态初始化或者动态初始化。</span><br><span class="hljs-built_in">pthread_rwlock_init</span>()<br>int <span class="hljs-built_in">pthread_rwlock_init</span>(pthread_rwlock_t *restrict rwlock, const pthread_rwlockattr_t *restrict attr);<br><br>    rwlock：读写锁对象的指针。<br>    attr：读写锁属性对象的指针，可以为NULL。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><br><span class="hljs-comment">//获取读取锁，如果写入锁已经被占用，则函数会阻塞等待，直到写入锁被释放。多个线程可以同时获取读取锁。</span><br><span class="hljs-built_in">pthread_rwlock_rdlock</span>()<br>int <span class="hljs-built_in">pthread_rwlock_rdlock</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><span class="hljs-comment">//此函数用于获取写入锁，如果读取锁或者写入锁已经被占用，则函数会阻塞等待，直到锁被释放。写入锁是独占的，只有一个线程可以获取写入锁。</span><br><span class="hljs-built_in">pthread_rwlock_wrlock</span>()<br>int <span class="hljs-built_in">pthread_rwlock_wrlock</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><span class="hljs-comment">//此函数用于释放读取锁或者写入锁。如果锁没有被获取，释放锁会导致未定义的行为。</span><br><span class="hljs-built_in">pthread_rwlock_unlock</span>()<br>int <span class="hljs-built_in">pthread_rwlock_unlock</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><span class="hljs-comment">//此函数尝试获取读取锁，如果读取锁已经被占用，则函数会立即返回，不会阻塞等待。如果获取成功，则进行读取操作。</span><br><span class="hljs-built_in">pthread_rwlock_tryrdlock</span>()<br>int <span class="hljs-built_in">pthread_rwlock_tryrdlock</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><span class="hljs-comment">//此函数尝试获取写入锁，如果读取锁或者写入锁已经被占用，则函数会立即返回，不会阻塞等待。如果获取成功，则进行写入操作。</span><br><span class="hljs-built_in">pthread_rwlock_trywrlock</span>()<br>int <span class="hljs-built_in">pthread_rwlock_trywrlock</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br><br><span class="hljs-comment">//此函数用于销毁读写锁</span><br><span class="hljs-built_in">pthread_rwlock_destroy</span>()<br>int <span class="hljs-built_in">pthread_rwlock_destroy</span>(pthread_rwlock_t *rwlock);<br><br>    rwlock：读写锁对象的指针。<br>    返回值：成功返回<span class="hljs-number">0</span>，失败返回错误码。<br></code></pre></td></tr></table></figure>
+
+<h2 id="进程通信方式"><a href="#进程通信方式" class="headerlink" title="进程通信方式"></a>进程通信方式</h2><p><strong>管道（Pipe）：管道是一种半双工的通信方式，它只能用于父子进程或者兄弟进程之间的通信</strong>。管道有两种类型：无名管道和命名管道。无名管道只存在于相关进程的内存中，而命名管道则存在于文件系统中，允许不相关的进程进行通信。</p>
+<p><strong>命名管道（Named Pipe）：命名管道允许不相关的进程进行通信。</strong>它在文件系统中创建一个特殊文件，任何知道文件名的进程都可以通过文件访问方式进行通信。</p>
+<p><strong>信号（Signal）：信号是一种异步通信机制，用于通知进程发生了某些事件。</strong>一个进程可以向另一个进程发送信号，另一个进程可以选择接受或忽略信号。</p>
+<p><strong>消息队列（Message Queue）：消息队列是一种存放在内核中的消息链表，用于不相关的进程间的通信。</strong>进程可以向队列中发送消息，其他进程可以从队列中接收消息。</p>
+<p><strong>共享内存（Shared Memory）：共享内存允许多个进程访问同一块物理内存。</strong>进程可以将数据写入共享内存区域，其他进程可以直接从该内存区域读取数据。</p>
+<p><strong>套接字（Socket）：套接字是一种通用的进程间通信方式，可用于不同主机之间的通信。</strong>套接字提供了一组接口，进程可以使用这些接口来建立网络连接并进行通信。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="print-no-link">#进程和线程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux系统进程线程学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/09/Work No.17/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/08/09/Work%20No.19/" title="Linux信号signal学习">
+                        <span class="hidden-mobile">Linux信号signal学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/07/31/OocearM37hWYHTp.jpg">
 <meta property="article:published_time" content="2024-08-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-07T02:28:01.828Z">
+<meta property="article:modified_time" content="2024-08-09T04:05:31.973Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月7日 上午
+                    本文最后更新于 2024年8月9日 中午
                   
                 
               </p>
@@ -293,12 +293,12 @@
             
               <div class="markdown-body">
                 
-                <h1 id="C语言数组学习"><a href="#C语言数组学习" class="headerlink" title="C语言数组学习"></a>C语言数组学习</h1><h3 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wkd_007/article/details/134400060">【C语言 | 数组】C语言数组详解(经典，超详细)-CSDN博客</a></p>
+                <h1 id="C语言数组学习"><a href="#C语言数组学习" class="headerlink" title="C语言数组学习"></a>C语言数组学习</h1><h2 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wkd_007/article/details/134400060">【C语言 | 数组】C语言数组详解(经典，超详细)-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/cprogramming/c-arrays.html">C 数组 | 菜鸟教程 (runoob.com)</a></p>
-<h3 id="计算机基础单位和数据类型"><a href="#计算机基础单位和数据类型" class="headerlink" title="计算机基础单位和数据类型"></a>计算机基础单位和数据类型</h3><p>其中在C语言中的一些特定的数据类型存储也是有一定的范围的：</p>
+<h2 id="计算机基础单位和数据类型"><a href="#计算机基础单位和数据类型" class="headerlink" title="计算机基础单位和数据类型"></a>计算机基础单位和数据类型</h2><p>其中在C语言中的一些特定的数据类型存储也是有一定的范围的：</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-number">1.</span> <span class="hljs-keyword">char</span> <span class="hljs-comment">-------- 1字节</span><br><span class="hljs-number">2.</span> <span class="hljs-keyword">short</span> <span class="hljs-comment">--------- 2字节</span><br><span class="hljs-number">3.</span> int <span class="hljs-comment">-------- 4字节   </span><br><span class="hljs-number">4.</span> <span class="hljs-keyword">long</span> <span class="hljs-comment">---------- 4字节</span><br><span class="hljs-number">5.</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> <span class="hljs-comment">-------- 8字节</span><br><span class="hljs-number">6.</span> float <span class="hljs-comment">---------- 4字节</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="数组的储存空间大小和位置"><a href="#数组的储存空间大小和位置" class="headerlink" title="数组的储存空间大小和位置"></a>数组的储存空间大小和位置</h3><p>数组的储存空间定义上也和数据类型有关，比如</p>
+<h2 id="数组的储存空间大小和位置"><a href="#数组的储存空间大小和位置" class="headerlink" title="数组的储存空间大小和位置"></a>数组的储存空间大小和位置</h2><p>数组的储存空间定义上也和数据类型有关，比如</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">int</span> arr[<span class="hljs-number">5</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>那么，这个数组的数据类型是整数型，一共有五个整数型，所以总占空间为20字节</p>
@@ -318,7 +318,7 @@
 <p>其中sizeof的使用上也是有区分的</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">sizeof</span>(arr);<span class="hljs-comment">//这个是输出整个数组的大小</span><br><span class="hljs-built_in">sizeof</span>(&amp;arr);<span class="hljs-comment">//这个是输出首地址的大小</span><br><span class="hljs-built_in">sizeof</span>(a[<span class="hljs-number">0</span>]);<span class="hljs-comment">//这个是输出首地址的大小</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="数组定义类型"><a href="#数组定义类型" class="headerlink" title="数组定义类型"></a>数组定义类型</h3><p>如果要定义类似这种数组，那么hello占数组的五个数据还是只是一个数据呢</p>
+<h2 id="数组定义类型"><a href="#数组定义类型" class="headerlink" title="数组定义类型"></a>数组定义类型</h2><p>如果要定义类似这种数组，那么hello占数组的五个数据还是只是一个数据呢</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">char str[] <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span><span class="hljs-comment">; </span><br></code></pre></td></tr></table></figure>
 
 <p>我们可以将str的字符进行逐个输出可以发现，我们定义一整串字符串的时候，系统会自动帮我们拆分整个字符串，然后判断这个数组的大小</p>
@@ -330,11 +330,11 @@
 <p>数组的指定输出可以直接用数组名+[数组位置]，二维数组也是类似，地址也是类似</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">int</span> arr[<span class="hljs-number">5</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;;<br><span class="hljs-attribute">int</span> arr1[<span class="hljs-number">2</span>][<span class="hljs-number">3</span>]=&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;&#125;;<br><span class="hljs-attribute">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,arr[<span class="hljs-number">1</span>]);//输出是<span class="hljs-number">2</span><br><span class="hljs-attribute">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,arr1[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]);//输出是<span class="hljs-number">4</span><br><span class="hljs-attribute">printf</span>(<span class="hljs-string">&quot;%p\n&quot;</span>,&amp;arr[<span class="hljs-number">1</span>]);//输出是<span class="hljs-number">000000000061</span>FE04<br></code></pre></td></tr></table></figure>
 
-<h3 id="指针和数组的区别"><a href="#指针和数组的区别" class="headerlink" title="指针和数组的区别"></a>指针和数组的区别</h3><p><strong>数组</strong>：数组是用于储存多个相同类型数据的集合。</p>
+<h2 id="指针和数组的区别"><a href="#指针和数组的区别" class="headerlink" title="指针和数组的区别"></a>指针和数组的区别</h2><p><strong>数组</strong>：数组是用于储存多个相同类型数据的集合。</p>
 <p><strong>指针</strong>：指针相当于一个变量，但是它和不同变量不一样，它存放的是其它变量在内存中的地址。</p>
 <p><strong>数组</strong>：数组在内存中是连续存放的，开辟一块连续的内存空间。数组是根据数组的下进行访问的，多维数组在内存中是按照一维数组存储的，只是在逻辑上是多维的。数组的存储空间，不是在静态区就是在栈上。</p>
 <p><strong>指针</strong>：指针很灵活，它可以指向任意类型的数据。指针的类型说明了它所指向地址空间的内存。由于指针本身就是一个变量，再加上它所存放的也是变量，所以指针的存储空间不能确定。</p>
-<h4 id="数组传参时，会退化为指针"><a href="#数组传参时，会退化为指针" class="headerlink" title="数组传参时，会退化为指针"></a>数组传参时，会退化为指针</h4><p>退化的意义：C语言只会以值拷贝的方式传递参数，参数传递时，如果只拷贝整个数组，效率会大大降低，并且在参数位于栈上，太大的数组拷贝将会导致栈溢出。</p>
+<h2 id="数组传参时，会退化为指针"><a href="#数组传参时，会退化为指针" class="headerlink" title="数组传参时，会退化为指针"></a>数组传参时，会退化为指针</h2><p>退化的意义：C语言只会以值拷贝的方式传递参数，参数传递时，如果只拷贝整个数组，效率会大大降低，并且在参数位于栈上，太大的数组拷贝将会导致栈溢出。</p>
 <p>因此，C语言将数组的传参进行了退化。将整个数组拷贝一份传入函数时，将数组名看做常量指针，传数组首元素的地址。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">main</span>()</span><br>&#123;<br>    <span class="hljs-built_in">int</span> arr[<span class="hljs-number">10</span>] = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-built_in">int</span> *p = arr;<br>    <span class="hljs-built_in">int</span> sz = <span class="hljs-keyword">sizeof</span>(arr)/<span class="hljs-keyword">sizeof</span>(arr[<span class="hljs-number">0</span>]);<br>    <span class="hljs-comment">//一级指针p，传给函数</span><br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;sz; i++)<br>    &#123;<br>       printf(<span class="hljs-string">&quot;%d\n&quot;</span>, *(p+i));<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
