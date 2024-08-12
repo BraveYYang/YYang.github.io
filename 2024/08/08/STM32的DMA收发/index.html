@@ -16,26 +16,26 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux消息队列学习感谢博主：消息队列（定义、结构、如何创建、消息队列的发送与接收、发送与接收实例）_vc中如何定义使用消息队列-CSDN博客 消息队列概述官方说法是，MQ（全称Message Queue）是一种进程间通信或同一进程的不同线程间的通信方式，队列就是一个消息容器 现实使用中，我们将消息队列称之为中间件，从它的名字就可以看出，消息队列不存储消息内容的本身，它只是消息的搬运工 消息队列">
+    <meta name="description" content="STM32的DMA收发配置DMA(Direct Memory Access)—直接存储器存取，是单片机的一个外设，它的主要功能是用来搬数据，但是不需要占用 CPU，即在传输数据的时候， CPU 可以干其他的事情，好像是多线程一样 DMA主要组成有控制器请求、通道、仲裁器 控制器请求的话主要由想要使用方发起，如果外设要想通过 DMA 来传输数据，必须先给 DMA 控制器发送 DMA 请求， DMA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux消息队列学习">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/09/Work%20No.20/index.html">
+<meta property="og:title" content="STM32的DMA收发配置">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/08/STM32%E7%9A%84DMA%E6%94%B6%E5%8F%91/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="Linux消息队列学习感谢博主：消息队列（定义、结构、如何创建、消息队列的发送与接收、发送与接收实例）_vc中如何定义使用消息队列-CSDN博客 消息队列概述官方说法是，MQ（全称Message Queue）是一种进程间通信或同一进程的不同线程间的通信方式，队列就是一个消息容器 现实使用中，我们将消息队列称之为中间件，从它的名字就可以看出，消息队列不存储消息内容的本身，它只是消息的搬运工 消息队列">
+<meta property="og:description" content="STM32的DMA收发配置DMA(Direct Memory Access)—直接存储器存取，是单片机的一个外设，它的主要功能是用来搬数据，但是不需要占用 CPU，即在传输数据的时候， CPU 可以干其他的事情，好像是多线程一样 DMA主要组成有控制器请求、通道、仲裁器 控制器请求的话主要由想要使用方发起，如果外设要想通过 DMA 来传输数据，必须先给 DMA 控制器发送 DMA 请求， DMA">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/02/smPFoif4rdC3xeW.png">
-<meta property="article:published_time" content="2024-08-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-09T07:28:47.587Z">
+<meta property="og:image" content="https://s2.loli.net/2024/08/02/Jw2m6LlYHhnTg5q.jpg">
+<meta property="article:published_time" content="2024-08-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-12T12:26:59.316Z">
 <meta property="article:author" content="BraveYYang">
-<meta property="article:tag" content="消息队列">
+<meta property="article:tag" content="DMA数据传输">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/02/smPFoif4rdC3xeW.png">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/02/Jw2m6LlYHhnTg5q.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Linux消息队列学习 - BraveYYang</title>
+  <title>STM32的DMA收发配置 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux消息队列学习"></span>
+            <span id="subtitle" data-typed-text="STM32的DMA收发配置"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-09 00:00" pubdate>
-          2024年8月9日 凌晨
+        <time datetime="2024-08-08 00:00" pubdate>
+          2024年8月8日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.8k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          16 分钟
         
       </span>
     
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux消息队列学习</h1>
+            <h1 id="seo-header">STM32的DMA收发配置</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月9日 下午
+                    本文最后更新于 2024年8月12日 晚上
                   
                 
               </p>
@@ -293,32 +293,43 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Linux消息队列学习"><a href="#Linux消息队列学习" class="headerlink" title="Linux消息队列学习"></a>Linux消息队列学习</h1><h2 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/scarificed/article/details/121475146">消息队列（定义、结构、如何创建、消息队列的发送与接收、发送与接收实例）_vc中如何定义使用消息队列-CSDN博客</a></p>
-<h2 id="消息队列概述"><a href="#消息队列概述" class="headerlink" title="消息队列概述"></a>消息队列概述</h2><p>官方说法是，MQ（全称Message Queue）是一种进程间通信或同一进程的不同线程间的通信方式，队列就是一个消息容器</p>
-<p>现实使用中，我们将消息队列称之为<strong>中间件</strong>，从它的名字就可以看出，消息队列不存储消息内容的本身，它只是消息的搬运工</p>
-<p>消息队列是一种先进先出的队列型数据结构，实际上是系统内核中的一个内部链表。消息被顺序插入队列中，其中发送进程将消息添加到队列末尾，接受进程从队列头读取消息。</p>
-<h4 id="消息和队列"><a href="#消息和队列" class="headerlink" title="消息和队列"></a>消息和队列</h4><p><strong>消息：</strong>需要传输的数据，可以是最简单的文本字符串，也可以是自定义的复杂格式</p>
-<p><strong>队列：</strong>一种先进先出的数据结构，在这里是存放消息的容器，入队即发消息的过程，出队即收消息的过程</p>
-<p><strong>过程：</strong>生产者将消息投递到一个叫做 队列 的容器中，然后再从容器中取出消息，最后转发给消费者</p>
-<h4 id="队列模型（又叫做点对点模型）"><a href="#队列模型（又叫做点对点模型）" class="headerlink" title="队列模型（又叫做点对点模型）"></a>队列模型（又叫做点对点模型）</h4><p><strong>点对点模式（PTP）</strong>：一个生产者发送的每一个消息，都只有一个消费者消费，看起来就像消息从一个点被传递到另一个点，也就是<strong>单播</strong></p>
-<p>它允许多个生产者向同一个队列里发送消息，但是只有一个消费者能拿到数据，如果有多个消费者，那么多个消费者是竞争者关系，最终一条消息只能被其中一个消费者接收到，读完即会被删除</p>
-<h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><p>一个生产者发送的每一个消息，都会发送到所有订阅了此队列的消费者，也就是<strong>广播</strong></p>
-<p>在发布订阅模型中，存放消息的容器变成了主题（主题也是一个队列），订阅者在接收消息之前需要先订阅主题，最终，每个订阅者都可以收到同一个主题的全量消息，可以看到和队列模式唯一不同的就是，发布订阅模式中的<strong>一份消息数据可以被多次消费</strong></p>
-<h2 id="消息队列结构"><a href="#消息队列结构" class="headerlink" title="消息队列结构"></a>消息队列结构</h2><p>消息队列中消息本身由消息类型和消息数据组成，通常使用如下结构：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">msgbuf</span><br>&#123;<br>	<span class="hljs-type">long</span> 	mtype;<span class="hljs-comment">//mtype指定了消息类型，为正整数。</span><br>	<span class="hljs-type">char</span>	mtext[<span class="hljs-number">1</span>];<span class="hljs-comment">//mtext指定了消息的数据。我们可以定义任意的数据类型甚至包括结构来描述消息数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="STM32的DMA收发配置"><a href="#STM32的DMA收发配置" class="headerlink" title="STM32的DMA收发配置"></a>STM32的DMA收发配置</h1><p>DMA(Direct Memory Access)—直接存储器存取，是单片机的一个外设，它的主要功能是用来搬数据，但是不需要占用 CPU，即在传输数据的时候， CPU 可以干其他的事情，好像是多线程一样</p>
+<p>DMA主要组成有控制器请求、通道、仲裁器</p>
+<h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><p>请求的话主要由想要使用方发起，如果外设要想通过 DMA 来传输数据，必须先给 DMA 控制器发送 DMA 请求， DMA 收到请求信号之后，控制器会给外设一个应答信号，当外设应答后且 DMA 控制器收到应答信号之后，就会启动 DMA 的传输，直到传输完毕。</p>
+<h3 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h3><p>DMA 控制器包含了 DMA1 和 DMA2，其中 DMA1 有 7 个通道， DMA2 有 5 个通道，通道的地址也是DMA存储器的地址</p>
+<p>每个通道对应不同的外设的 DMA 请求。<strong>虽然每个通道可以接收多个外设的请求，但是同一时间只能接收一个，不能同时接收多个。</strong></p>
+<h3 id="仲裁器"><a href="#仲裁器" class="headerlink" title="仲裁器"></a>仲裁器</h3><p>当发生多个 DMA 通道请求时，就意味着有先后响应处理的顺序问题，这个就由仲裁器也管理。</p>
+<p>仲裁器管理 DMA 通道请求分为两个阶段。</p>
+<p>第一阶段属于软件阶段，可以在 <strong>DMA_CCRx 寄存器中设置，有 4 个等级：非常高、高、中和低四个优先级。</strong></p>
+<p>第二阶段属于硬件阶段，如果两个或以上的 DMA 通道请求设置的优先级一样，则他们优先级取决于通道编号，编号越低优先权越高，比如通道 0 高于通道1。</p>
+<h3 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h3><p>DMA 传输数据的方向有三个：从外设到存储器，从存储器到外设，从存储器到存储器</p>
+<p>DMA_CCR 位 4 DIR 配置： 0 表示从外设到存储器， 1 表示从存储器到外设。储存器到储存器有单独设置。</p>
+<p>当我们使用从外设到存储器传输时，以 ADC 采集为例。 <strong>DMA 外设寄存器的地址对应的就是 ADC数据寄存器的地址， DMA 存储器的地址就是我们自定义的变量</strong>（用来接收存储 AD 采集的数据）的地址。</p>
+<p>当我们使用从存储器到外设传输时，以串口向电脑端发送数据为例。 <strong>DMA 外设寄存器的地址对应的就是串口数据寄存器的地址， DMA 存储器的地址就是我们自定义的变量</strong>（相当于一个缓冲区，用来存储通过串口发送到电脑的数据）的地址。  </p>
+<p>当我们使用从存储器到存储器传输时，以内部 FLASH 向内部 SRAM 复制数据为例。 DMA 外设寄存器的地址对应的就是内部 FLASH（我们这里把内部 FALSH 当作一个外设来看）的地址， DMA存储器的地址就是我们自定义的变量  </p>
+<p>一个 32 位的寄存器，一次最多只能传输 65535 个数据。  </p>
+<p>要想数据传输正确，源和目标地址存储的数据宽度还必须一致，串口数据寄存器是 8 位的，所以我们定义的要发送的数据也必须是 8 位。  </p>
+<h3 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h3><p>DMA的配置上也比较清晰，跟之前的类似，首先要初始化结构体，并且打开DMA1的时钟，所有的外设都要有这个操作</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs scss">DMA_InitTypeDef DMA_InitStruct;<span class="hljs-comment">//初始化结构体</span><br><br><span class="hljs-built_in">RCC_AHBPeriphClockCmd</span>(RCC_AHBPeriph_DMA1, ENABLE);<span class="hljs-comment">//打开DMA1的时钟</span><br></code></pre></td></tr></table></figure>
 
-<p><strong>mtype：</strong>引入消息类型之后，消息队列在逻辑上由一个消息链表转化为多个消息链表。发送进程仍然无条件把消息写入队列的尾部，但接收进程却可以有选择地读取某个特定类型的消息中最接近队列头的一个，即使该消息不在队列头。相应消息一旦被读取，就从队列中删除，其它消息维持不变。</p>
-<h4 id="创建消息队列"><a href="#创建消息队列" class="headerlink" title="创建消息队列"></a>创建消息队列</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">msgget</span><span class="hljs-params">(<span class="hljs-type">key_t</span> key, <span class="hljs-type">int</span> msgflg)</span></span>;<br><span class="hljs-comment">//参数key是消息队列的关键字</span><br><span class="hljs-comment">//参数msgflg的低9位指定队列的属主、属组和其他用户的访问权限，其它位指定消息队列的创建方式。</span><br>	<span class="hljs-comment">//IPC_CREAT：创建，如存在则打开；</span><br>	<span class="hljs-comment">//IPC_EXCL：与IPC_CREAT使用，单独使用无意义。创建时，如存在则失败。</span><br>	<br><span class="hljs-comment">//创建关键字为0x1234，访问权限为0666的消息队列，如队列已存在返回其标识号。</span><br><span class="hljs-type">int</span> msgid;<br>msgid = <span class="hljs-built_in">msgget</span>(<span class="hljs-number">0x1234</span>, <span class="hljs-number">0666</span>|IPC_CREAT);<br><br><span class="hljs-comment">//创建关键字为0x1234，访问权限为0666的消息队列，如队列已存在则报错。</span><br><span class="hljs-type">int</span> msgid;<br>msgid = <span class="hljs-built_in">msgget</span>(<span class="hljs-number">0x1234</span>, <span class="hljs-number">0666</span>|IPC_CREAT|IPC_EXCL);<br></code></pre></td></tr></table></figure>
+<p>第一部分是定义数据的去向和大小，分别是要去的地址(外设)，从哪里来的地址(DMA1地址)，传输方向和传输数目</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">DMA_InitStruct.DMA_PeripheralBaseAddr</span> = (uint32_t)(USART1_BASE+<span class="hljs-number">0</span>x04)<span class="hljs-comment">;//外设地址，定义数据去向地址</span><br><br><span class="hljs-attr">DMA_InitStruct.DMA_MemoryBaseAddr</span> = (uint32_t)DMA1_Channel4<span class="hljs-comment">;//存储器地址</span><br><br><span class="hljs-attr">DMA_InitStruct.DMA_DIR</span> = DMA_DIR_PeripheralDST<span class="hljs-comment">;//传输方向选择，可选外设到存储器、存储器到外设。</span><br><br><span class="hljs-attr">DMA_InitStruct.DMA_BufferSize</span> = <span class="hljs-number">256</span><span class="hljs-comment">;//设定待传输数据数目</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="消息队列发送"><a href="#消息队列发送" class="headerlink" title="消息队列发送"></a>消息队列发送</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//发送消息</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">msgsnd</span><span class="hljs-params">(<span class="hljs-type">int</span> msqid, <span class="hljs-type">void</span> *msgp, <span class="hljs-type">int</span> msgsz, <span class="hljs-type">int</span> msgflg)</span></span>;<br>    <span class="hljs-comment">//msgid：指定发送消息队列的标识号；</span><br>    <span class="hljs-comment">//msgp：指向存储待发送消息内容的内存地址，用户可设计自己的消息结构；</span><br>    <span class="hljs-comment">//msgsz：指定长度，仅记载数据的长度，不包括消息类型部分，且必须大于0；</span><br>    <span class="hljs-comment">//msgflg：控制消息发送的方式，有阻塞和非阻塞（IPC_NOWAIT）两种方式。</span><br></code></pre></td></tr></table></figure>
+<p>第二部分是设定数据的传输模式和宽度</p>
+<p>首先是外设数据的模式要设为不自动递增，因为寄存器就只有一个，无法多次递增，在设置外设数据的宽度，外设数据的宽度要和DMA1存储器的宽度一致，如果不一致的话，会导致数据丢失</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">//一般外设都是只有一个数据寄存器，所以一般不会使能该位<br>DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_PeripheralInc</span> = DM<span class="hljs-built_in">A_PeripheralInc</span>_Disable<span class="hljs-comment">;//使能外设地址自动递增功能</span><br><br>DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_PeripheralDataSize</span> = DM<span class="hljs-built_in">A_PeripheralDataSize</span>_Byte<span class="hljs-comment">;//外设数据宽度</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="消息队列的发送流程"><a href="#消息队列的发送流程" class="headerlink" title="消息队列的发送流程"></a>消息队列的发送流程</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//第一步，定义消息结构</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">msgbuf</span>&#123;	<br>	<span class="hljs-type">long</span> mtype;		<br>	<span class="hljs-type">char</span> ctext[<span class="hljs-number">100</span>];<br>&#125;	<br><br><span class="hljs-comment">//第二步，创建消息队列</span><br><span class="hljs-type">int</span> msgid;<br>msgid = <span class="hljs-built_in">msgget</span>(KEY, <span class="hljs-number">0666</span>|IPC_CREAT);<br><span class="hljs-keyword">if</span>(msgid &lt; <span class="hljs-number">0</span>)	<span class="hljs-comment">//打开或创建消息失败；</span><br><br><span class="hljs-comment">//第三步，组织消息</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">msgbuf</span> buf;<br>buf.mtype = <span class="hljs-number">100</span>;<br><span class="hljs-built_in">strcpy</span>(buf.ctext, “HELLO UNIX!”);<br><br><span class="hljs-comment">//第四步，发送消息</span><br><span class="hljs-type">int</span> ret;<br>ret = <span class="hljs-built_in">msgsnd</span>(msgid, &amp;buf, <span class="hljs-built_in">strlen</span>(buf.ctext), <span class="hljs-number">0</span>);<br><br><span class="hljs-comment">//第五步，判断发送是否成功</span><br><span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)<br>&#123;<br>	<span class="hljs-keyword">if</span>(errno == EINTR)	<span class="hljs-comment">//信号中断，重新发送；</span><br>	<span class="hljs-keyword">else</span> <span class="hljs-comment">//系统错误</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在设置存储器的数据模式和宽度，数据模式选择递增的方式，因为数据寄存器要接收多个数据，接受完一个要继续接收，可以理解为外设接收完数据直接清零，所以不需要递增，存储器无法清零，所以要递增，宽度一致</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">//我们自定义的存储区一般都是存放多个数据的，所以要使能存储器地址自动递增功能。<br>DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_MemoryInc</span> = DM<span class="hljs-built_in">A_MemoryInc</span>_Enable<span class="hljs-comment">;//使能存储器地址自动递增功能</span><br><br>DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_MemoryDataSize</span> = DM<span class="hljs-built_in">A_PeripheralDataSize</span>_Byte<span class="hljs-comment">;//存储器数据宽度</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="从消息队列中接收消息"><a href="#从消息队列中接收消息" class="headerlink" title="从消息队列中接收消息"></a>从消息队列中接收消息</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//接收队列消息</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">msgrcv</span><span class="hljs-params">(<span class="hljs-type">int</span> msgid, <span class="hljs-type">void</span> *msgp, <span class="hljs-type">int</span> msgsz, <span class="hljs-type">long</span> msgtyp, <span class="hljs-type">int</span> msgflg)</span></span>;<br><br>	<span class="hljs-comment">//msgid：消息队列标识号；</span><br>	<span class="hljs-comment">//msgp：指向接收消息的内存缓冲区；</span><br>	<span class="hljs-comment">//msgsz：指定该缓冲区的最大容量，不包括消息类型占用的部分；</span><br>	<span class="hljs-comment">//msgtyp：指定读取消息的类型；</span><br></code></pre></td></tr></table></figure>
+<p>在设置数据的传输模式，是循环还是单次传输</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_Mode</span> = DM<span class="hljs-built_in">A_Mode</span>_Normal<span class="hljs-comment">;//DMA 传输模式选择，可选一次传输或者循环传输</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="消息队列的接收流程"><a href="#消息队列的接收流程" class="headerlink" title="消息队列的接收流程"></a>消息队列的接收流程</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//第一步，定义消息结构</span><br><span class="hljs-keyword">struct</span> msgbuf&#123;	<br>	<span class="hljs-built_in">long</span> mtype;		<br>	<span class="hljs-built_in">char</span> ctext[<span class="hljs-number">100</span>];<br>&#125;	<br><br><span class="hljs-comment">//打开（创建）消息队列</span><br><span class="hljs-built_in">int</span> msgid;<br>msgid = msgget(KEY, <span class="hljs-number">0666</span>|IPC_CREAT);<br><br><span class="hljs-comment">//准备接收消息缓冲区</span><br><span class="hljs-keyword">struct</span> msgbuf buf;<br>memset(buf, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(buf));<br><br><span class="hljs-comment">//接收消息</span><br><span class="hljs-built_in">int</span> ret;<br>ret = msgrcv(msgid, &amp;buf, <span class="hljs-keyword">sizeof</span>(buf.ctext), TYPE, <span class="hljs-number">0</span>);<br><br><span class="hljs-comment">//接收判断</span><br><span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)<br>&#123;<br>	<span class="hljs-keyword">if</span>(errno == EINTR)	 <span class="hljs-comment">//信号中断，重新接收；</span><br>	<span class="hljs-keyword">else</span>                 <span class="hljs-comment">//系统错误</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>第三部分是数据的软优先级设置，以及数据初始化、数据使能和标志位清零</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_Priority</span> = DM<span class="hljs-built_in">A_Priority</span>_High<span class="hljs-comment">;//软件设置通道的优先级，有 4 个可选优先级分别为非常高、高、中和低</span><br><br>DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_M2M</span> = DM<span class="hljs-built_in">A_M2M</span>_Disable<span class="hljs-comment">;//存储器到存储器模式，使用存储器到存储器时用到</span><br><br>DM<span class="hljs-built_in">A_Init</span>(DMA1_Channel4, &amp;DM<span class="hljs-built_in">A_InitStruct</span>)<span class="hljs-comment">;//对配置进行初始化</span><br><br>//用于清除 DMA 标志位，代码用到传输完成标志位，使用之前先清除传输完成标志位以免产生不必要干扰<br>DM<span class="hljs-built_in">A_ClearFlag</span>(DMA1_FLAG_TC4)<span class="hljs-comment">;</span><br><br>DM<span class="hljs-built_in">A_Cmd</span>(DMA1_Channel4, ENABLE)<span class="hljs-comment">;//启动或者停止 DMA 数据传输</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="消息队列优势"><a href="#消息队列优势" class="headerlink" title="消息队列优势"></a>消息队列优势</h2><p>1、采用消息队列通信比采用管道通信具有更多的灵活性，通信的进程不但没有血缘上的要求，也不需要进行同步处理。<br>2、消息队列是一种先进先出的队列型数据结构；<br>3、消息队列将输出的信息进行了打包处理，可以保证以消息为单位进行接收；<br>4、消息队列对信息进行分类服务，根据消息的类别进行分别处理。<br>5、提供消息数据自动拆分功能，同时不能接受两次发送的消息。<br>6、消息队列提供了不完全随机读取的服务。<br>7、消息队列提供了完全异步的读写服务。</p>
+<h3 id="配置总代码"><a href="#配置总代码" class="headerlink" title="配置总代码"></a>配置总代码</h3><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">void UtM_DM<span class="hljs-built_in">A_Config</span>(void)<br>&#123;<br>	DM<span class="hljs-built_in">A_InitTypeDef</span> DM<span class="hljs-built_in">A_InitStruct</span><span class="hljs-comment">;//初始化结构体</span><br>	<br>	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE)<span class="hljs-comment">;//打开DMA1的时钟</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_PeripheralBaseAddr</span> = (uint32_t)(USART1_BASE+<span class="hljs-number">0</span>x04)<span class="hljs-comment">;//外设地址，定义数据去向地址</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_MemoryBaseAddr</span> = (uint32_t)DMA1_Channel4<span class="hljs-comment">;//存储器地址</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_DIR</span> = DM<span class="hljs-built_in">A_DIR</span>_PeripheralDST<span class="hljs-comment">;//传输方向选择，可选外设到存储器、存储器到外设。</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_BufferSize</span> = <span class="hljs-number">256</span><span class="hljs-comment">;//设定待传输数据数目</span><br>	<br>	//一般外设都是只有一个数据寄存器，所以一般不会使能该位<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_PeripheralInc</span> = DM<span class="hljs-built_in">A_PeripheralInc</span>_Disable<span class="hljs-comment">;//使能外设地址自动递增功能</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_PeripheralDataSize</span> = DM<span class="hljs-built_in">A_PeripheralDataSize</span>_Byte<span class="hljs-comment">;//外设数据宽度</span><br>	<br>	//我们自定义的存储区一般都是存放多个数据的，所以要使能存储器地址自动递增功能。<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_MemoryInc</span> = DM<span class="hljs-built_in">A_MemoryInc</span>_Enable<span class="hljs-comment">;//使能存储器地址自动递增功能</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_MemoryDataSize</span> = DM<span class="hljs-built_in">A_PeripheralDataSize</span>_Byte<span class="hljs-comment">;//存储器数据宽度</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_Mode</span> = DM<span class="hljs-built_in">A_Mode</span>_Normal<span class="hljs-comment">;//DMA 传输模式选择，可选一次传输或者循环传输</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_Priority</span> = DM<span class="hljs-built_in">A_Priority</span>_High<span class="hljs-comment">;//软件设置通道的优先级，有 4 个可选优先级分别为非常高、高、中和低</span><br>	<br>	DM<span class="hljs-built_in">A_InitStruct</span>.DM<span class="hljs-built_in">A_M2M</span> = DM<span class="hljs-built_in">A_M2M</span>_Disable<span class="hljs-comment">;//存储器到存储器模式，使用存储器到存储器时用到</span><br>	<br>	DM<span class="hljs-built_in">A_Init</span>(DMA1_Channel4, &amp;DM<span class="hljs-built_in">A_InitStruct</span>)<span class="hljs-comment">;//对配置进行初始化</span><br>	<br>	//用于清除 DMA 标志位，代码用到传输完成标志位，使用之前先清除传输完成标志位以免产生不必要干扰<br>	DM<span class="hljs-built_in">A_ClearFlag</span>(DMA1_FLAG_TC4)<span class="hljs-comment">;</span><br>	<br>	DM<span class="hljs-built_in">A_Cmd</span>(DMA1_Channel4, ENABLE)<span class="hljs-comment">;//启动或者停止 DMA 数据传输</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -337,7 +348,7 @@
     
       <span class="category-chain">
         
-  <a href="/YYang.github.io/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/YYang.github.io/categories/STM32/" class="category-chain-item">STM32</a>
   
   
 
@@ -352,7 +363,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/YYang.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="print-no-link">#消息队列</a>
+        <a href="/YYang.github.io/tags/DMA%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93/" class="print-no-link">#DMA数据传输</a>
       
     </div>
   
@@ -364,8 +375,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux消息队列学习</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/08/09/Work No.20/</div>
+      <div>STM32的DMA收发配置</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/08/STM32的DMA收发/</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +388,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月9日</div>
+          <div>2024年8月8日</div>
         </div>
       
       
@@ -409,9 +420,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/09/Work%20No.19/" title="Linux信号signal学习">
+                      <a href="/YYang.github.io/2024/08/09/Work%20No.20/" title="Linux消息队列学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux信号signal学习</span>
+                        <span class="hidden-mobile">Linux消息队列学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -419,8 +430,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/08/STM32%E7%9A%84DMA%E6%94%B6%E5%8F%91/" title="STM32的DMA收发配置">
-                        <span class="hidden-mobile">STM32的DMA收发配置</span>
+                      <a href="/YYang.github.io/2024/08/07/Work%20No.18/" title="C语言内存分配学习">
+                        <span class="hidden-mobile">C语言内存分配学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
