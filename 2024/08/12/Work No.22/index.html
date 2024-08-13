@@ -16,16 +16,16 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Python学习-2感谢博主：数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com) 切片假设一个列表或者元组有如下的元素 123&gt;&gt;&gt; qiepian &#x3D; [1,2,3,4,5,6,7,8,9]    &gt;&gt;&gt; qiepian[1, 2, 3, 4, 5, 6, 7, 8, 9]  现在我想访问第五个元素 12&gt;&amp;g">
+    <meta name="description" content="Python-切片、迭代、类和实例感谢博主：数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com) 切片假设一个列表或者元组有如下的元素 123&gt;&gt;&gt; qiepian &#x3D; [1,2,3,4,5,6,7,8,9]    &gt;&gt;&gt; qiepian[1, 2, 3, 4, 5, 6, 7, 8, 9]  现在我想访问第五个元素 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python学习-2">
+<meta property="og:title" content="Python-切片、迭代、类和实例">
 <meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/12/Work%20No.22/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="Python学习-2感谢博主：数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com) 切片假设一个列表或者元组有如下的元素 123&gt;&gt;&gt; qiepian &#x3D; [1,2,3,4,5,6,7,8,9]    &gt;&gt;&gt; qiepian[1, 2, 3, 4, 5, 6, 7, 8, 9]  现在我想访问第五个元素 12&gt;&amp;g">
+<meta property="og:description" content="Python-切片、迭代、类和实例感谢博主：数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com) 切片假设一个列表或者元组有如下的元素 123&gt;&gt;&gt; qiepian &#x3D; [1,2,3,4,5,6,7,8,9]    &gt;&gt;&gt; qiepian[1, 2, 3, 4, 5, 6, 7, 8, 9]  现在我想访问第五个元素 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/02/1wdIJmxaylcsK9j.jpg">
 <meta property="article:published_time" content="2024-08-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-12T12:28:53.434Z">
+<meta property="article:modified_time" content="2024-08-13T03:54:47.408Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Python学习-2 - BraveYYang</title>
+  <title>Python-切片、迭代、类和实例 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Python学习-2"></span>
+            <span id="subtitle" data-typed-text="Python-切片、迭代、类和实例"></span>
           
         </div>
 
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Python学习-2</h1>
+            <h1 id="seo-header">Python-切片、迭代、类和实例</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月12日 晚上
+                    本文最后更新于 2024年8月13日 中午
                   
                 
               </p>
@@ -293,7 +293,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Python学习-2"><a href="#Python学习-2" class="headerlink" title="Python学习-2"></a>Python学习-2</h1><h2 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h2><p><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/python/basic/data-types/index.html">数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com)</a></p>
+                <h1 id="Python-切片、迭代、类和实例"><a href="#Python-切片、迭代、类和实例" class="headerlink" title="Python-切片、迭代、类和实例"></a>Python-切片、迭代、类和实例</h1><h2 id="感谢博主："><a href="#感谢博主：" class="headerlink" title="感谢博主："></a>感谢博主：</h2><p><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/python/basic/data-types/index.html">数据类型和变量 - Python教程 - 廖雪峰的官方网站 (liaoxuefeng.com)</a></p>
 <h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>假设一个列表或者元组有如下的元素</p>
 <figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">qiepian = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]    </span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">qiepian</span><br>[1, 2, 3, 4, 5, 6, 7, 8, 9]<br></code></pre></td></tr></table></figure>
 
@@ -429,7 +429,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Python学习-2</div>
+      <div>Python-切片、迭代、类和实例</div>
       <div>https://braveyyang.github.io/YYang.github.io/2024/08/12/Work No.22/</div>
     </div>
     <div class="license-meta">
@@ -474,9 +474,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/12/Work%20No.21/" title="Python学习-1">
+                      <a href="/YYang.github.io/2024/08/12/Work%20No.21/" title="Python-变量、列表、元组、字典、函数">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python学习-1</span>
+                        <span class="hidden-mobile">Python-变量、列表、元组、字典、函数</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
