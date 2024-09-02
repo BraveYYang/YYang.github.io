@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/02/smPFoif4rdC3xeW.png">
 <meta property="article:published_time" content="2024-08-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-09T07:28:47.587Z">
+<meta property="article:modified_time" content="2024-09-02T02:44:12.135Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="消息队列">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.9k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          16 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月9日 下午
+                    本文最后更新于 2024年9月2日 上午
                   
                 
               </p>
@@ -317,6 +317,10 @@
 <h4 id="从消息队列中接收消息"><a href="#从消息队列中接收消息" class="headerlink" title="从消息队列中接收消息"></a>从消息队列中接收消息</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//接收队列消息</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">msgrcv</span><span class="hljs-params">(<span class="hljs-type">int</span> msgid, <span class="hljs-type">void</span> *msgp, <span class="hljs-type">int</span> msgsz, <span class="hljs-type">long</span> msgtyp, <span class="hljs-type">int</span> msgflg)</span></span>;<br><br>	<span class="hljs-comment">//msgid：消息队列标识号；</span><br>	<span class="hljs-comment">//msgp：指向接收消息的内存缓冲区；</span><br>	<span class="hljs-comment">//msgsz：指定该缓冲区的最大容量，不包括消息类型占用的部分；</span><br>	<span class="hljs-comment">//msgtyp：指定读取消息的类型；</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="消息队列的接收流程"><a href="#消息队列的接收流程" class="headerlink" title="消息队列的接收流程"></a>消息队列的接收流程</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//第一步，定义消息结构</span><br><span class="hljs-keyword">struct</span> msgbuf&#123;	<br>	<span class="hljs-built_in">long</span> mtype;		<br>	<span class="hljs-built_in">char</span> ctext[<span class="hljs-number">100</span>];<br>&#125;	<br><br><span class="hljs-comment">//打开（创建）消息队列</span><br><span class="hljs-built_in">int</span> msgid;<br>msgid = msgget(KEY, <span class="hljs-number">0666</span>|IPC_CREAT);<br><br><span class="hljs-comment">//准备接收消息缓冲区</span><br><span class="hljs-keyword">struct</span> msgbuf buf;<br>memset(buf, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(buf));<br><br><span class="hljs-comment">//接收消息</span><br><span class="hljs-built_in">int</span> ret;<br>ret = msgrcv(msgid, &amp;buf, <span class="hljs-keyword">sizeof</span>(buf.ctext), TYPE, <span class="hljs-number">0</span>);<br><br><span class="hljs-comment">//接收判断</span><br><span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)<br>&#123;<br>	<span class="hljs-keyword">if</span>(errno == EINTR)	 <span class="hljs-comment">//信号中断，重新接收；</span><br>	<span class="hljs-keyword">else</span>                 <span class="hljs-comment">//系统错误</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="消息队列信息情况核实"><a href="#消息队列信息情况核实" class="headerlink" title="消息队列信息情况核实"></a>消息队列信息情况核实</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs perl">struct msqid_ds queue_info;<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">msgctl</span>(ID, IPC_STAT, &amp;queue_info) == -<span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">printf</span>(<span class="hljs-string">&quot;Failed to get queue info for control_queue_ID: <span class="hljs-variable">%d</span>, errno = <span class="hljs-variable">%d</span>, error: <span class="hljs-variable">%s</span>\n&quot;</span>, ID, errno, strerror(errno));<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">printf</span>(<span class="hljs-string">&quot;Control queue status - messages: <span class="hljs-variable">%ld</span>\n&quot;</span>, queue_info.msg_qnum);<span class="hljs-regexp">//</span>检查消息的数量<br>    <span class="hljs-keyword">printf</span>(<span class="hljs-string">&quot;Max size of message: <span class="hljs-variable">%ld</span>\n&quot;</span>, queue_info.msg_qbytes);<span class="hljs-regexp">//</span>检查消息的最大限制长度<br>&#125;<br><br>//output<br>Control queue status - messages: <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="终端查看消息队列"><a href="#终端查看消息队列" class="headerlink" title="终端查看消息队列"></a>终端查看消息队列</h3><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xquery">ipcs命令<br>ipcs -a ：显示全部可以显示的信息<br>ipcs -q：显示活动的消息队列<br>ipcs -m：显示活动的共享内存信息<br>ipcs -s：显示活动的信号量信息<br><br>ipcrm命令：<br>ipcrm -m<span class="hljs-built_in"> id</span>：删除共享内存标识<br>ipcrm -M<span class="hljs-built_in"> key</span>：删除由关键字创建的共享内存标识<br>ipcrm -q<span class="hljs-built_in"> id</span> ：删除消息队列标识<span class="hljs-built_in"> id</span>和其相关的消息队列和数据结构<br>ipcrm -Q<span class="hljs-built_in"> key</span>：删除由关键<span class="hljs-built_in">字key</span>创建的消息队列和其相关的消息队列和数据结构<br>ipcs -s<span class="hljs-built_in"> id</span>：删除信号标识<span class="hljs-built_in">符id</span>和其相关的信号量集及数据结构<br>ipcs -S<span class="hljs-built_in"> key</span>:删除由关键<span class="hljs-built_in">字key</span>创建的信号量标识及其相关的信号量集及数据结构<br></code></pre></td></tr></table></figure>
 
 <h2 id="消息队列优势"><a href="#消息队列优势" class="headerlink" title="消息队列优势"></a>消息队列优势</h2><p>1、采用消息队列通信比采用管道通信具有更多的灵活性，通信的进程不但没有血缘上的要求，也不需要进行同步处理。<br>2、消息队列是一种先进先出的队列型数据结构；<br>3、消息队列将输出的信息进行了打包处理，可以保证以消息为单位进行接收；<br>4、消息队列对信息进行分类服务，根据消息的类别进行分别处理。<br>5、提供消息数据自动拆分功能，同时不能接受两次发送的消息。<br>6、消息队列提供了不完全随机读取的服务。<br>7、消息队列提供了完全异步的读写服务。</p>
 
