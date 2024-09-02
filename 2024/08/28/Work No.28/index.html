@@ -16,26 +16,26 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Makefile文件单Makefile文件编译这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境 这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作 多个C文件生成多个可执行文件（多个main函数）该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译 1234">
+    <meta name="description" content="Protobuf-c使用Protobuf基本了解Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。 protobuf的字符是二进制，无法直接打">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Makefile文件">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/14/Work%20No.26/index.html">
+<meta property="og:title" content="Protobuf-c使用">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/28/Work%20No.28/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="Makefile文件单Makefile文件编译这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境 这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作 多个C文件生成多个可执行文件（多个main函数）该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译 1234">
+<meta property="og:description" content="Protobuf-c使用Protobuf基本了解Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。 protobuf的字符是二进制，无法直接打">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/QdvBaUHkV3xjnFw.jpg">
-<meta property="article:published_time" content="2024-08-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-15T01:13:12.617Z">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/fDkGW65qImzX3xi.jpg">
+<meta property="article:published_time" content="2024-08-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-02T07:42:24.052Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/QdvBaUHkV3xjnFw.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/fDkGW65qImzX3xi.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Makefile文件 - BraveYYang</title>
+  <title>Protobuf-c使用 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Makefile文件"></span>
+            <span id="subtitle" data-typed-text="Protobuf-c使用"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-14 00:00" pubdate>
-          2024年8月14日 凌晨
+        <time datetime="2024-08-28 00:00" pubdate>
+          2024年8月28日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          794 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          7 分钟
         
       </span>
     
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Makefile文件</h1>
+            <h1 id="seo-header">Protobuf-c使用</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月15日 上午
+                    本文最后更新于 2024年9月2日 下午
                   
                 
               </p>
@@ -293,30 +293,60 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Makefile文件"><a href="#Makefile文件" class="headerlink" title="Makefile文件"></a>Makefile文件</h1><h2 id="单Makefile文件编译"><a href="#单Makefile文件编译" class="headerlink" title="单Makefile文件编译"></a>单Makefile文件编译</h2><p>这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境</p>
-<p>这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作</p>
-<h4 id="多个C文件生成多个可执行文件（多个main函数）"><a href="#多个C文件生成多个可执行文件（多个main函数）" class="headerlink" title="多个C文件生成多个可执行文件（多个main函数）"></a>多个C文件生成多个可执行文件（多个main函数）</h4><p>该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义编译器为 gcc。这个变量可以在 make 命令行中覆盖。</span><br>CC = gcc<br><br><span class="hljs-comment"># 定义编译选项：</span><br><span class="hljs-comment"># -Wall：启用所有常见的编译警告。</span><br><span class="hljs-comment"># -g：生成调试信息，用于调试程序。</span><br>CFLAGS = -Wall -g<br><br><span class="hljs-comment"># 使用 wildcard 函数查找当前目录下所有以 .c 结尾的文件</span><br><span class="hljs-comment"># $(wildcard *.c) 会返回一个以空格分隔的 C 源文件列表</span><br>SRCS = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c)</span><br><br><span class="hljs-comment"># 生成与源文件同名的可执行文件列表：</span><br><span class="hljs-comment"># 这里，%.c 被替换为 %，即去掉 .c 扩展名。</span><br><span class="hljs-comment"># $(SRCS:.c=) 会将 SRCS 中所有的 .c 文件名的扩展名去掉，得到可执行文件名。</span><br>EXES = $(SRCS:.c=)<br><br><span class="hljs-comment"># 默认目标：&#x27;all&#x27; 目标是 Makefile 的默认目标。</span><br><span class="hljs-comment"># 如果运行 `make` 而不指定目标，默认会执行 &#x27;all&#x27; 目标。</span><br><span class="hljs-comment"># 这个目标依赖于所有的可执行文件名。</span><br><span class="hljs-section">all: <span class="hljs-variable">$(EXES)</span></span><br><br><span class="hljs-comment"># 规则：如何从源文件生成可执行文件。</span><br><span class="hljs-comment"># %: %.c 是一个模式规则：</span><br><span class="hljs-comment"># - $@ 表示目标文件（即可执行文件名）。</span><br><span class="hljs-comment"># - $&lt; 表示第一个依赖文件（即源文件）。</span><br><span class="hljs-comment"># 这条规则定义了如何编译单个 C 文件生成与之同名的可执行文件。</span><br><span class="hljs-variable">$(EXES)</span>: %: %.c<br><br><span class="hljs-comment"># 使用 gcc 编译源文件，生成同名的可执行文件。</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o <span class="hljs-variable">$@</span> <span class="hljs-variable">$&lt;</span><br><br><span class="hljs-comment"># 编译完成后，输出生成的可执行文件的名称。</span><br><span class="hljs-comment"># @ 使这条命令不在命令行中显示，只显示输出的结果。</span><br>	@echo <span class="hljs-string">&quot;Compiled <span class="hljs-variable">$@</span>&quot;</span><br><br><span class="hljs-comment"># 清理目标：&#x27;clean&#x27; 是一个伪目标，用于删除所有生成的可执行文件。</span><br><span class="hljs-comment"># 这是为了保持工作目录的清洁，并且通常用在重新编译前。</span><br><span class="hljs-section">clean:</span><br><br><span class="hljs-comment"># 删除所有在 EXES 中定义的可执行文件。</span><br>	rm -f <span class="hljs-variable">$(EXES)</span><br><br><span class="hljs-comment"># .PHONY 是一个特殊的标志，用于声明 &#x27;all&#x27; 和 &#x27;clean&#x27; 目标是伪目标。</span><br><span class="hljs-comment"># 伪目标不对应实际的文件名，它们是为了方便定义的一些操作或命令。</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>: all clean</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Protobuf-c使用"><a href="#Protobuf-c使用" class="headerlink" title="Protobuf-c使用"></a>Protobuf-c使用</h1><h2 id="Protobuf基本了解"><a href="#Protobuf基本了解" class="headerlink" title="Protobuf基本了解"></a>Protobuf基本了解</h2><p>Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。</p>
+<p>protobuf的字符是二进制，无法直接打印出来，但是解包和传输速率更快，传输大小和速度只有JSON的一半，解包只需要一次性解包即可，但是JSON数据的解包需要层层解包，但是数据可以直接打印出来进行调试查看</p>
+<h2 id="Protobuf使用"><a href="#Protobuf使用" class="headerlink" title="Protobuf使用"></a>Protobuf使用</h2><p>protobuf在使用的时候不需要太多操作，配置完protobuf-c的环境后，在所需放置的文件夹下面新建一个message.proto的文件</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs protobuf"><span class="hljs-comment">//message.proto</span><br><br>syntax = <span class="hljs-string">&quot;proto2&quot;</span>;  <span class="hljs-comment">// proto3 必须加此注解</span><br><span class="hljs-keyword">message </span><span class="hljs-title class_">student</span><br>&#123;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> id = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> name = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> gender = <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">int32</span>  age = <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> object = <span class="hljs-number">5</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> home_address = <span class="hljs-number">6</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> phone = <span class="hljs-number">7</span>;<br>&#125;<br><br><span class="hljs-comment">//实体结构（message）: 代表了实体结构，由多个消息字段组成。</span><br><span class="hljs-comment">//消息字段（field）: 包括数据类型、字段名、字段规则、字段唯一标识、默认值</span><br><span class="hljs-comment">//数据类型：常见的原子类型都支持(在FieldDescriptor::kTypeToName中有定义)</span><br><span class="hljs-comment">//字段规则：(在FieldDescriptor::kLabelToName中定义)</span><br><span class="hljs-comment">//required：必须初始化字段，如果没有赋值，在数据序列化时会抛出异常</span><br><span class="hljs-comment">//optional：可选字段，可以不必初始化。</span><br><span class="hljs-comment">//repeated：数据可以重复(相当于java 中的Array或List)</span><br><span class="hljs-comment">//字段唯一标识：序列化和反序列化将会使用到。</span><br><span class="hljs-comment">//默认值：在定义消息字段时可以给出默认值。</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="多个C文件生成一个可执行文件（只有一个main函数）"><a href="#多个C文件生成一个可执行文件（只有一个main函数）" class="headerlink" title="多个C文件生成一个可执行文件（只有一个main函数）"></a>多个C文件生成一个可执行文件（只有一个main函数）</h4><p>下面的代码是一个文件夹所有c文件只生成一个可执行文件</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义编译器为 gcc。这个变量可以在 make 命令行中覆盖。</span><br>CC = gcc<br><br><span class="hljs-comment"># 定义编译选项：</span><br><span class="hljs-comment"># -Wall：启用所有常见的编译警告。</span><br><span class="hljs-comment"># -g：生成调试信息，用于调试程序。</span><br>CFLAGS = -Wall -g<br><br><span class="hljs-comment"># 使用 wildcard 函数查找当前目录下所有以 .c 结尾的文件</span><br><span class="hljs-comment"># $(wildcard *.c) 会返回一个以空格分隔的 C 源文件列表</span><br>SRCS = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c)</span><br><br><span class="hljs-comment"># 生成与当前目录同名的可执行文件名</span><br><span class="hljs-comment"># 使用 notdir 和 basename 函数提取当前目录名并生成对应的可执行文件名</span><br>EXE = <span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> <span class="hljs-variable">$(CURDIR)</span>)</span><br><br><span class="hljs-comment"># 默认目标：&#x27;all&#x27; 目标是 Makefile 的默认目标。</span><br><span class="hljs-comment"># 如果运行 `make` 而不指定目标，默认会执行 &#x27;all&#x27; 目标。</span><br><span class="hljs-comment"># 这个目标依赖于生成的可执行文件。</span><br><span class="hljs-section">all: <span class="hljs-variable">$(EXE)</span></span><br><br><span class="hljs-comment"># 规则：如何从源文件生成可执行文件。</span><br><span class="hljs-comment"># $@ 表示目标文件（即可执行文件名）。</span><br><span class="hljs-comment"># $^ 表示所有的依赖文件（即所有的源文件）。</span><br><span class="hljs-variable">$(EXE)</span>: <span class="hljs-variable">$(SRCS)</span><br><br><span class="hljs-comment"># 使用 gcc 编译源文件，生成一个与文件夹同名的可执行文件。</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o <span class="hljs-variable">$@</span> <span class="hljs-variable">$^</span><br><br><span class="hljs-comment"># 编译完成后，输出生成的可执行文件的名称。</span><br><span class="hljs-comment"># @ 使这条命令不在命令行中显示，只显示输出的结果。</span><br>	@echo <span class="hljs-string">&quot;Compiled <span class="hljs-variable">$@</span>&quot;</span><br><br><span class="hljs-comment"># 清理目标：&#x27;clean&#x27; 是一个伪目标，用于删除生成的可执行文件。</span><br><span class="hljs-comment"># 这是为了保持工作目录的清洁，并且通常用在重新编译前。</span><br><span class="hljs-section">clean:</span><br><br><span class="hljs-comment"># 删除生成的可执行文件。</span><br>	rm -f <span class="hljs-variable">$(EXE)</span><br><br><span class="hljs-comment"># .PHONY 是一个特殊的标志，用于声明 &#x27;all&#x27; 和 &#x27;clean&#x27; 目标是伪目标。</span><br><span class="hljs-comment"># 伪目标不对应实际的文件名，它们是为了方便定义的一些操作或命令。</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>: all clean</span><br></code></pre></td></tr></table></figure>
+<p>之后进入该位置终端，输入</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">protoc-c <span class="hljs-attribute">--c_cout</span>=.  message.proto<br></code></pre></td></tr></table></figure>
 
-<h2 id="多文件夹的Makefile编译"><a href="#多文件夹的Makefile编译" class="headerlink" title="多文件夹的Makefile编译"></a>多文件夹的Makefile编译</h2><p>上面的makefile只能编译一个文件夹，如果我想在主文件夹编译所有文件夹，就需要写一个总的Makefile来对所有的文件夹进行调用</p>
-<p>假设我的文件框架如下</p>
-<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs llvm">project/<br>├── Makefile<br>├── src/<br>│   ├── file<span class="hljs-number">1</span>.<span class="hljs-keyword">c</span><br>│   ├── file<span class="hljs-number">2</span>.<span class="hljs-keyword">c</span><br>│   └── Makefile<br>├── lib/<br>│   ├── file<span class="hljs-number">3</span>.<span class="hljs-keyword">c</span><br>│   └── Makefile<br>└── include/<br>    └── file<span class="hljs-number">4</span>.<span class="hljs-keyword">c</span><br></code></pre></td></tr></table></figure>
+<p>系统会自动生成两个序列文件</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">message.pb-<span class="hljs-keyword">c</span>.<span class="hljs-keyword">c</span><br>message.pb-<span class="hljs-keyword">c</span>.h<br></code></pre></td></tr></table></figure>
 
-<p>所以主文件夹的Makefile文件内容如下</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"># 主Makefile<br><br># 定义子目录的变量<br># 这里 SUBDIRS 包含了所有需要编译的子目录，并将它们分行排列以便清晰展示<br>SUBDIRS = \<br>    src \<br>    lib \<br>    include<br><br># 默认目标是编译所有子目录<br># 当用户只输入 `make` 而不指定具体目标时，`all` 目标会被执行<br><span class="hljs-title">all:</span> $(SUBDIRS)<br><br># 对于每个子目录，调用 `make` 命令并进入该目录 (`-C` 选项)<br># 这会在每个子目录中执行它们自己的 `Makefile`<br><span class="hljs-title">$(SUBDIRS):</span><br>	$(MAKE) -C $@<br><br># 清理所有子目录的目标<br># 这里定义了 `clean` 目标，当用户运行 `make clean` 时会被执行<br># 这个目标会遍历所有子目录，并在每个子目录中执行 `make clean`<br><span class="hljs-title">clean:</span><br># 遍历所有子目录,在每个子目录中执行 `make clean`<br>	for dir in $(SUBDIRS)<span class="hljs-comment">; do \</span><br>		$(MAKE) -C $$dir clean<span class="hljs-comment">; \</span><br>	done<br><br># 伪目标声明<br># .PHONY 是一个特殊的伪目标声明，表示 `all`, `clean`, `$(SUBDIRS)` 等目标不对应实际文件<br># 即使当前目录下存在名为 `all` 或 `clean` 的文件，它们也不会被作为目标，而是执行与之对应的命令<br><span class="hljs-title">.PHONY:</span> all clean $(SUBDIRS)<br></code></pre></td></tr></table></figure>
+<p>这两个文件并不需要去认真关注，因为他们只是生成后的文件，如果需要修改数据格式，数据类型等等，要在message.proto文件里面定义好，然后进行生成即可</p>
+<h2 id="protobuf在其他函数中使用"><a href="#protobuf在其他函数中使用" class="headerlink" title="protobuf在其他函数中使用"></a>protobuf在其他函数中使用</h2><p>初始化protobuf</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">// 初始化Protocol Buffer消息<br>ProtoMsgCmd protobuff <span class="hljs-operator">=</span> PROTO_MSG_CMD__INIT<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<p>完成这个编写之后呢，就可以在主文件或者子文件夹随便执行编译</p>
-<h2 id="文件编译操作"><a href="#文件编译操作" class="headerlink" title="文件编译操作"></a>文件编译操作</h2><p>完成该文件创建和内容编写，就可以开始执行，执行前先清除原有的编译文件</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make clean</span><br></code></pre></td></tr></table></figure>
+<p>复制消息</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">// 复制命令字符串到Protocol Buffer消息中<br>protobuff.buffcmd <span class="hljs-operator">=</span> strdup(cmdStr)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<p>再执行编译文件</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make</span><br></code></pre></td></tr></table></figure>
+<p>定义存放编码缓存区</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">uint8_t Bitbuff[BITBUFF_MAX_LEN] <span class="hljs-operator">=</span> &#123;<span class="hljs-number">0</span>&#125;<span class="hljs-comment">; // 存放编码后的消息数据</span><br></code></pre></td></tr></table></figure>
 
-<p>最后输出一个可执行的脚本，输入即可执行</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">./<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>进行protobuf序列化</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-comment">// 将Protocol Buffer消息打包到Bitbuff中</span><br>size_t Bitbufflen <span class="hljs-punctuation">=</span> proto_msg_cmd__pack<span class="hljs-punctuation">(</span><span class="hljs-meta">&amp;protobuff, Bitbuff);</span><br></code></pre></td></tr></table></figure>
+
+<p>进行protobuf反序列化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 初始化反序列化消息结构</span><br>ProtoMsgCmd *unpackedMsg;<br><br><span class="hljs-comment">// 获取消息中序列化的Protocol Buffer数据</span><br><span class="hljs-type">uint8_t</span> *Bitbuff = buffStr; <span class="hljs-comment">// 假设buffStr是保存序列化数据的字段</span><br><span class="hljs-type">size_t</span> Bitbufflen = buffLen; <span class="hljs-comment">// 假设buffLen是保存序列化数据长度的字段</span><br></code></pre></td></tr></table></figure>
+
+<p>进行解包</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 解包</span><br>protobuff  = <span class="hljs-built_in">proto_msg_cmd__unpack</span>(<span class="hljs-literal">NULL</span>, Bitbufflen, Bitbuff);<br><span class="hljs-keyword">if</span> (protobuff  == <span class="hljs-literal">NULL</span>) &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error unpacking protocol buffer message %d: %s\n&quot;</span>, errno, <span class="hljs-built_in">strerror</span>(errno));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出数据</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 处理解包后的数据，例如输出解包后的命令字符串</span><br><span class="hljs-keyword">if</span> (protobuff-&gt;buffcmd != <span class="hljs-literal">NULL</span>) &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Received Command: %s\n&quot;</span>, protobuff-&gt;buffcmd);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No command string found!\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>释放内存，防止出现内存泄漏</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// 完成后释放消息结构内存</span><br><span class="hljs-built_in">proto_msg_cmd__free_unpacked</span>(protobuff , NULL);<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 
               </div>
@@ -335,7 +365,7 @@
     
       <span class="category-chain">
         
-  <a href="/YYang.github.io/categories/C-C-%E7%BC%96%E8%AF%91/" class="category-chain-item">C/C++编译</a>
+  <a href="/YYang.github.io/categories/protobuf%E9%80%9A%E4%BF%A1/" class="category-chain-item">protobuf通信</a>
   
   
 
@@ -362,8 +392,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Makefile文件</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/08/14/Work No.26/</div>
+      <div>Protobuf-c使用</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/28/Work No.28/</div>
     </div>
     <div class="license-meta">
       
@@ -375,7 +405,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月14日</div>
+          <div>2024年8月28日</div>
         </div>
       
       
@@ -407,18 +437,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/15/Work%20No.27/" title="Socket通信流程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Socket通信流程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/13/Work%20No.23/" title="Python-类和实例补充">
-                        <span class="hidden-mobile">Python-类和实例补充</span>
+                      <a href="/YYang.github.io/2024/08/18/STM32%E7%9A%84I2C%E5%AD%A6%E4%B9%A0/" title="STM32的I2C通信学习">
+                        <span class="hidden-mobile">STM32的I2C通信学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

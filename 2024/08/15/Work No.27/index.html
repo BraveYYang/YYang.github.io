@@ -16,26 +16,26 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Makefile文件单Makefile文件编译这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境 这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作 多个C文件生成多个可执行文件（多个main函数）该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译 1234">
+    <meta name="description" content="Socket通信流程服务端1.创建套接字12345int sockfd; &#x2F;&#x2F;创建套接字接收区sockfd &#x3D; socket(AF_INET, SOCK_STREAM, 0); &#x2F;&#x2F;创建套接字&#x2F;&#x2F;判断是否创建成功，成功返回0if (sockfd &lt; 0) &#123;&#125;  2.配置服务器地址12345678&#x2F;&#x2F;配置地址结构体，将端口、地址输入到结构体当中struct sockadd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Makefile文件">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/14/Work%20No.26/index.html">
+<meta property="og:title" content="Socket通信流程">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/15/Work%20No.27/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="Makefile文件单Makefile文件编译这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境 这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作 多个C文件生成多个可执行文件（多个main函数）该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译 1234">
+<meta property="og:description" content="Socket通信流程服务端1.创建套接字12345int sockfd; &#x2F;&#x2F;创建套接字接收区sockfd &#x3D; socket(AF_INET, SOCK_STREAM, 0); &#x2F;&#x2F;创建套接字&#x2F;&#x2F;判断是否创建成功，成功返回0if (sockfd &lt; 0) &#123;&#125;  2.配置服务器地址12345678&#x2F;&#x2F;配置地址结构体，将端口、地址输入到结构体当中struct sockadd">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/QdvBaUHkV3xjnFw.jpg">
-<meta property="article:published_time" content="2024-08-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-15T01:13:12.617Z">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/qPDXg6Z5IRdjzYO.jpg">
+<meta property="article:published_time" content="2024-08-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-02T07:24:59.464Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/QdvBaUHkV3xjnFw.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/qPDXg6Z5IRdjzYO.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Makefile文件 - BraveYYang</title>
+  <title>Socket通信流程 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Makefile文件"></span>
+            <span id="subtitle" data-typed-text="Socket通信流程"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-14 00:00" pubdate>
-          2024年8月14日 凌晨
+        <time datetime="2024-08-15 00:00" pubdate>
+          2024年8月15日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          694 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          6 分钟
         
       </span>
     
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Makefile文件</h1>
+            <h1 id="seo-header">Socket通信流程</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月15日 上午
+                    本文最后更新于 2024年9月2日 下午
                   
                 
               </p>
@@ -293,30 +293,33 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Makefile文件"><a href="#Makefile文件" class="headerlink" title="Makefile文件"></a>Makefile文件</h1><h2 id="单Makefile文件编译"><a href="#单Makefile文件编译" class="headerlink" title="单Makefile文件编译"></a>单Makefile文件编译</h2><p>这个文件可以将c文件编译成机器可以解读的文件，使用GCC进行编译，所以使用前，必须保证有GCC环境</p>
-<p>这个文件其实是将GCC编译过程编程一个可执行脚本，然后执行该脚本，完成一系列操作</p>
-<h4 id="多个C文件生成多个可执行文件（多个main函数）"><a href="#多个C文件生成多个可执行文件（多个main函数）" class="headerlink" title="多个C文件生成多个可执行文件（多个main函数）"></a>多个C文件生成多个可执行文件（多个main函数）</h4><p>该文件的作用是编译同一文件下的所有C文件，每个文件夹都会生成一个可执行文件，放在哪个文件夹，就执行哪个文件夹的编译</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义编译器为 gcc。这个变量可以在 make 命令行中覆盖。</span><br>CC = gcc<br><br><span class="hljs-comment"># 定义编译选项：</span><br><span class="hljs-comment"># -Wall：启用所有常见的编译警告。</span><br><span class="hljs-comment"># -g：生成调试信息，用于调试程序。</span><br>CFLAGS = -Wall -g<br><br><span class="hljs-comment"># 使用 wildcard 函数查找当前目录下所有以 .c 结尾的文件</span><br><span class="hljs-comment"># $(wildcard *.c) 会返回一个以空格分隔的 C 源文件列表</span><br>SRCS = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c)</span><br><br><span class="hljs-comment"># 生成与源文件同名的可执行文件列表：</span><br><span class="hljs-comment"># 这里，%.c 被替换为 %，即去掉 .c 扩展名。</span><br><span class="hljs-comment"># $(SRCS:.c=) 会将 SRCS 中所有的 .c 文件名的扩展名去掉，得到可执行文件名。</span><br>EXES = $(SRCS:.c=)<br><br><span class="hljs-comment"># 默认目标：&#x27;all&#x27; 目标是 Makefile 的默认目标。</span><br><span class="hljs-comment"># 如果运行 `make` 而不指定目标，默认会执行 &#x27;all&#x27; 目标。</span><br><span class="hljs-comment"># 这个目标依赖于所有的可执行文件名。</span><br><span class="hljs-section">all: <span class="hljs-variable">$(EXES)</span></span><br><br><span class="hljs-comment"># 规则：如何从源文件生成可执行文件。</span><br><span class="hljs-comment"># %: %.c 是一个模式规则：</span><br><span class="hljs-comment"># - $@ 表示目标文件（即可执行文件名）。</span><br><span class="hljs-comment"># - $&lt; 表示第一个依赖文件（即源文件）。</span><br><span class="hljs-comment"># 这条规则定义了如何编译单个 C 文件生成与之同名的可执行文件。</span><br><span class="hljs-variable">$(EXES)</span>: %: %.c<br><br><span class="hljs-comment"># 使用 gcc 编译源文件，生成同名的可执行文件。</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o <span class="hljs-variable">$@</span> <span class="hljs-variable">$&lt;</span><br><br><span class="hljs-comment"># 编译完成后，输出生成的可执行文件的名称。</span><br><span class="hljs-comment"># @ 使这条命令不在命令行中显示，只显示输出的结果。</span><br>	@echo <span class="hljs-string">&quot;Compiled <span class="hljs-variable">$@</span>&quot;</span><br><br><span class="hljs-comment"># 清理目标：&#x27;clean&#x27; 是一个伪目标，用于删除所有生成的可执行文件。</span><br><span class="hljs-comment"># 这是为了保持工作目录的清洁，并且通常用在重新编译前。</span><br><span class="hljs-section">clean:</span><br><br><span class="hljs-comment"># 删除所有在 EXES 中定义的可执行文件。</span><br>	rm -f <span class="hljs-variable">$(EXES)</span><br><br><span class="hljs-comment"># .PHONY 是一个特殊的标志，用于声明 &#x27;all&#x27; 和 &#x27;clean&#x27; 目标是伪目标。</span><br><span class="hljs-comment"># 伪目标不对应实际的文件名，它们是为了方便定义的一些操作或命令。</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>: all clean</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Socket通信流程"><a href="#Socket通信流程" class="headerlink" title="Socket通信流程"></a>Socket通信流程</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h4 id="1-创建套接字"><a href="#1-创建套接字" class="headerlink" title="1.创建套接字"></a>1.创建套接字</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> sockfd; <span class="hljs-comment">//创建套接字接收区</span><br>sockfd = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>); <span class="hljs-comment">//创建套接字</span><br><span class="hljs-comment">//判断是否创建成功，成功返回0</span><br><span class="hljs-keyword">if</span> (sockfd &lt; <span class="hljs-number">0</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h4 id="多个C文件生成一个可执行文件（只有一个main函数）"><a href="#多个C文件生成一个可执行文件（只有一个main函数）" class="headerlink" title="多个C文件生成一个可执行文件（只有一个main函数）"></a>多个C文件生成一个可执行文件（只有一个main函数）</h4><p>下面的代码是一个文件夹所有c文件只生成一个可执行文件</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义编译器为 gcc。这个变量可以在 make 命令行中覆盖。</span><br>CC = gcc<br><br><span class="hljs-comment"># 定义编译选项：</span><br><span class="hljs-comment"># -Wall：启用所有常见的编译警告。</span><br><span class="hljs-comment"># -g：生成调试信息，用于调试程序。</span><br>CFLAGS = -Wall -g<br><br><span class="hljs-comment"># 使用 wildcard 函数查找当前目录下所有以 .c 结尾的文件</span><br><span class="hljs-comment"># $(wildcard *.c) 会返回一个以空格分隔的 C 源文件列表</span><br>SRCS = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c)</span><br><br><span class="hljs-comment"># 生成与当前目录同名的可执行文件名</span><br><span class="hljs-comment"># 使用 notdir 和 basename 函数提取当前目录名并生成对应的可执行文件名</span><br>EXE = <span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> <span class="hljs-variable">$(CURDIR)</span>)</span><br><br><span class="hljs-comment"># 默认目标：&#x27;all&#x27; 目标是 Makefile 的默认目标。</span><br><span class="hljs-comment"># 如果运行 `make` 而不指定目标，默认会执行 &#x27;all&#x27; 目标。</span><br><span class="hljs-comment"># 这个目标依赖于生成的可执行文件。</span><br><span class="hljs-section">all: <span class="hljs-variable">$(EXE)</span></span><br><br><span class="hljs-comment"># 规则：如何从源文件生成可执行文件。</span><br><span class="hljs-comment"># $@ 表示目标文件（即可执行文件名）。</span><br><span class="hljs-comment"># $^ 表示所有的依赖文件（即所有的源文件）。</span><br><span class="hljs-variable">$(EXE)</span>: <span class="hljs-variable">$(SRCS)</span><br><br><span class="hljs-comment"># 使用 gcc 编译源文件，生成一个与文件夹同名的可执行文件。</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o <span class="hljs-variable">$@</span> <span class="hljs-variable">$^</span><br><br><span class="hljs-comment"># 编译完成后，输出生成的可执行文件的名称。</span><br><span class="hljs-comment"># @ 使这条命令不在命令行中显示，只显示输出的结果。</span><br>	@echo <span class="hljs-string">&quot;Compiled <span class="hljs-variable">$@</span>&quot;</span><br><br><span class="hljs-comment"># 清理目标：&#x27;clean&#x27; 是一个伪目标，用于删除生成的可执行文件。</span><br><span class="hljs-comment"># 这是为了保持工作目录的清洁，并且通常用在重新编译前。</span><br><span class="hljs-section">clean:</span><br><br><span class="hljs-comment"># 删除生成的可执行文件。</span><br>	rm -f <span class="hljs-variable">$(EXE)</span><br><br><span class="hljs-comment"># .PHONY 是一个特殊的标志，用于声明 &#x27;all&#x27; 和 &#x27;clean&#x27; 目标是伪目标。</span><br><span class="hljs-comment"># 伪目标不对应实际的文件名，它们是为了方便定义的一些操作或命令。</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>: all clean</span><br></code></pre></td></tr></table></figure>
+<h4 id="2-配置服务器地址"><a href="#2-配置服务器地址" class="headerlink" title="2.配置服务器地址"></a>2.配置服务器地址</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//配置地址结构体，将端口、地址输入到结构体当中</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> serv_addr; <br><span class="hljs-comment">//清除结构体内部数据，防止干扰</span><br><span class="hljs-built_in">memset</span>(&amp;serv_addr, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(serv_addr));<br><span class="hljs-comment">//结构体内部成员赋值</span><br>serv_addr.sin_family = AF_INET;<br>serv_addr.sin_port = <span class="hljs-built_in">htons</span>(PORT); <span class="hljs-comment">// 替换PORT为具体的端口号</span><br>serv_addr.sin_addr.s_addr = <span class="hljs-built_in">inet_addr</span>(<span class="hljs-string">&quot;127.0.0.1&quot;</span>); <span class="hljs-comment">// 替换为实际的IP地址</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="多文件夹的Makefile编译"><a href="#多文件夹的Makefile编译" class="headerlink" title="多文件夹的Makefile编译"></a>多文件夹的Makefile编译</h2><p>上面的makefile只能编译一个文件夹，如果我想在主文件夹编译所有文件夹，就需要写一个总的Makefile来对所有的文件夹进行调用</p>
-<p>假设我的文件框架如下</p>
-<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs llvm">project/<br>├── Makefile<br>├── src/<br>│   ├── file<span class="hljs-number">1</span>.<span class="hljs-keyword">c</span><br>│   ├── file<span class="hljs-number">2</span>.<span class="hljs-keyword">c</span><br>│   └── Makefile<br>├── lib/<br>│   ├── file<span class="hljs-number">3</span>.<span class="hljs-keyword">c</span><br>│   └── Makefile<br>└── include/<br>    └── file<span class="hljs-number">4</span>.<span class="hljs-keyword">c</span><br></code></pre></td></tr></table></figure>
+<h4 id="3-绑定套接字（仅用于服务器端）"><a href="#3-绑定套接字（仅用于服务器端）" class="headerlink" title="3.绑定套接字（仅用于服务器端）"></a>3.绑定套接字（仅用于服务器端）</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//将套接字和地址结构体进行绑定</span><br><span class="hljs-built_in">int</span> socket_bind = bind(sockfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;serv_addr, <span class="hljs-keyword">sizeof</span>(serv_addr)<br><span class="hljs-comment">//判断是否绑定成功，成功返回0</span><br><span class="hljs-keyword">if</span> (socket_bind &lt; <span class="hljs-number">0</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>所以主文件夹的Makefile文件内容如下</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"># 主Makefile<br><br># 定义子目录的变量<br># 这里 SUBDIRS 包含了所有需要编译的子目录，并将它们分行排列以便清晰展示<br>SUBDIRS = \<br>    src \<br>    lib \<br>    include<br><br># 默认目标是编译所有子目录<br># 当用户只输入 `make` 而不指定具体目标时，`all` 目标会被执行<br><span class="hljs-title">all:</span> $(SUBDIRS)<br><br># 对于每个子目录，调用 `make` 命令并进入该目录 (`-C` 选项)<br># 这会在每个子目录中执行它们自己的 `Makefile`<br><span class="hljs-title">$(SUBDIRS):</span><br>	$(MAKE) -C $@<br><br># 清理所有子目录的目标<br># 这里定义了 `clean` 目标，当用户运行 `make clean` 时会被执行<br># 这个目标会遍历所有子目录，并在每个子目录中执行 `make clean`<br><span class="hljs-title">clean:</span><br># 遍历所有子目录,在每个子目录中执行 `make clean`<br>	for dir in $(SUBDIRS)<span class="hljs-comment">; do \</span><br>		$(MAKE) -C $$dir clean<span class="hljs-comment">; \</span><br>	done<br><br># 伪目标声明<br># .PHONY 是一个特殊的伪目标声明，表示 `all`, `clean`, `$(SUBDIRS)` 等目标不对应实际文件<br># 即使当前目录下存在名为 `all` 或 `clean` 的文件，它们也不会被作为目标，而是执行与之对应的命令<br><span class="hljs-title">.PHONY:</span> all clean $(SUBDIRS)<br></code></pre></td></tr></table></figure>
+<h4 id="4-启动监听（仅限服务端）"><a href="#4-启动监听（仅限服务端）" class="headerlink" title="4.启动监听（仅限服务端）"></a>4.启动监听（仅限服务端）</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">//启动对socket的监听，5代表同时监听设备最大数为5个，超出部分直接屏蔽</span><br><span class="hljs-built_in">int</span> socket_listen = listen(sockfd, <span class="hljs-number">5</span>);.<br><span class="hljs-comment">//判断是否监听成功，成功返回0</span><br><span class="hljs-keyword">if</span> (socket_listen &lt; <span class="hljs-number">0</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>完成这个编写之后呢，就可以在主文件或者子文件夹随便执行编译</p>
-<h2 id="文件编译操作"><a href="#文件编译操作" class="headerlink" title="文件编译操作"></a>文件编译操作</h2><p>完成该文件创建和内容编写，就可以开始执行，执行前先清除原有的编译文件</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make clean</span><br></code></pre></td></tr></table></figure>
+<h4 id="5-接受设备（仅限服务端）"><a href="#5-接受设备（仅限服务端）" class="headerlink" title="5.接受设备（仅限服务端）"></a>5.接受设备（仅限服务端）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//定义一个接受成功返回值储存区</span><br><span class="hljs-type">int</span> new_socket;<br><span class="hljs-comment">//定义一个连接设备的地址结构体</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> client_addr;<br><span class="hljs-comment">//计算连接设备结构体的长度</span><br><span class="hljs-type">socklen_t</span> addr_len = <span class="hljs-built_in">sizeof</span>(client_addr);<br><span class="hljs-comment">//启动对设备的接受操作</span><br>new_socket = <span class="hljs-built_in">accept</span>(sockfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;client_addr, &amp;addr_len);<br><span class="hljs-comment">//判断是否接受成功，成功返回0</span><br><span class="hljs-keyword">if</span> (new_socket &lt; <span class="hljs-number">0</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>再执行编译文件</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make</span><br></code></pre></td></tr></table></figure>
+<h4 id="6-接收数据"><a href="#6-接收数据" class="headerlink" title="6.接收数据"></a>6.接收数据</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//定义存储数据区</span><br><span class="hljs-type">char</span> buffer[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-comment">//启动读取函数，读取并存储</span><br><span class="hljs-type">int</span> valread = <span class="hljs-built_in">read</span>(sockfd, buffer, <span class="hljs-built_in">sizeof</span>(buffer));<br></code></pre></td></tr></table></figure>
 
-<p>最后输出一个可执行的脚本，输入即可执行</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">./<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h4 id="7-发送数据"><a href="#7-发送数据" class="headerlink" title="7.发送数据"></a>7.发送数据</h4><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gml"><span class="hljs-comment">//定义发送字符串</span><br>char *<span class="hljs-variable language_">message</span> = <span class="hljs-string">&quot;Hello, Server&quot;</span>;<br><span class="hljs-comment">//将字符串发送到下位机</span><br>send(sockfd, <span class="hljs-variable language_">message</span>, strlen(<span class="hljs-variable language_">message</span>), <span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="8-关闭设备"><a href="#8-关闭设备" class="headerlink" title="8.关闭设备"></a>8.关闭设备</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">//关闭socket通信</span><br><span class="hljs-built_in">close</span>(sockfd);<br></code></pre></td></tr></table></figure>
+
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h4 id="1-创建套接字-1"><a href="#1-创建套接字-1" class="headerlink" title="1.创建套接字"></a>1.创建套接字</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> sockfd; <span class="hljs-comment">//创建套接字接收区</span><br>sockfd = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>); <span class="hljs-comment">//创建套接字</span><br><span class="hljs-comment">//判断是否创建成功，成功返回0</span><br><span class="hljs-keyword">if</span> (sockfd &lt; <span class="hljs-number">0</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-配置服务器地址-1"><a href="#2-配置服务器地址-1" class="headerlink" title="2.配置服务器地址"></a>2.配置服务器地址</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//配置地址结构体，将端口、地址输入到结构体当中</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> serv_addr; <br><span class="hljs-comment">//清除结构体内部数据，防止干扰</span><br><span class="hljs-built_in">memset</span>(&amp;serv_addr, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(serv_addr));<br><span class="hljs-comment">//结构体内部成员赋值</span><br>serv_addr.sin_family = AF_INET;<br>serv_addr.sin_port = <span class="hljs-built_in">htons</span>(PORT); <span class="hljs-comment">// 替换PORT为具体的端口号</span><br>serv_addr.sin_addr.s_addr = <span class="hljs-built_in">inet_addr</span>(<span class="hljs-string">&quot;127.0.0.1&quot;</span>); <span class="hljs-comment">// 替换为实际的IP地址</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-连接客户端（仅限客户端）"><a href="#3-连接客户端（仅限客户端）" class="headerlink" title="3.连接客户端（仅限客户端）"></a>3.连接客户端（仅限客户端）</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//用于连接客户端的设备</span><br><span class="hljs-built_in">int</span> socket_connect = connect(sockfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;serv_addr, <span class="hljs-keyword">sizeof</span>(serv_addr))<br><span class="hljs-comment"><span class="hljs-doctag">///</span>/判断是否连接成功，成功返回0</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-接收数据"><a href="#4-接收数据" class="headerlink" title="4.接收数据"></a>4.接收数据</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//定义存储数据区</span><br><span class="hljs-type">char</span> buffer[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-comment">//启动读取函数，读取并存储</span><br><span class="hljs-type">int</span> valread = <span class="hljs-built_in">read</span>(sockfd, buffer, <span class="hljs-built_in">sizeof</span>(buffer));<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-发送数据"><a href="#5-发送数据" class="headerlink" title="5.发送数据"></a>5.发送数据</h4><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gml"><span class="hljs-comment">//定义发送字符串</span><br>char *<span class="hljs-variable language_">message</span> = <span class="hljs-string">&quot;Hello, Server&quot;</span>;<br><span class="hljs-comment">//将字符串发送到下位机</span><br>send(sockfd, <span class="hljs-variable language_">message</span>, strlen(<span class="hljs-variable language_">message</span>), <span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="6-关闭设备"><a href="#6-关闭设备" class="headerlink" title="6.关闭设备"></a>6.关闭设备</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">//关闭socket通信</span><br><span class="hljs-built_in">close</span>(sockfd);<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -335,7 +338,7 @@
     
       <span class="category-chain">
         
-  <a href="/YYang.github.io/categories/C-C-%E7%BC%96%E8%AF%91/" class="category-chain-item">C/C++编译</a>
+  <a href="/YYang.github.io/categories/Socket%E9%80%9A%E4%BF%A1/" class="category-chain-item">Socket通信</a>
   
   
 
@@ -362,8 +365,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Makefile文件</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/08/14/Work No.26/</div>
+      <div>Socket通信流程</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/15/Work No.27/</div>
     </div>
     <div class="license-meta">
       
@@ -375,7 +378,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月14日</div>
+          <div>2024年8月15日</div>
         </div>
       
       
@@ -407,9 +410,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/15/Work%20No.27/" title="Socket通信流程">
+                      <a href="/YYang.github.io/2024/08/18/STM32%E7%9A%84I2C%E5%AD%A6%E4%B9%A0/" title="STM32的I2C通信学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Socket通信流程</span>
+                        <span class="hidden-mobile">STM32的I2C通信学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -417,8 +420,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/13/Work%20No.23/" title="Python-类和实例补充">
-                        <span class="hidden-mobile">Python-类和实例补充</span>
+                      <a href="/YYang.github.io/2024/08/14/Work%20No.26/" title="Makefile文件">
+                        <span class="hidden-mobile">Makefile文件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
