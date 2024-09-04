@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/15/VGghwBmsxZQ56EU.jpg">
 <meta property="article:published_time" content="2024-07-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-02T07:40:52.841Z">
+<meta property="article:modified_time" content="2024-09-04T09:29:35.106Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="嵌入式">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月2日 下午
+                    本文最后更新于 2024年9月4日 下午
                   
                 
               </p>
@@ -360,6 +360,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">long</span> mtype;             <span class="hljs-comment">// 消息类型，为正整数。用于区分不同类型的消息</span><br>    <span class="hljs-type">uint32_t</span> origin;        <span class="hljs-comment">// 消息来源的标识</span><br>    <span class="hljs-type">uint32_t</span> buffNum;       <span class="hljs-comment">// 命令标识</span><br>    <span class="hljs-type">size_t</span> buffLen;         <span class="hljs-comment">// 消息数据的实际长度</span><br>    <span class="hljs-type">uint8_t</span> buffStr[DATA_LEN]; <span class="hljs-comment">// 消息数据的缓冲区</span><br>&#125; Msgbuff_t;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">long</span> mtype;             <span class="hljs-comment">// 消息类型，为正整数。用于区分不同类型的消息</span><br>    <span class="hljs-type">uint32_t</span> origin;        <span class="hljs-comment">// 消息来源的标识</span><br>    <span class="hljs-type">uint32_t</span> buffNum;       <span class="hljs-comment">// 命令标识</span><br>    <span class="hljs-type">uint8_t</span> buffStr[DATA_LEN]; <span class="hljs-comment">// 消息数据的缓冲区</span><br>    <span class="hljs-type">size_t</span> buffLen;         <span class="hljs-comment">// 消息数据的实际长度</span><br>&#125; Msgbuff_t;<br></code></pre></td></tr></table></figure>
 
 <p>这两个结构体看似一样，但是输出的时候，就会出现不一样的结果了，第一个是正常输出的，因为内存对齐的时候，以靠近的为主，正好前四个的内存块为8、4、4、8，内存的分布是正常的，但是如果是第二个，假设DATA_LEN是100，那么就会出现buffLen前面会填充其他的字节，从而导致数据错乱</p>
+<h2 id="17-VScode乱码情况"><a href="#17-VScode乱码情况" class="headerlink" title="17.VScode乱码情况"></a>17.VScode乱码情况</h2><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript">打开VScode。<br>按下快捷键Ctrl+,（或选择菜单栏的“文件”-&gt;“首选项”-&gt;“设置”）。<br>在搜索框中输入“encoding”。<br>找到“Files: Encoding”选项，确保它设置为“UTF-<span class="hljs-number">8</span>”。<br>如果需要，还可以设置“Editor: Detect Indentation”为“<span class="hljs-literal">false</span>”，以防止VScode自动检测并更改缩进。<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>

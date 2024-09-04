@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <link rel="icon" href="https://s2.loli.net/2024/07/31/A1GerwZsSxQqzJy.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f3130">
+  <meta name="author" content="BraveYYang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="STM32的SPI学习SPI基本知识SPI协议是由摩托罗拉公司提出的通讯协议(Serial Peripheral Interface)，即串行外围设备接口， 是一种高速全双工的通信总线。它被广泛地使用在ADC、LCD等设备与MCU间，要求通讯速率较高的场合。 SPI通讯使用3条总线及片选线，3条总线分别为SCK、MOSI、MISO，片选线为SS SCK：时钟线，用于同步消息和检测消息，传输速率也跟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32的SPI学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="BraveYYang">
+<meta property="og:description" content="STM32的SPI学习SPI基本知识SPI协议是由摩托罗拉公司提出的通讯协议(Serial Peripheral Interface)，即串行外围设备接口， 是一种高速全双工的通信总线。它被广泛地使用在ADC、LCD等设备与MCU间，要求通讯速率较高的场合。 SPI通讯使用3条总线及片选线，3条总线分别为SCK、MOSI、MISO，片选线为SS SCK：时钟线，用于同步消息和检测消息，传输速率也跟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/b89FBs1i47y5VDI.jpg">
+<meta property="article:published_time" content="2024-08-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-04T09:32:52.857Z">
+<meta property="article:author" content="BraveYYang">
+<meta property="article:tag" content="SPI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/b89FBs1i47y5VDI.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>STM32的SPI学习 - BraveYYang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/YYang.github.io/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/YYang.github.io/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/YYang.github.io/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"braveyyang.github.io","root":"/YYang.github.io/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/YYang.github.io/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/YYang.github.io/js/utils.js" ></script>
+  <script  src="/YYang.github.io/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/YYang.github.io/">
+      <strong>BraveYYang Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/YYang.github.io/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/07/31/gYXRzdMW4oQTUNm.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="STM32的SPI学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-30 00:00" pubdate>
+          2024年8月30日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">STM32的SPI学习</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年9月4日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="STM32的SPI学习"><a href="#STM32的SPI学习" class="headerlink" title="STM32的SPI学习"></a>STM32的SPI学习</h1><h2 id="SPI基本知识"><a href="#SPI基本知识" class="headerlink" title="SPI基本知识"></a>SPI基本知识</h2><p>SPI协议是由摩托罗拉公司提出的通讯协议(Serial Peripheral Interface)，即串行外围设备接口， 是一种高速全双工的通信总线。它被广泛地使用在ADC、LCD等设备与MCU间，要求通讯速率较高的场合。</p>
+<p>SPI通讯使用3条总线及片选线，3条总线分别为SCK、MOSI、MISO，片选线为SS</p>
+<p>SCK：时钟线，用于同步消息和检测消息，传输速率也跟时钟线有关</p>
+<p>MOSI：Master Output， Slave Input，以主机为主，所以是主机是输出端，传感器的输入端</p>
+<p>MISO：Master Input,，Slave Output，以主机为主，所以是主机是输入端，传感器的输出端</p>
+<p>SS：片选线，也称为NSS、CS，主要用于识别设备的标志，可以用自带的片选线，也可以随便找一个GPIO口作为片选线</p>
+<h2 id="通信流程图"><a href="#通信流程图" class="headerlink" title="通信流程图"></a>通信流程图</h2><p><img src="https://s2.loli.net/2024/08/26/MhngUwW54dCKuEy.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<p>通讯的时候需要将片选线拉低，标志SPI通信开始，这个也是主机告诉某个选定的从机开始通信，如果信号线被拉高，标志停止通信， MOSI与MISO的信号只在NSS为低电平的时候才有效，在SCK的每个时钟周期MOSI和MISO传输一位数据。</p>
+<p>SPI使用MOSI及MISO信号线来传输数据，使用SCK信号线进行数据同步。MOSI及MISO数据线在SCK的每个时钟周期传输一位数据， 且数据输入输出是同时进行的。</p>
+<h2 id="SPI初始化结构体"><a href="#SPI初始化结构体" class="headerlink" title="SPI初始化结构体"></a>SPI初始化结构体</h2><p>SPI的使用主要有6个步骤，定义GPIO和SPI的结构体，初始化GPIO和SPI的时钟，设置GPIO配置，设置SPI配置，使能SPI，拉高片选线</p>
+<p>这几个步骤跟其他的也很类似，所以就不需要过多描述，其中有个点，就是GPIO引脚的设置，可以查阅STM32官方手册中文版111页，有推荐的GPIO口的配置，例如复用推挽、浮空输入等等模式</p>
+<p><img src="https://s2.loli.net/2024/09/01/CTVcqPOJjdlEIAr.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<p>根据这个表格我们就知道NSS、SCK、MOSI、MISO的GPIO模式设置应该如何设置</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs 1c">void SPI_config<span class="hljs-punctuation">(</span>void<span class="hljs-punctuation">)</span><br>&#123;<br>	GPIO_InitTypeDef SPI_GPIO_InitStructure<span class="hljs-punctuation">;</span>  <span class="hljs-comment">//初始化GPIO结构体</span><br>	SPI_InitTypeDef  SPI_InitStructure<span class="hljs-punctuation">;</span>  <span class="hljs-comment">//初始化I2C结构体</span><br>	<br>	<span class="hljs-comment">//打开GPIOB的时钟</span><br>	RCC_APB2PeriphClockCmd<span class="hljs-punctuation">(</span>RCC_APB2Periph_GPIOA<span class="hljs-punctuation">,</span> ENABLE<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span><br>	<br>	<span class="hljs-comment">//打开SPI的时钟</span><br>	RCC_APB2PeriphClockCmd<span class="hljs-punctuation">(</span>RCC_APB2Periph_SPI1<span class="hljs-punctuation">,</span> ENABLE<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span><br>	<br>	<span class="hljs-comment">//配置I2C NSS引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode <span class="hljs-punctuation">=</span> GPIO_Mode_Out_PP<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Pin <span class="hljs-punctuation">=</span> GPIO_Pin_4<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Speed <span class="hljs-punctuation">=</span> GPIO_Speed_50MHz<span class="hljs-punctuation">;</span><br>	GPIO_Init<span class="hljs-punctuation">(</span>GPIOA<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;SPI_GPIO_InitStructure);</span><br>	<br>	<span class="hljs-comment">//配置I2C SCK引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode <span class="hljs-punctuation">=</span> GPIO_Mode_AF_PP<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Pin <span class="hljs-punctuation">=</span> GPIO_Pin_5<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Speed <span class="hljs-punctuation">=</span> GPIO_Speed_50MHz<span class="hljs-punctuation">;</span><br>	GPIO_Init<span class="hljs-punctuation">(</span>GPIOA<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;SPI_GPIO_InitStructure);</span><br>	<br>	<span class="hljs-comment">//配置I2C MOSI引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode <span class="hljs-punctuation">=</span> GPIO_Mode_AF_PP<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Pin <span class="hljs-punctuation">=</span> GPIO_Pin_7<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Speed <span class="hljs-punctuation">=</span> GPIO_Speed_50MHz<span class="hljs-punctuation">;</span><br>	GPIO_Init<span class="hljs-punctuation">(</span>GPIOA<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;SPI_GPIO_InitStructure);</span><br>	<br>	<span class="hljs-comment">//配置I2C MISO引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode <span class="hljs-punctuation">=</span> GPIO_Mode_IN_FLOATING<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Pin <span class="hljs-punctuation">=</span> GPIO_Pin_6<span class="hljs-punctuation">;</span><br>	SPI_GPIO_InitStructure.GPIO_Speed <span class="hljs-punctuation">=</span> GPIO_Speed_50MHz<span class="hljs-punctuation">;</span><br>	GPIO_Init<span class="hljs-punctuation">(</span>GPIOA<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;SPI_GPIO_InitStructure);</span><br>	<br>	<span class="hljs-comment">//配置SPI 结构体设置</span><br>	SPI_InitStructure.SPI_BaudRatePrescaler <span class="hljs-punctuation">=</span> SPI_BaudRatePrescaler_2<span class="hljs-punctuation">;</span> <span class="hljs-comment">//设置波特率为72/4=36MHz</span><br>	SPI_InitStructure.SPI_CPHA <span class="hljs-punctuation">=</span> SPI_CPHA_2Edge<span class="hljs-punctuation">;</span> <span class="hljs-comment">//设置为偶数边沿采集</span><br>	SPI_InitStructure.SPI_CPOL <span class="hljs-punctuation">=</span> SPI_CPOL_High<span class="hljs-punctuation">;</span> <span class="hljs-comment">//设置为上升沿采集数据</span><br>	SPI_InitStructure.SPI_CRCPolynomial <span class="hljs-punctuation">=</span> <span class="hljs-number">0</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">//不进行校验，所以可以随便设置</span><br>	SPI_InitStructure.SPI_DataSize <span class="hljs-punctuation">=</span> SPI_DataSize_8b<span class="hljs-punctuation">;</span> <span class="hljs-comment">//配置数据传输大小为8字节</span><br>	SPI_InitStructure.SPI_Direction <span class="hljs-punctuation">=</span> SPI_Direction_2Lines_FullDuplex<span class="hljs-punctuation">;</span> <span class="hljs-comment">//SPI模式为双线全双工模式</span><br>	SPI_InitStructure.SPI_FirstBit <span class="hljs-punctuation">=</span> SPI_FirstBit_MSB<span class="hljs-punctuation">;</span> <span class="hljs-comment">//配置为高位先行</span><br>	SPI_InitStructure.SPI_Mode <span class="hljs-punctuation">=</span> SPI_Mode_Master<span class="hljs-punctuation">;</span> <span class="hljs-comment">//配置主机主发送</span><br>	SPI_InitStructure.SPI_NSS <span class="hljs-punctuation">=</span> SPI_NSS_Soft<span class="hljs-punctuation">;</span> <span class="hljs-comment">//片选线配置为软件设置</span><br>	SPI_Init<span class="hljs-punctuation">(</span>SPI1<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;SPI_InitStructure); <span class="hljs-comment">//初始化SPI1的结构体</span></span><br>	<br>	<span class="hljs-comment">//使能SPI</span><br>	SPI_Cmd<span class="hljs-punctuation">(</span>SPI1<span class="hljs-punctuation">,</span> ENABLE<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span><br>	<br>	<span class="hljs-comment">//直接拉高片选线，等到需要的时候进行拉低</span><br>	SPI_CS_GPIO_HIGH<span class="hljs-punctuation">;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在代码的SPI结构体部分，一共有10个步骤</p>
+<p>1.设置波特率，最大波特率是40MHz，SPI1是挂载在APB2上面，所以最大是72MHz，选择2分频</p>
+<p>2.设置CPHA，选择位偶数边沿采集，还有一个是奇数边沿采集，主要为时钟的奇偶段进行数据的检测校验，两种选项都可以，没太大区别</p>
+<p>3.设置CPOL，选择是上升沿检测还是下降沿检测，主要就是引脚低变高或者高变低的时候去检测数据</p>
+<p>4.设置校验位，不进行设置，这边可以写校验逻辑，对数据进行按特定方法进行计算校验</p>
+<p>5.设置数据的传输字节，是要一次性8位或者16位</p>
+<p>6.设置SPI的模式，主要有单线双线，还有全双工或者只发送，只接收等模式</p>
+<p>7.设置SPI数据的高八位或者低八位先进行发送，这个得依照读取的设备要求进行配置，有些存储设备只能先读高八位或者低八位</p>
+<p>8.设置以什么设备为主，是主机或者从机，默认以主机单片机为主</p>
+<p>9.设置片选线的方式，有硬件或者软件方式，硬件方式是单片机写好的，无法更改，软件方式可以随便挑一个GPIO口进行设置</p>
+<p>10.初始化结构体，将配置写入初始化中</p>
+<h2 id="SPI传输"><a href="#SPI传输" class="headerlink" title="SPI传输"></a>SPI传输</h2><p>SPI传输的话单次是一个字节进行发送，共发送八位数据，采用固件库定义的函数进行发送，传输的过程需要依照时序图进行判断</p>
+<p><img src="https://s2.loli.net/2024/09/01/2oCk65Rb8BeZJx1.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<p>首先要拉低片选线NSS，标志SPI传输开始，之后进行TXE标志位的校验，校验是否将数据放入移位寄存器进行准备发送</p>
+<p>再利用函数，将八位数据通过SPI进行发送</p>
+<p>发送后，需要校验是否完成发送，但是这个不能使用TXE进行校验，因为数据的在移到移位寄存器的时候TXE会发生变化，会导致标志位识别不对，所以我们直接使用RXNE标志位进行校验，因为必须是发送成功了，才能读取到数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">uint8_t SPI_Send_Byte_Data(uint8_t <span class="hljs-keyword">data</span>)<br>&#123;<br>	<span class="hljs-comment">// 校验TXE标志位是否复位，也就是数据发送寄存器是否将数据放置移位寄存器</span><br>	<span class="hljs-keyword">while</span>(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)<br>  &#123;<br>    <span class="hljs-keyword">if</span>((I2CTimeout--) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> I2C_TIMEOUT_UserCallback(<span class="hljs-number">0</span>);<br>  &#125;<br>	<br>	<span class="hljs-comment">//如果清空，则发送8位数据</span><br>	SPI_I2S_SendData(SPI1, <span class="hljs-keyword">data</span>);<br>	<br>	<span class="hljs-comment">// 校验RXNE标志位是否复位，校验该位置可以准确知晓是否发送成功，因为只有发送成功，才会接收到数据</span><br>	<span class="hljs-keyword">while</span>(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)<br>  &#123;<br>    <span class="hljs-keyword">if</span>((I2CTimeout--) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> I2C_TIMEOUT_UserCallback(<span class="hljs-number">1</span>);<br>  &#125;<br>	<br>	<span class="hljs-comment">// 返回接收到的数据</span><br>	<span class="hljs-keyword">return</span> SPI_I2S_ReceiveData(SPI1);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而且，因为SPI是全双工模式，我们每发送一个数据，就可以同时接收一个数据，因此我们将读写程序放到一个函数中</p>
+<p>当然，如果你不想放到一起也是不行的，因为SPI传输也是依靠时钟的频率进行识别，而时钟的频率只有在主机发送的时候才会产生，所以单独发送可以实现，但是单独读取是不行的</p>
+<p>因此我们可以定义一个空值，用于接收时的发送，这个空值没有任何的作用，只是进行启动时钟用于读取</p>
+<p>下面是进行FLASH的读取，获取他的ID值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DUMMY 0x00</span><br><br><span class="hljs-function"><span class="hljs-type">uint32_t</span> <span class="hljs-title">SPI_Receive_Flash_ID</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 定义将要接收的缓存区</span><br>	<span class="hljs-type">uint32_t</span> flash_id;<br>	<br>	<span class="hljs-comment">// 将片选信号拉低，标志开始启用SPI传输</span><br>	SPI_CS_GPIO_LOW;<br>	<br>	<span class="hljs-comment">// 发送flash标志数据，以此来获取flash的地址信息	</span><br>	<span class="hljs-built_in">SPI_Send_Byte_Data</span>(<span class="hljs-number">0x9f</span>);<br>	<br>	<span class="hljs-comment">// 接收第一个第一个8位地址数据，flash_id = 0x00 00 00 ef</span><br>	flash_id = <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将地址左移八位，空置后两位用于再次接收，flash_id = 0x00 00 ef 00</span><br>	flash_id &lt;&lt;= <span class="hljs-number">8</span>;<br>	<br>	<span class="hljs-comment">// 接收第二个第一个8位地址数据，flash_id = 0x00 00 ef 40</span><br>	flash_id |= <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将地址左移八位，空置后两位用于再次接收，flash_id = 0x00 ef 40 00</span><br>	flash_id &lt;&lt;= <span class="hljs-number">8</span>;<br>	<br>	<span class="hljs-comment">// 接收第三个第一个8位地址数据，flash_id = 0x00 ef 40 17</span><br>	flash_id |= <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将片选信号拉高，标志SPI传输结束</span><br>	SPI_CS_GPIO_LOW;<br>	<br>	<span class="hljs-comment">// 返回ID值</span><br>	<span class="hljs-keyword">return</span> flash_id;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="总代码如下"><a href="#总代码如下" class="headerlink" title="总代码如下"></a>总代码如下</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp">bsp_spi.h<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> _BSP_SPI_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _BSP_SPI_H</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;STM32F10x.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;bsp_usart.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DUMMY 0x00</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span>  SPI_CS_GPIO_HIGH         GPIO_SetBits( GPIOA, GPIO_Pin_4 )</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span>  SPI_CS_GPIO_LOW          GPIO_ResetBits( GPIOA, GPIO_Pin_4 )</span><br><br><span class="hljs-type">static</span> __IO <span class="hljs-type">uint32_t</span>  I2CTimeout = <span class="hljs-number">10</span>*(<span class="hljs-number">0x1000</span>); <br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SPI_config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-type">uint8_t</span> <span class="hljs-title">SPI_Send_Byte_Data</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> data)</span></span>;<br><span class="hljs-function"><span class="hljs-type">uint8_t</span> <span class="hljs-title">SPI_Receive_Byte_Data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-type">uint32_t</span> <span class="hljs-title">SPI_Receive_Flash_ID</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">/* _BSP_SPI_H */</span></span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><code class="hljs cpp">bsp_spi.c<br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;bsp_spi.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> <span class="hljs-title">I2C_TIMEOUT_UserCallback</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> errorCode)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">/* Block communication and all processes */</span><br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I2C 等待超时!errorCode = %d&quot;</span>,errorCode);<br>  <br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SPI_config</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	GPIO_InitTypeDef SPI_GPIO_InitStructure;  <span class="hljs-comment">//初始化GPIO结构体</span><br>	SPI_InitTypeDef  SPI_InitStructure;  <span class="hljs-comment">//初始化I2C结构体</span><br>	<br>	<span class="hljs-comment">//打开GPIOB的时钟</span><br>	<span class="hljs-built_in">RCC_APB2PeriphClockCmd</span>(RCC_APB2Periph_GPIOA, ENABLE);<br>	<br>	<span class="hljs-comment">//打开SPI的时钟</span><br>	<span class="hljs-built_in">RCC_APB2PeriphClockCmd</span>(RCC_APB2Periph_SPI1, ENABLE);<br>	<br>	<span class="hljs-comment">//配置I2C NSS引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;<br>	SPI_GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;<br>	SPI_GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;<br>	<span class="hljs-built_in">GPIO_Init</span>(GPIOA, &amp;SPI_GPIO_InitStructure);<br>	<br>	<span class="hljs-comment">//配置I2C SCK引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;<br>	SPI_GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;<br>	SPI_GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;<br>	<span class="hljs-built_in">GPIO_Init</span>(GPIOA, &amp;SPI_GPIO_InitStructure);<br>	<br>	<span class="hljs-comment">//配置I2C MOSI引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;<br>	SPI_GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;<br>	SPI_GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;<br>	<span class="hljs-built_in">GPIO_Init</span>(GPIOA, &amp;SPI_GPIO_InitStructure);<br>	<br>	<span class="hljs-comment">//配置I2C MISO引脚</span><br>	SPI_GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;<br>	SPI_GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;<br>	SPI_GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;<br>	<span class="hljs-built_in">GPIO_Init</span>(GPIOA, &amp;SPI_GPIO_InitStructure);<br>	<br>	<span class="hljs-comment">//配置SPI 结构体设置</span><br>	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4; <span class="hljs-comment">//设置波特率为72/4=18MHz</span><br>	SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; <span class="hljs-comment">//设置为偶数边沿采集</span><br>	SPI_InitStructure.SPI_CPOL = SPI_CPOL_High; <span class="hljs-comment">//设置为上升沿采集数据</span><br>	SPI_InitStructure.SPI_CRCPolynomial = <span class="hljs-number">0</span>; <span class="hljs-comment">//不进行校验，所以可以随便设置</span><br>	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; <span class="hljs-comment">//配置数据传输大小为8字节</span><br>	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; <span class="hljs-comment">//SPI模式为双线全双工模式</span><br>	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; <span class="hljs-comment">//配置为高位先行</span><br>	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; <span class="hljs-comment">//配置主机主发送</span><br>	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; <span class="hljs-comment">//片选线配置为软件设置</span><br>	<span class="hljs-built_in">SPI_Init</span>(SPI1, &amp;SPI_InitStructure); <span class="hljs-comment">//初始化SPI1的结构体</span><br>	<br>	<span class="hljs-comment">//使能SPI</span><br>	<span class="hljs-built_in">SPI_Cmd</span>(SPI1, ENABLE);<br>	<br>	<span class="hljs-comment">//直接拉高片选线，等到需要的时候进行拉低</span><br>	SPI_CS_GPIO_HIGH;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">uint8_t</span> <span class="hljs-title">SPI_Send_Byte_Data</span><span class="hljs-params">(<span class="hljs-type">uint8_t</span> data)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 校验TXE标志位是否复位，也就是数据发送寄存器是否将数据放置移位寄存器</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">SPI_I2S_GetFlagStatus</span>(SPI1, SPI_I2S_FLAG_TXE) == RESET)<br>  &#123;<br>    <span class="hljs-keyword">if</span>((I2CTimeout--) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">I2C_TIMEOUT_UserCallback</span>(<span class="hljs-number">0</span>);<br>  &#125;<br>	<br>	<span class="hljs-comment">//如果清空，则发送8位数据</span><br>	<span class="hljs-built_in">SPI_I2S_SendData</span>(SPI1, data);<br>	<br>	<span class="hljs-comment">// 校验RXNE标志位是否复位，校验该位置可以准确知晓是否发送成功，因为只有发送成功，才会接收到数据</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">SPI_I2S_GetFlagStatus</span>(SPI1, SPI_I2S_FLAG_RXNE) == RESET)<br>  &#123;<br>    <span class="hljs-keyword">if</span>((I2CTimeout--) == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">I2C_TIMEOUT_UserCallback</span>(<span class="hljs-number">1</span>);<br>  &#125;<br>	<br>	<span class="hljs-comment">// 返回接收到的数据</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">SPI_I2S_ReceiveData</span>(SPI1);<br>&#125;<br><br><span class="hljs-comment">// 读取数据和发送数据一致</span><br><span class="hljs-comment">// 因为时钟是由主机产生，如果主机没有发送，就不会产生时钟信号，也就无法读取，所以直接在发送的过程进行读取数据</span><br><span class="hljs-function"><span class="hljs-type">uint8_t</span> <span class="hljs-title">SPI_Receive_Byte_Data</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 直接返回读取值</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">uint32_t</span> <span class="hljs-title">SPI_Receive_Flash_ID</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">// 定义将要接收的缓存区</span><br>	<span class="hljs-type">uint32_t</span> flash_id;<br>	<br>	<span class="hljs-comment">// 将片选信号拉低，标志开始启用SPI传输</span><br>	SPI_CS_GPIO_LOW;<br>	<br>	<span class="hljs-comment">// 发送flash标志数据，以此来获取flash的地址信息	</span><br>	<span class="hljs-built_in">SPI_Send_Byte_Data</span>(<span class="hljs-number">0x9f</span>);<br>	<br>	<span class="hljs-comment">// 接收第一个第一个8位地址数据，flash_id = 0x00 00 00 ef</span><br>	flash_id = <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将地址左移八位，空置后两位用于再次接收，flash_id = 0x00 00 ef 00</span><br>	flash_id &lt;&lt;= <span class="hljs-number">8</span>;<br>	<br>	<span class="hljs-comment">// 接收第二个第一个8位地址数据，flash_id = 0x00 00 ef 40</span><br>	flash_id |= <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将地址左移八位，空置后两位用于再次接收，flash_id = 0x00 ef 40 00</span><br>	flash_id &lt;&lt;= <span class="hljs-number">8</span>;<br>	<br>	<span class="hljs-comment">// 接收第三个第一个8位地址数据，flash_id = 0x00 ef 40 17</span><br>	flash_id |= <span class="hljs-built_in">SPI_Send_Byte_Data</span>(DUMMY);<br>	<br>	<span class="hljs-comment">// 将片选信号拉高，标志SPI传输结束</span><br>	SPI_CS_GPIO_LOW;<br>	<br>	<span class="hljs-comment">// 返回ID值</span><br>	<span class="hljs-keyword">return</span> flash_id;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/YYang.github.io/categories/STM32/" class="category-chain-item">STM32</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/YYang.github.io/tags/SPI/" class="print-no-link">#SPI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>STM32的SPI学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/08/30/STM32的SPI学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BraveYYang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/" title="VScode+platformIO编译STM32标准库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VScode+platformIO编译STM32标准库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/YYang.github.io/2024/08/28/Work%20No.28/" title="Protobuf-c使用">
+                        <span class="hidden-mobile">Protobuf-c使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ekFRK0cV6PBBS94Zi0gS9i2P-gzGzoHsz","appKey":"S1Nkh18SsJW3sa5Ww0HzH5jA","path":"window.location.pathname","placeholder":"欢迎各位大胆开麦！！！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/BraveYYang" target="_blank" rel="nofollow noopener"><span>BraveYYang</span></a> <i class="iconfont icon-love"></i> <a href="https://space.bilibili.com/1849265446?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow noopener"><span>Bilibili</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/YYang.github.io/js/events.js" ></script>
+<script  src="/YYang.github.io/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/YYang.github.io/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/YYang.github.io/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/YYang.github.io/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -16,26 +16,26 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Protobuf-c使用Protobuf基本了解Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。 protobuf的字符是二进制，无法直接打">
+    <meta name="description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Protobuf-c使用">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/08/28/Work%20No.28/index.html">
+<meta property="og:title" content="VScode+platformIO编译STM32标准库">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="Protobuf-c使用Protobuf基本了解Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。 protobuf的字符是二进制，无法直接打">
+<meta property="og:description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/fDkGW65qImzX3xi.jpg">
-<meta property="article:published_time" content="2024-08-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-02T07:42:24.052Z">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
+<meta property="article:published_time" content="2024-09-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-04T09:30:41.260Z">
 <meta property="article:author" content="BraveYYang">
-<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="VScode">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/fDkGW65qImzX3xi.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Protobuf-c使用 - BraveYYang</title>
+  <title>VScode+platformIO编译STM32标准库 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Protobuf-c使用"></span>
+            <span id="subtitle" data-typed-text="VScode+platformIO编译STM32标准库"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-28 00:00" pubdate>
-          2024年8月28日 凌晨
+        <time datetime="2024-09-04 00:00" pubdate>
+          2024年9月4日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          794 字
+          354 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          7 分钟
+          3 分钟
         
       </span>
     
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Protobuf-c使用</h1>
+            <h1 id="seo-header">VScode+platformIO编译STM32标准库</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月2日 下午
+                    本文最后更新于 2024年9月4日 下午
                   
                 
               </p>
@@ -293,60 +293,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Protobuf-c使用"><a href="#Protobuf-c使用" class="headerlink" title="Protobuf-c使用"></a>Protobuf-c使用</h1><h2 id="Protobuf基本了解"><a href="#Protobuf基本了解" class="headerlink" title="Protobuf基本了解"></a>Protobuf基本了解</h2><p>Protobuf是Google提供一个具有高效的协议数据交换格式工具库，类似于JSON，Protobuf和XML、JSON序列化的方式不同，采用了二进制字节的序列化方式，用字段索引和字段类型通过算法计算得到字段之前的关系映射，从而达到更高的时间效率和空间效率，特别适合对数据大小和传输速率比较敏感的场合使用。</p>
-<p>protobuf的字符是二进制，无法直接打印出来，但是解包和传输速率更快，传输大小和速度只有JSON的一半，解包只需要一次性解包即可，但是JSON数据的解包需要层层解包，但是数据可以直接打印出来进行调试查看</p>
-<h2 id="Protobuf使用"><a href="#Protobuf使用" class="headerlink" title="Protobuf使用"></a>Protobuf使用</h2><p>protobuf在使用的时候不需要太多操作，配置完protobuf-c的环境后，在所需放置的文件夹下面新建一个message.proto的文件</p>
-<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs protobuf"><span class="hljs-comment">//message.proto</span><br><br>syntax = <span class="hljs-string">&quot;proto2&quot;</span>;  <span class="hljs-comment">// proto3 必须加此注解</span><br><span class="hljs-keyword">message </span><span class="hljs-title class_">student</span><br>&#123;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> id = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> name = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> gender = <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">int32</span>  age = <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> object = <span class="hljs-number">5</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> home_address = <span class="hljs-number">6</span>;<br>    <span class="hljs-keyword">required</span> <span class="hljs-type">string</span> phone = <span class="hljs-number">7</span>;<br>&#125;<br><br><span class="hljs-comment">//实体结构（message）: 代表了实体结构，由多个消息字段组成。</span><br><span class="hljs-comment">//消息字段（field）: 包括数据类型、字段名、字段规则、字段唯一标识、默认值</span><br><span class="hljs-comment">//数据类型：常见的原子类型都支持(在FieldDescriptor::kTypeToName中有定义)</span><br><span class="hljs-comment">//字段规则：(在FieldDescriptor::kLabelToName中定义)</span><br><span class="hljs-comment">//required：必须初始化字段，如果没有赋值，在数据序列化时会抛出异常</span><br><span class="hljs-comment">//optional：可选字段，可以不必初始化。</span><br><span class="hljs-comment">//repeated：数据可以重复(相当于java 中的Array或List)</span><br><span class="hljs-comment">//字段唯一标识：序列化和反序列化将会使用到。</span><br><span class="hljs-comment">//默认值：在定义消息字段时可以给出默认值。</span><br></code></pre></td></tr></table></figure>
+                <h1 id="VScode-platformIO编译STM32标准库"><a href="#VScode-platformIO编译STM32标准库" class="headerlink" title="VScode+platformIO编译STM32标准库"></a>VScode+platformIO编译STM32标准库</h1><h2 id="参考博主"><a href="#参考博主" class="headerlink" title="参考博主"></a>参考博主</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7393313322210426915">https://juejin.cn/post/7393313322210426915</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maomaochong666/article/details/129240827">https://blog.csdn.net/maomaochong666/article/details/129240827</a></p>
+<h2 id="配置主要有四个步骤："><a href="#配置主要有四个步骤：" class="headerlink" title="配置主要有四个步骤："></a>配置主要有四个步骤：</h2><h4 id="1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"><a href="#1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架" class="headerlink" title="1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"></a>1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架</h4><p><img src="https://s2.loli.net/2024/09/04/xN5agDtl6RfTYI9.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<h4 id="2-拷录文件放入STM32项目中"><a href="#2-拷录文件放入STM32项目中" class="headerlink" title="2.拷录文件放入STM32项目中"></a>2.拷录文件放入STM32项目中</h4><p>以野火为模板，将library文件user文件拷入到项目当中的src文件夹下，不要分开使用，直接全部拷入，方便使用，删除start启动文件和system_stm32f10x.c文件，因为在初始化的时候已经自动生成</p>
+<img src="https://s2.loli.net/2024/09/04/ItUnakMPEJAlwrW.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png" style="zoom:50%;" />
 
-<p>之后进入该位置终端，输入</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">protoc-c <span class="hljs-attribute">--c_cout</span>=.  message.proto<br></code></pre></td></tr></table></figure>
+<h4 id="3-修改platformIO-ini文件"><a href="#3-修改platformIO-ini文件" class="headerlink" title="3.修改platformIO.ini文件"></a>3.修改platformIO.ini文件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">//烧录和调试配置</span><br>upload_protocol <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br>debug_tool <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br><br><span class="hljs-comment">// 添加头文件链接</span><br>build_flags <span class="hljs-operator">=</span> <br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span>u,_printf_float<br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span><span class="hljs-type">Map</span>,output.map<br>    <span class="hljs-operator">-</span><span class="hljs-type">O0</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">Libraries</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">CMSIS</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">FWlib</span><span class="hljs-operator">/</span>inc<br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">User</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">DMA</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">EXTI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">I2C</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">LED</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">RCC</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">SPI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">Systick</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">USART</span><br><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">STM32F10X_HD</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">USE_STDPERIPH_DRIVER</span><br><br><span class="hljs-comment">// 定义串口通信，使用motion进行串口调试</span><br>monitor_speed <span class="hljs-operator">=</span> <span class="hljs-number">115200</span><br>monitor_echo <span class="hljs-operator">=</span> yes<br>monitor_rts <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>monitor_dtr <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br><span class="hljs-comment">// 将烧录文件转为hex格式</span><br>extra_scripts <span class="hljs-operator">=</span> export_hex.py<br></code></pre></td></tr></table></figure>
 
-<p>系统会自动生成两个序列文件</p>
-<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">message.pb-<span class="hljs-keyword">c</span>.<span class="hljs-keyword">c</span><br>message.pb-<span class="hljs-keyword">c</span>.h<br></code></pre></td></tr></table></figure>
+<h4 id="4-修改core-cm3-c文件内容"><a href="#4-修改core-cm3-c文件内容" class="headerlink" title="4.修改core_cm3.c文件内容"></a>4.修改core_cm3.c文件内容</h4><p>修改core_cm3.c里面的内容（736、753行）</p>
+<p><img src="https://s2.loli.net/2024/09/04/AiZRHY1Kd4wjWnb.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<h4 id="5-创建烧录文件hex转换脚本"><a href="#5-创建烧录文件hex转换脚本" class="headerlink" title="5.创建烧录文件hex转换脚本"></a>5.创建烧录文件hex转换脚本</h4><p>export_hex.py</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nsis">Import(<span class="hljs-string">&quot;env&quot;</span>)<br> <br><span class="hljs-comment"># # Custom HEX from ELF</span><br> <br>env.AddPostAction(<br> <br>    <span class="hljs-string">&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;</span>,<br> <br>    env.VerboseAction(<span class="hljs-string">&quot; &quot;</span>.join([<br> <br>        <span class="hljs-string">&quot;<span class="hljs-variable">$OBJCOPY</span>&quot;</span>, <span class="hljs-string">&quot;-O&quot;</span>, <span class="hljs-string">&quot;ihex&quot;</span>, <span class="hljs-string">&quot;-R&quot;</span>, <span class="hljs-string">&quot;.eeprom&quot;</span>,<br> <br>        <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;&#x27;</span>, <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;&#x27;</span>  <span class="hljs-comment"># 加个单引号</span><br> <br>    ]), <span class="hljs-string">&quot;Building <span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;</span>)<br> <br>)<br></code></pre></td></tr></table></figure>
 
-<p>这两个文件并不需要去认真关注，因为他们只是生成后的文件，如果需要修改数据格式，数据类型等等，要在message.proto文件里面定义好，然后进行生成即可</p>
-<h2 id="protobuf在其他函数中使用"><a href="#protobuf在其他函数中使用" class="headerlink" title="protobuf在其他函数中使用"></a>protobuf在其他函数中使用</h2><p>初始化protobuf</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">// 初始化Protocol Buffer消息<br>ProtoMsgCmd protobuff <span class="hljs-operator">=</span> PROTO_MSG_CMD__INIT<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
-
-<p>复制消息</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">// 复制命令字符串到Protocol Buffer消息中<br>protobuff.buffcmd <span class="hljs-operator">=</span> strdup(cmdStr)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
-
-<p>定义存放编码缓存区</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">uint8_t Bitbuff[BITBUFF_MAX_LEN] <span class="hljs-operator">=</span> &#123;<span class="hljs-number">0</span>&#125;<span class="hljs-comment">; // 存放编码后的消息数据</span><br></code></pre></td></tr></table></figure>
-
-<p>进行protobuf序列化</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-comment">// 将Protocol Buffer消息打包到Bitbuff中</span><br>size_t Bitbufflen <span class="hljs-punctuation">=</span> proto_msg_cmd__pack<span class="hljs-punctuation">(</span><span class="hljs-meta">&amp;protobuff, Bitbuff);</span><br></code></pre></td></tr></table></figure>
-
-<p>进行protobuf反序列化</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 初始化反序列化消息结构</span><br>ProtoMsgCmd *unpackedMsg;<br><br><span class="hljs-comment">// 获取消息中序列化的Protocol Buffer数据</span><br><span class="hljs-type">uint8_t</span> *Bitbuff = buffStr; <span class="hljs-comment">// 假设buffStr是保存序列化数据的字段</span><br><span class="hljs-type">size_t</span> Bitbufflen = buffLen; <span class="hljs-comment">// 假设buffLen是保存序列化数据长度的字段</span><br></code></pre></td></tr></table></figure>
-
-<p>进行解包</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 解包</span><br>protobuff  = <span class="hljs-built_in">proto_msg_cmd__unpack</span>(<span class="hljs-literal">NULL</span>, Bitbufflen, Bitbuff);<br><span class="hljs-keyword">if</span> (protobuff  == <span class="hljs-literal">NULL</span>) &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error unpacking protocol buffer message %d: %s\n&quot;</span>, errno, <span class="hljs-built_in">strerror</span>(errno));<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>输出数据</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 处理解包后的数据，例如输出解包后的命令字符串</span><br><span class="hljs-keyword">if</span> (protobuff-&gt;buffcmd != <span class="hljs-literal">NULL</span>) &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Received Command: %s\n&quot;</span>, protobuff-&gt;buffcmd);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No command string found!\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>释放内存，防止出现内存泄漏</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// 完成后释放消息结构内存</span><br><span class="hljs-built_in">proto_msg_cmd__free_unpacked</span>(protobuff , NULL);<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>然后就可以编译并且烧录到单片机中，烧录过程查看博主内容</p>
 
                 
               </div>
@@ -365,7 +325,7 @@
     
       <span class="category-chain">
         
-  <a href="/YYang.github.io/categories/protobuf%E9%80%9A%E4%BF%A1/" class="category-chain-item">protobuf通信</a>
+  <a href="/YYang.github.io/categories/STM32/" class="category-chain-item">STM32</a>
   
   
 
@@ -380,7 +340,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/YYang.github.io/tags/C-C/" class="print-no-link">#C/C++</a>
+        <a href="/YYang.github.io/tags/VScode/" class="print-no-link">#VScode</a>
       
     </div>
   
@@ -392,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Protobuf-c使用</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/08/28/Work No.28/</div>
+      <div>VScode+platformIO编译STM32标准库</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO编译STM32标准库/</div>
     </div>
     <div class="license-meta">
       
@@ -405,7 +365,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月28日</div>
+          <div>2024年9月4日</div>
         </div>
       
       
@@ -437,18 +397,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/" title="STM32的SPI学习">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32的SPI学习</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/18/STM32%E7%9A%84I2C%E5%AD%A6%E4%B9%A0/" title="STM32的I2C通信学习">
-                        <span class="hidden-mobile">STM32的I2C通信学习</span>
+                      <a href="/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/" title="STM32的SPI学习">
+                        <span class="hidden-mobile">STM32的SPI学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
