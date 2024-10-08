@@ -16,26 +16,27 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+    <meta name="description" content="STM32的ADC学习基本知识ADC一共有三个ADC设备，这三个设备可以看成三个不一样的工人，他们可以同时，做各自的事情，当然如果他们三个人一起做一件事情，这件事情也会做的更快，做的更好，然后每个工人身上又有十几个通道，这十几个通道可以看出十几件不同的事情，干完这件事情才能干下一件事情，所以通道之间需要排队完成。 ADC的配置内容ADC的配置分为共同配置和ADC个体配置，在配置完ADC硬件后，还需">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VScode+platformIO编译STM32标准库">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:title" content="STM32的ADC学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/12/STM32%E7%9A%84ADC%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+<meta property="og:description" content="STM32的ADC学习基本知识ADC一共有三个ADC设备，这三个设备可以看成三个不一样的工人，他们可以同时，做各自的事情，当然如果他们三个人一起做一件事情，这件事情也会做的更快，做的更好，然后每个工人身上又有十几个通道，这十几个通道可以看出十几件不同的事情，干完这件事情才能干下一件事情，所以通道之间需要排队完成。 ADC的配置内容ADC的配置分为共同配置和ADC个体配置，在配置完ADC硬件后，还需">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
-<meta property="article:published_time" content="2024-09-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-04T09:30:41.260Z">
+<meta property="og:image" content="https://s2.loli.net/2024/09/15/lQoOgFdmNfSWJ8P.png">
+<meta property="og:image" content="https://s2.loli.net/2024/09/15/Bw6jIWZN8kOYtiD.png">
+<meta property="article:published_time" content="2024-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-15T08:29:25.672Z">
 <meta property="article:author" content="BraveYYang">
-<meta property="article:tag" content="VScode">
+<meta property="article:tag" content="SPI">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2024/09/15/lQoOgFdmNfSWJ8P.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VScode+platformIO编译STM32标准库 - BraveYYang</title>
+  <title>STM32的ADC学习 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VScode+platformIO编译STM32标准库"></span>
+            <span id="subtitle" data-typed-text="STM32的ADC学习"></span>
           
         </div>
 
@@ -212,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-04 00:00" pubdate>
-          2024年9月4日 凌晨
+        <time datetime="2024-09-12 00:00" pubdate>
+          2024年9月12日 凌晨
         </time>
       </span>
     
@@ -224,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          354 字
+          1.4k 字
         
       </span>
     
@@ -235,7 +236,7 @@
         
         
         
-          3 分钟
+          12 分钟
         
       </span>
     
@@ -280,12 +281,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VScode+platformIO编译STM32标准库</h1>
+            <h1 id="seo-header">STM32的ADC学习</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月4日 下午
+                    本文最后更新于 2024年9月15日 下午
                   
                 
               </p>
@@ -293,20 +294,45 @@
             
               <div class="markdown-body">
                 
-                <h1 id="VScode-platformIO编译STM32标准库"><a href="#VScode-platformIO编译STM32标准库" class="headerlink" title="VScode+platformIO编译STM32标准库"></a>VScode+platformIO编译STM32标准库</h1><h2 id="参考博主"><a href="#参考博主" class="headerlink" title="参考博主"></a>参考博主</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7393313322210426915">https://juejin.cn/post/7393313322210426915</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maomaochong666/article/details/129240827">https://blog.csdn.net/maomaochong666/article/details/129240827</a></p>
-<h2 id="配置主要有四个步骤："><a href="#配置主要有四个步骤：" class="headerlink" title="配置主要有四个步骤："></a>配置主要有四个步骤：</h2><h4 id="1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"><a href="#1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架" class="headerlink" title="1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"></a>1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架</h4><p><img src="https://s2.loli.net/2024/09/04/xN5agDtl6RfTYI9.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="2-拷录文件放入STM32项目中"><a href="#2-拷录文件放入STM32项目中" class="headerlink" title="2.拷录文件放入STM32项目中"></a>2.拷录文件放入STM32项目中</h4><p>以野火为模板，将library文件user文件拷入到项目当中的src文件夹下，不要分开使用，直接全部拷入，方便使用，删除start启动文件和system_stm32f10x.c文件，因为在初始化的时候已经自动生成</p>
-<img src="https://s2.loli.net/2024/09/04/ItUnakMPEJAlwrW.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png" style="zoom:50%;" />
+                <h1 id="STM32的ADC学习"><a href="#STM32的ADC学习" class="headerlink" title="STM32的ADC学习"></a>STM32的ADC学习</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>ADC一共有三个ADC设备，这三个设备可以看成三个不一样的工人，他们可以同时，做各自的事情，当然如果他们三个人一起做一件事情，这件事情也会做的更快，做的更好，然后每个工人身上又有十几个通道，这十几个通道可以看出十几件不同的事情，干完这件事情才能干下一件事情，所以通道之间需要排队完成。</p>
+<h2 id="ADC的配置内容"><a href="#ADC的配置内容" class="headerlink" title="ADC的配置内容"></a>ADC的配置内容</h2><p>ADC的配置分为共同配置和ADC个体配置，在配置完ADC硬件后，还需要针对每个通道进行配置</p>
+<p>共同配置主要配置所有ADC的采集模式、采集频率、传输模式和采集间隔时间，共同配置是在使用两个ADC硬件以上的才会选择进行配置，如果是单ADC的话，是不进行配置的</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs abnf">/* adc共同配置 ADC_CommonInitTypeDef */<br><br>// 初始化结构体<br>ADC_CommonInitTypeDef ADC_CommonInitStructure<span class="hljs-comment">;</span><br>// 双ADC模式，常规的交替转换<br>ADC_CommonInitStructure.ADC_Mode <span class="hljs-operator">=</span> ADC_DualMode_Interl<span class="hljs-comment">;</span><br>// AHB2的时钟是<span class="hljs-number">168</span>MHz，四分频是<span class="hljs-number">42</span>MHz，ADC最大为<span class="hljs-number">36</span>MHz<br>ADC_CommonInitStructure.ADC_Prescaler <span class="hljs-operator">=</span> ADC_Prescaler_Div4<span class="hljs-comment">;</span><br>// 选择DMA的传输方式，ADC_DMAAccessMode_1、<span class="hljs-number">2</span>、<span class="hljs-number">3</span>三种模式，<span class="hljs-number">1</span>适用于单通道，<span class="hljs-number">2</span>和<span class="hljs-number">3</span>适用于多通道，<span class="hljs-number">3</span>适用于更高速、更大的传输，比如图片、视频等<br>ADC_CommonInitStructure.ADC_DMAAccessMode <span class="hljs-operator">=</span> ADC_DMAAccessMode_2<span class="hljs-comment">;</span><br>// 两个ADC采样的间隔时间<br>ADC_CommonInitStructure.ADC_TwoSamplingDelay <span class="hljs-operator">=</span> ADC_TwoSamplingDelay_20Cycles<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="3-修改platformIO-ini文件"><a href="#3-修改platformIO-ini文件" class="headerlink" title="3.修改platformIO.ini文件"></a>3.修改platformIO.ini文件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">//烧录和调试配置</span><br>upload_protocol <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br>debug_tool <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br><br><span class="hljs-comment">// 添加头文件链接</span><br>build_flags <span class="hljs-operator">=</span> <br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span>u,_printf_float<br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span><span class="hljs-type">Map</span>,output.map<br>    <span class="hljs-operator">-</span><span class="hljs-type">O0</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">Libraries</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">CMSIS</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">FWlib</span><span class="hljs-operator">/</span>inc<br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">User</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">DMA</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">EXTI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">I2C</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">LED</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">RCC</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">SPI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">Systick</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">USART</span><br><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">STM32F10X_HD</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">USE_STDPERIPH_DRIVER</span><br><br><span class="hljs-comment">// 定义串口通信，使用motion进行串口调试</span><br>monitor_speed <span class="hljs-operator">=</span> <span class="hljs-number">115200</span><br>monitor_echo <span class="hljs-operator">=</span> yes<br>monitor_rts <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>monitor_dtr <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br><span class="hljs-comment">// 将烧录文件转为hex格式</span><br>extra_scripts <span class="hljs-operator">=</span> export_hex.py<br></code></pre></td></tr></table></figure>
+<p>个体配置主要配置ADC的采集精度、是否扫描、是否连续读取、是否外部触发、外部触发边沿选择、外部触发模式、采集通道数、数据对齐方式，不管是单ADC，还是多ADC，都需要配置每个ADC的个体配置</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">/* adc额外配置 ADC_CommonInitTypeDef */</span><br><br><span class="hljs-comment">// 定义结构体</span><br>ADC_InitTypeDef ADC_InitStructure;<br><span class="hljs-comment">// ADC读取为是12位，处理的时间也是12个ADC时钟</span><br>ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;<br><span class="hljs-comment">// 使能扫描模式，如果是多通道的，就需要扫描模式</span><br>ADC_InitStructure.ADC_ScanConvMode = <span class="hljs-keyword">ENABLE</span>;<br><span class="hljs-comment">// 连续读取模式，可以连续不停而不需要软硬件触发就可以采样ADC</span><br>ADC_InitStructure.ADC_ContinuousConvMode = <span class="hljs-keyword">ENABLE</span>;<br><span class="hljs-comment">// 外部边沿触发</span><br>ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;<br><span class="hljs-comment">// 外部触发的模式，定时器或者中断</span><br>ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;<br><span class="hljs-comment">// 采样的通道数量</span><br>ADC_InitStructure.ADC_NbrOfConversion = <span class="hljs-number">1</span>;<br><span class="hljs-comment">// 数据右对齐，就是先写入右边数据，多通道的话就是右八位为第一个检测到的数据</span><br>ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;<br><span class="hljs-comment">// 写入配置</span><br><span class="hljs-built_in">ADC_Init</span>(ADC1, &amp;ADC_InitStructure);<br></code></pre></td></tr></table></figure>
 
-<h4 id="4-修改core-cm3-c文件内容"><a href="#4-修改core-cm3-c文件内容" class="headerlink" title="4.修改core_cm3.c文件内容"></a>4.修改core_cm3.c文件内容</h4><p>修改core_cm3.c里面的内容（736、753行）</p>
-<p><img src="https://s2.loli.net/2024/09/04/AiZRHY1Kd4wjWnb.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="5-创建烧录文件hex转换脚本"><a href="#5-创建烧录文件hex转换脚本" class="headerlink" title="5.创建烧录文件hex转换脚本"></a>5.创建烧录文件hex转换脚本</h4><p>export_hex.py</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nsis">Import(<span class="hljs-string">&quot;env&quot;</span>)<br> <br><span class="hljs-comment"># # Custom HEX from ELF</span><br> <br>env.AddPostAction(<br> <br>    <span class="hljs-string">&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;</span>,<br> <br>    env.VerboseAction(<span class="hljs-string">&quot; &quot;</span>.join([<br> <br>        <span class="hljs-string">&quot;<span class="hljs-variable">$OBJCOPY</span>&quot;</span>, <span class="hljs-string">&quot;-O&quot;</span>, <span class="hljs-string">&quot;ihex&quot;</span>, <span class="hljs-string">&quot;-R&quot;</span>, <span class="hljs-string">&quot;.eeprom&quot;</span>,<br> <br>        <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;&#x27;</span>, <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;&#x27;</span>  <span class="hljs-comment"># 加个单引号</span><br> <br>    ]), <span class="hljs-string">&quot;Building <span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;</span>)<br> <br>)<br></code></pre></td></tr></table></figure>
+<p>最后还需要选择所需通道和采样时长，并使能所有ADC</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// 配置通道和采样的时长</span><br><span class="hljs-built_in">ADC_RegularChannelConfig</span>(ADC1, ADC_Channel_0, <span class="hljs-number">1</span>, ADC_SampleTime_3Cycles);  <br><br><span class="hljs-comment">// 使能ADC</span><br><span class="hljs-built_in">ADC_Cmd</span>(ADC1, ENABLE);<br><br><span class="hljs-comment">// 使能ADC-DMA</span><br><span class="hljs-built_in">ADC_DMACmd</span>(ADC1, ENABLE);<br></code></pre></td></tr></table></figure>
 
-<p>然后就可以编译并且烧录到单片机中，烧录过程查看博主内容</p>
+<h2 id="ADC配置顺序"><a href="#ADC配置顺序" class="headerlink" title="ADC配置顺序"></a>ADC配置顺序</h2><p>ADC的使用方式有很多种，如果比较简单的话就直接进行单ADC和单通道直接使用，也可以多通道单ADC使用，或者多通道多ADC使用，这几种方法可以根据不同的配置进行实现</p>
+<h3 id="单ADC单通道"><a href="#单ADC单通道" class="headerlink" title="单ADC单通道"></a>单ADC单通道</h3><p>1.初始化结构体和启用ADC时钟</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// 初始化结构体</span><br>ADC_CommonInitTypeDef ADC_CommonInitStructure;<br><br><span class="hljs-comment">// 使能ADC时钟</span><br><span class="hljs-built_in">RCC_APB2PeriphClockCmd</span>(RCC_APB2Periph_ADC1, ENABLE);<br><br><br></code></pre></td></tr></table></figure>
+
+<p>2.初始化ADC个体配置，单ADC不需要分频，因为系统会自动分频到36MHz</p>
+<p>3.选择ADC的通道和采样时间</p>
+<p>4.使能ADC</p>
+<p>5.启用ADC</p>
+<p>6.如果单ADC单通道传输的话想要启用DMA，就需要使能ADC和DMA通道</p>
+<p>7.如果软件触发ADC的话，那就需要将外部触发的不配置为使能，如果外部触发配置使能，那么软件触发将不生效</p>
+<h3 id="单ADC多通道"><a href="#单ADC多通道" class="headerlink" title="单ADC多通道"></a>单ADC多通道</h3><h2 id="DMA传输流程图"><a href="#DMA传输流程图" class="headerlink" title="DMA传输流程图"></a>DMA传输流程图</h2><p><img src="https://s2.loli.net/2024/09/15/lQoOgFdmNfSWJ8P.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://s2.loli.net/2024/09/15/Bw6jIWZN8kOYtiD.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<p>ADC_Resolution</p>
+<p>STM32F407的ADC读取精度是12位（即 12-bit）。ADC 分辨率决定了转换结果的精度，12 位分辨率意味着 ADC 可以将模拟信号转换为 4096 个不同的数字值（2^12）。当然也就是说处理的时间是12个ADC时钟。</p>
+<p>ADC_ScanConvMode</p>
+<p>扫描模式的作用是可以针对多个通道进行扫描，如果不开启的话只能在同一个通道上面进行读取</p>
+<p>ADC_ContinuousConvMode</p>
+<p>连续转换模式。连续转换模式使得 ADC 在完成一个转换后自动开始下一个转换，而无需额外的触发信号。这样可以实现不断更新的 ADC 值。</p>
+<p>ADC_ExternalTrigConvEdge</p>
+<p>外部触发转换的边缘，设置外部触发信号的边缘，以控制 ADC 转换的启动时机。主要就是上升沿、下降沿、两个都用或者不启用</p>
+<p>ADC_ExternalTrigConv</p>
+<p>选择外部触发信号，外部触发的信号主要有定时器、中断触发，并且这些触发的话每个设备都是固定的，在头文件中宏定义会全部定义完全。内部触发意味着 ADC 转换的启动由微控制器内部的触发源控制，例如内部定时器、软件触发或其他内部事件，内部触发的话是比较快，比较简单，而且可以根据软件触发的方式进行随意检测，但是硬件检测的方式对于周期的控制比较精确，但是比较麻烦。</p>
+<p>ADC_NbrOfConversion</p>
+<p>设置要进行的转换通道数，如果启用扫描模式，则可以启用更多的通道</p>
+<p>ADC_DataAlign</p>
+<p>设置 ADC 转换结果的数据对齐方式。<code>ADC_DataAlign_Right</code> 表示转换结果右对齐，即数据的低位在数据寄存器的低位部分，高位在高位部分。另一种对齐方式是左对齐</p>
+<p>ADC_RegularChannelConfig</p>
+<p>配置 ADC 的常规（非扫描模式）通道。这个是配置ADC通道和设置采样事件</p>
 
                 
               </div>
@@ -340,7 +366,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/YYang.github.io/tags/VScode/" class="print-no-link">#VScode</a>
+        <a href="/YYang.github.io/tags/SPI/" class="print-no-link">#SPI</a>
       
     </div>
   
@@ -352,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VScode+platformIO编译STM32标准库</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO编译STM32标准库/</div>
+      <div>STM32的ADC学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/09/12/STM32的ADC学习/</div>
     </div>
     <div class="license-meta">
       
@@ -365,7 +391,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月4日</div>
+          <div>2024年9月12日</div>
         </div>
       
       
@@ -397,9 +423,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/09/12/STM32%E7%9A%84TIM%E5%AD%A6%E4%B9%A0/" title="STM32的TIM学习">
+                      <a href="/YYang.github.io/2024/09/14/Work%20No.29/" title="Python">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32的TIM学习</span>
+                        <span class="hidden-mobile">Python</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -407,8 +433,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/" title="STM32的SPI学习">
-                        <span class="hidden-mobile">STM32的SPI学习</span>
+                      <a href="/YYang.github.io/2024/09/12/STM32%E7%9A%84TIM%E5%AD%A6%E4%B9%A0/" title="STM32的TIM学习">
+                        <span class="hidden-mobile">STM32的TIM学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

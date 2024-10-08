@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/15/VGghwBmsxZQ56EU.jpg">
 <meta property="article:published_time" content="2024-07-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-04T09:29:35.106Z">
+<meta property="article:modified_time" content="2024-10-04T15:05:02.165Z">
 <meta property="article:author" content="BraveYYang">
 <meta property="article:tag" content="嵌入式">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.4k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          19 分钟
+          21 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月4日 下午
+                    本文最后更新于 2024年10月4日 晚上
                   
                 
               </p>
@@ -362,6 +362,13 @@
 <p>这两个结构体看似一样，但是输出的时候，就会出现不一样的结果了，第一个是正常输出的，因为内存对齐的时候，以靠近的为主，正好前四个的内存块为8、4、4、8，内存的分布是正常的，但是如果是第二个，假设DATA_LEN是100，那么就会出现buffLen前面会填充其他的字节，从而导致数据错乱</p>
 <h2 id="17-VScode乱码情况"><a href="#17-VScode乱码情况" class="headerlink" title="17.VScode乱码情况"></a>17.VScode乱码情况</h2><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript">打开VScode。<br>按下快捷键Ctrl+,（或选择菜单栏的“文件”-&gt;“首选项”-&gt;“设置”）。<br>在搜索框中输入“encoding”。<br>找到“Files: Encoding”选项，确保它设置为“UTF-<span class="hljs-number">8</span>”。<br>如果需要，还可以设置“Editor: Detect Indentation”为“<span class="hljs-literal">false</span>”，以防止VScode自动检测并更改缩进。<br></code></pre></td></tr></table></figure>
 
+<h2 id="18-主机可以ping通虚拟机，虚拟机不行"><a href="#18-主机可以ping通虚拟机，虚拟机不行" class="headerlink" title="18.主机可以ping通虚拟机，虚拟机不行"></a>18.主机可以ping通虚拟机，虚拟机不行</h2><p>控制面板-&gt;系统和安全-&gt;防火墙-&gt;高级系统设置-&gt;入站规则-&gt;文件和打印机共享（回显请求 - ICMPv4-In） 专用、公用</p>
+<p>将上面的进行启用，主机的防火墙将请求隔断了，如果还不行关闭防火墙</p>
+<h2 id="19-虚拟机无法使用mobaxtem连接"><a href="#19-虚拟机无法使用mobaxtem连接" class="headerlink" title="19.虚拟机无法使用mobaxtem连接"></a>19.虚拟机无法使用mobaxtem连接</h2><h4 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1.关闭防火墙"></a>1.关闭防火墙</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ufw <span class="hljs-built_in">disable</span> // 关闭防火墙<br><span class="hljs-built_in">sudo</span> ufw <span class="hljs-built_in">enable</span>  // 开启防火墙<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-安装软件包"><a href="#2-安装软件包" class="headerlink" title="2.安装软件包"></a>2.安装软件包</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">(1)apt-<span class="hljs-built_in">get</span> <span class="hljs-built_in">remove</span> openssh-server<br>(2)sudo apt install openssh-server<br>(3)sudo<span class="hljs-built_in"> service </span>ssh start<br>(4) ps -aux | grep ssh<br>(5)okoksadasdasdsadasdsadasdasd192.168.31.224192.168.31.224192.168.31.224192.，asdasdasdasdasdasdasdqweqw<br></code></pre></td></tr></table></figure>
+
+<p>然后就再连接一下就可以了</p>
 
                 
               </div>

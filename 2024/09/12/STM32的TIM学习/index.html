@@ -16,26 +16,24 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+    <meta name="description" content="STM32的TIM学习基本知识高级控制定时器(TIM1和TIM8)和通用定时器在基本定时器的基础上引入了外部引脚，可以输入捕获和输出比较功能。 高级控制定时器比通用定时器增加了可编程死区互补输出、 重复计数器、带刹车(断路)功能，这些功能都是针对工业电机控制方面。 高级控制定时器时基单元包含一个16位自动重载计数器ARR，一个16位的计数器CNT，可向上&#x2F;下计数，一个16位可编程预分频器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VScode+platformIO编译STM32标准库">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:title" content="STM32的TIM学习">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/12/STM32%E7%9A%84TIM%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+<meta property="og:description" content="STM32的TIM学习基本知识高级控制定时器(TIM1和TIM8)和通用定时器在基本定时器的基础上引入了外部引脚，可以输入捕获和输出比较功能。 高级控制定时器比通用定时器增加了可编程死区互补输出、 重复计数器、带刹车(断路)功能，这些功能都是针对工业电机控制方面。 高级控制定时器时基单元包含一个16位自动重载计数器ARR，一个16位的计数器CNT，可向上&#x2F;下计数，一个16位可编程预分频器">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
-<meta property="article:published_time" content="2024-09-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-04T09:30:41.260Z">
+<meta property="article:published_time" content="2024-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-08T01:20:46.563Z">
 <meta property="article:author" content="BraveYYang">
-<meta property="article:tag" content="VScode">
+<meta property="article:tag" content="TIM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VScode+platformIO编译STM32标准库 - BraveYYang</title>
+  <title>STM32的TIM学习 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VScode+platformIO编译STM32标准库"></span>
+            <span id="subtitle" data-typed-text="STM32的TIM学习"></span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-04 00:00" pubdate>
-          2024年9月4日 凌晨
+        <time datetime="2024-09-12 00:00" pubdate>
+          2024年9月12日 凌晨
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          354 字
+          853 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          3 分钟
+          8 分钟
         
       </span>
     
@@ -280,12 +278,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VScode+platformIO编译STM32标准库</h1>
+            <h1 id="seo-header">STM32的TIM学习</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月4日 下午
+                    本文最后更新于 2024年10月8日 上午
                   
                 
               </p>
@@ -293,20 +291,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="VScode-platformIO编译STM32标准库"><a href="#VScode-platformIO编译STM32标准库" class="headerlink" title="VScode+platformIO编译STM32标准库"></a>VScode+platformIO编译STM32标准库</h1><h2 id="参考博主"><a href="#参考博主" class="headerlink" title="参考博主"></a>参考博主</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7393313322210426915">https://juejin.cn/post/7393313322210426915</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maomaochong666/article/details/129240827">https://blog.csdn.net/maomaochong666/article/details/129240827</a></p>
-<h2 id="配置主要有四个步骤："><a href="#配置主要有四个步骤：" class="headerlink" title="配置主要有四个步骤："></a>配置主要有四个步骤：</h2><h4 id="1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"><a href="#1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架" class="headerlink" title="1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"></a>1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架</h4><p><img src="https://s2.loli.net/2024/09/04/xN5agDtl6RfTYI9.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="2-拷录文件放入STM32项目中"><a href="#2-拷录文件放入STM32项目中" class="headerlink" title="2.拷录文件放入STM32项目中"></a>2.拷录文件放入STM32项目中</h4><p>以野火为模板，将library文件user文件拷入到项目当中的src文件夹下，不要分开使用，直接全部拷入，方便使用，删除start启动文件和system_stm32f10x.c文件，因为在初始化的时候已经自动生成</p>
-<img src="https://s2.loli.net/2024/09/04/ItUnakMPEJAlwrW.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png" style="zoom:50%;" />
+                <h1 id="STM32的TIM学习"><a href="#STM32的TIM学习" class="headerlink" title="STM32的TIM学习"></a>STM32的TIM学习</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>高级控制定时器(TIM1和TIM8)和通用定时器在基本定时器的基础上引入了外部引脚，可以输入捕获和输出比较功能。</p>
+<p>高级控制定时器比通用定时器增加了可编程死区互补输出、 重复计数器、带刹车(断路)功能，这些功能都是针对工业电机控制方面。</p>
+<p>高级控制定时器时基单元包含一个16位自动重载计数器ARR，一个16位的计数器CNT，可向上&#x2F;下计数，一个16位可编程预分频器PSC，预分频器时钟源有多种可选， 有内部的时钟、外部时钟。还有一个8位的重复计数器RCR，这样最高可实现40位的可编程定时。</p>
+<p>高级控制定时器有四个时钟源可选：</p>
+<ul>
+<li>内部时钟源CK_INT，内部时钟CK_INT即来自于芯片内部，等于168M</li>
+</ul>
+<p><strong>一个高级定时器的多个输出通道</strong>（如 <code>TIM1_CH1</code>、<code>TIM1_CH2</code>、<code>TIM1_CH3</code>）并<strong>不等同于多个定时器</strong>。每个通道可以产生不同的PWM占空比（但频率相同，因为它们共享计数器）。</p>
+<p><strong>多个通道之间可以实现同步输出</strong>，因为它们依赖同一个计数器。</p>
+<p>在输入捕获时，定时器时钟频率越高，捕获的时间精度越高。</p>
+<p>定时器的计数周期（<code>Period</code>）应足够大，以便记录下信号的变化。如果信号周期非常长，而定时器周期设置得太短，可能会导致计数器溢出。</p>
+<h3 id="TIM-OCMode"><a href="#TIM-OCMode" class="headerlink" title="TIM_OCMode"></a>TIM_OCMode</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs scss">TIM_OCMode_Timing (<span class="hljs-number">0</span>x0000)<br>作用：这是一个时间模式。在此模式下，定时器仅比较计数器和捕获比较寄存器（CCR）中的值，不产生任何外部信号变化。<br>应用场景：用于定时、计数功能，不影响输出管脚。<br><br>TIM_OCMode_Active (<span class="hljs-number">0</span>x0010)<br>作用：当计数器值与CCR中的值匹配时，输出变为高电平。<br>应用场景：用于激活外设或者作为标志信号触发。<br><br>TIM_OCMode_Inactive (<span class="hljs-number">0</span>x0020)<br>作用：当计数器值与CCR中的值匹配时，输出变为低电平。<br>应用场景：用于关闭外设或者表示事件结束。<br><br>TIM_OCMode_Toggle (<span class="hljs-number">0</span>x0030)<br>作用：当计数器值与CCR中的值匹配时，输出电平翻转（从高变低或从低变高）。<br>应用场景：用于产生方波或周期性信号输出。<br><br>TIM_OCMode_PWM1 (<span class="hljs-number">0</span>x0060)<br>作用：这是标准的PWM（脉宽调制）模式<span class="hljs-number">1</span>。当计数器值小于CCR中的值时，输出为高电平；当计数器值大于或等于CCR中的值时，输出为低电平。<br>应用场景：用于产生PWM信号，用于电机控制、LED调光等场景。<br><br>TIM_OCMode_PWM2 (<span class="hljs-number">0</span>x0070)<br>作用：这是PWM模式<span class="hljs-number">2</span>，与模式<span class="hljs-number">1</span>相反。当计数器值小于CCR中的值时，输出为低电平；当计数器值大于或等于CCR中的值时，输出为高电平。<br>应用场景：用于产生相反极性的PWM信号。<br><br>TIM_ForcedAction_Active<br>作用：强制输出高电平，忽略计数器的比较操作。<br>应用场景：用于强制将输出设为高电平，通常用于紧急停止或强制触发信号。<br><br>TIM_ForcedAction_InActive<br>作用：强制输出低电平，忽略计数器的比较操作。<br>应用场景：用于强制将输出设为低电平，例如复位某些信号或设备。<br></code></pre></td></tr></table></figure>
 
-<h4 id="3-修改platformIO-ini文件"><a href="#3-修改platformIO-ini文件" class="headerlink" title="3.修改platformIO.ini文件"></a>3.修改platformIO.ini文件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">//烧录和调试配置</span><br>upload_protocol <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br>debug_tool <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br><br><span class="hljs-comment">// 添加头文件链接</span><br>build_flags <span class="hljs-operator">=</span> <br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span>u,_printf_float<br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span><span class="hljs-type">Map</span>,output.map<br>    <span class="hljs-operator">-</span><span class="hljs-type">O0</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">Libraries</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">CMSIS</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">FWlib</span><span class="hljs-operator">/</span>inc<br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">User</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">DMA</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">EXTI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">I2C</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">LED</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">RCC</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">SPI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">Systick</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">USART</span><br><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">STM32F10X_HD</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">USE_STDPERIPH_DRIVER</span><br><br><span class="hljs-comment">// 定义串口通信，使用motion进行串口调试</span><br>monitor_speed <span class="hljs-operator">=</span> <span class="hljs-number">115200</span><br>monitor_echo <span class="hljs-operator">=</span> yes<br>monitor_rts <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>monitor_dtr <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br><span class="hljs-comment">// 将烧录文件转为hex格式</span><br>extra_scripts <span class="hljs-operator">=</span> export_hex.py<br></code></pre></td></tr></table></figure>
-
-<h4 id="4-修改core-cm3-c文件内容"><a href="#4-修改core-cm3-c文件内容" class="headerlink" title="4.修改core_cm3.c文件内容"></a>4.修改core_cm3.c文件内容</h4><p>修改core_cm3.c里面的内容（736、753行）</p>
-<p><img src="https://s2.loli.net/2024/09/04/AiZRHY1Kd4wjWnb.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="5-创建烧录文件hex转换脚本"><a href="#5-创建烧录文件hex转换脚本" class="headerlink" title="5.创建烧录文件hex转换脚本"></a>5.创建烧录文件hex转换脚本</h4><p>export_hex.py</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nsis">Import(<span class="hljs-string">&quot;env&quot;</span>)<br> <br><span class="hljs-comment"># # Custom HEX from ELF</span><br> <br>env.AddPostAction(<br> <br>    <span class="hljs-string">&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;</span>,<br> <br>    env.VerboseAction(<span class="hljs-string">&quot; &quot;</span>.join([<br> <br>        <span class="hljs-string">&quot;<span class="hljs-variable">$OBJCOPY</span>&quot;</span>, <span class="hljs-string">&quot;-O&quot;</span>, <span class="hljs-string">&quot;ihex&quot;</span>, <span class="hljs-string">&quot;-R&quot;</span>, <span class="hljs-string">&quot;.eeprom&quot;</span>,<br> <br>        <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;&#x27;</span>, <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;&#x27;</span>  <span class="hljs-comment"># 加个单引号</span><br> <br>    ]), <span class="hljs-string">&quot;Building <span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;</span>)<br> <br>)<br></code></pre></td></tr></table></figure>
-
-<p>然后就可以编译并且烧录到单片机中，烧录过程查看博主内容</p>
 
                 
               </div>
@@ -340,7 +337,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/YYang.github.io/tags/VScode/" class="print-no-link">#VScode</a>
+        <a href="/YYang.github.io/tags/TIM/" class="print-no-link">#TIM</a>
       
     </div>
   
@@ -352,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VScode+platformIO编译STM32标准库</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO编译STM32标准库/</div>
+      <div>STM32的TIM学习</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/09/12/STM32的TIM学习/</div>
     </div>
     <div class="license-meta">
       
@@ -365,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月4日</div>
+          <div>2024年9月12日</div>
         </div>
       
       
@@ -397,9 +394,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/09/12/STM32%E7%9A%84TIM%E5%AD%A6%E4%B9%A0/" title="STM32的TIM学习">
+                      <a href="/YYang.github.io/2024/09/12/STM32%E7%9A%84ADC%E5%AD%A6%E4%B9%A0/" title="STM32的ADC学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32的TIM学习</span>
+                        <span class="hidden-mobile">STM32的ADC学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -407,8 +404,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/" title="STM32的SPI学习">
-                        <span class="hidden-mobile">STM32的SPI学习</span>
+                      <a href="/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/" title="VScode+platformIO编译STM32标准库">
+                        <span class="hidden-mobile">VScode+platformIO编译STM32标准库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

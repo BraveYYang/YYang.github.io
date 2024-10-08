@@ -16,26 +16,26 @@
   <meta name="author" content="BraveYYang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+    <meta name="description" content="DShot协议感谢博主https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_39939185&#x2F;article&#x2F;details&#x2F;132066139 DShot协议的时间长短在Dshot中，1的高电平时长是0的两倍。帧的实际持续时长、位的周期时长和帧长度取决于Dshot版本：    Dshot 比特率 T1H T0H 位(μs) 帧(μs)    150 150kbit&#x2F;s 5.00 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VScode+platformIO编译STM32标准库">
-<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO%E7%BC%96%E8%AF%91STM32%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:title" content="DShot协议">
+<meta property="og:url" content="https://braveyyang.github.io/YYang.github.io/2024/09/29/20240529ZYY-DShot%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="BraveYYang">
-<meta property="og:description" content="VScode+platformIO编译STM32标准库参考博主https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7393313322210426915 https:&#x2F;&#x2F;blog.csdn.net&#x2F;maomaochong666&#x2F;article&#x2F;details&#x2F;129240827 配置主要有四个步骤：1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架 2.拷录文件放入STM3">
+<meta property="og:description" content="DShot协议感谢博主https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_39939185&#x2F;article&#x2F;details&#x2F;132066139 DShot协议的时间长短在Dshot中，1的高电平时长是0的两倍。帧的实际持续时长、位的周期时长和帧长度取决于Dshot版本：    Dshot 比特率 T1H T0H 位(μs) 帧(μs)    150 150kbit&#x2F;s 5.00 2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
-<meta property="article:published_time" content="2024-09-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-04T09:30:41.260Z">
+<meta property="og:image" content="https://s2.loli.net/2024/09/29/v3jhNAL8yuH7rFM.png">
+<meta property="article:published_time" content="2024-09-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-30T01:03:11.046Z">
 <meta property="article:author" content="BraveYYang">
-<meta property="article:tag" content="VScode">
+<meta property="article:tag" content="DShot协议">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/GtV85YzoJU9NnjI.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2024/09/29/v3jhNAL8yuH7rFM.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VScode+platformIO编译STM32标准库 - BraveYYang</title>
+  <title>DShot协议 - BraveYYang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VScode+platformIO编译STM32标准库"></span>
+            <span id="subtitle" data-typed-text="DShot协议"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-04 00:00" pubdate>
-          2024年9月4日 凌晨
+        <time datetime="2024-09-29 00:00" pubdate>
+          2024年9月29日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          354 字
+          466 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -280,12 +280,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VScode+platformIO编译STM32标准库</h1>
+            <h1 id="seo-header">DShot协议</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月4日 下午
+                    本文最后更新于 2024年9月30日 上午
                   
                 
               </p>
@@ -293,20 +293,68 @@
             
               <div class="markdown-body">
                 
-                <h1 id="VScode-platformIO编译STM32标准库"><a href="#VScode-platformIO编译STM32标准库" class="headerlink" title="VScode+platformIO编译STM32标准库"></a>VScode+platformIO编译STM32标准库</h1><h2 id="参考博主"><a href="#参考博主" class="headerlink" title="参考博主"></a>参考博主</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7393313322210426915">https://juejin.cn/post/7393313322210426915</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maomaochong666/article/details/129240827">https://blog.csdn.net/maomaochong666/article/details/129240827</a></p>
-<h2 id="配置主要有四个步骤："><a href="#配置主要有四个步骤：" class="headerlink" title="配置主要有四个步骤："></a>配置主要有四个步骤：</h2><h4 id="1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"><a href="#1-创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架" class="headerlink" title="1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架"></a>1.创建STM32项目，创建的芯片后缀带Generic的即可，选择CMSIS框架</h4><p><img src="https://s2.loli.net/2024/09/04/xN5agDtl6RfTYI9.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="2-拷录文件放入STM32项目中"><a href="#2-拷录文件放入STM32项目中" class="headerlink" title="2.拷录文件放入STM32项目中"></a>2.拷录文件放入STM32项目中</h4><p>以野火为模板，将library文件user文件拷入到项目当中的src文件夹下，不要分开使用，直接全部拷入，方便使用，删除start启动文件和system_stm32f10x.c文件，因为在初始化的时候已经自动生成</p>
-<img src="https://s2.loli.net/2024/09/04/ItUnakMPEJAlwrW.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png" style="zoom:50%;" />
+                <h1 id="DShot协议"><a href="#DShot协议" class="headerlink" title="DShot协议"></a>DShot协议</h1><h2 id="感谢博主"><a href="#感谢博主" class="headerlink" title="感谢博主"></a>感谢博主</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39939185/article/details/132066139">https://blog.csdn.net/weixin_39939185/article/details/132066139</a></p>
+<h2 id="DShot协议的时间长短"><a href="#DShot协议的时间长短" class="headerlink" title="DShot协议的时间长短"></a>DShot协议的时间长短</h2><p>在Dshot中，<strong>1的高电平时长是0的两倍</strong>。帧的实际持续时长、位的周期时长和帧长度取决于Dshot版本：</p>
+<table>
+<thead>
+<tr>
+<th>Dshot</th>
+<th>比特率</th>
+<th>T1H</th>
+<th>T0H</th>
+<th>位(μs)</th>
+<th>帧(μs)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>150</td>
+<td>150kbit&#x2F;s</td>
+<td>5.00</td>
+<td>2.50</td>
+<td>6.67</td>
+<td>106.72</td>
+</tr>
+<tr>
+<td>300</td>
+<td>300kbit&#x2F;s</td>
+<td>2.50</td>
+<td>1.25</td>
+<td>3.33</td>
+<td>53.28</td>
+</tr>
+<tr>
+<td>600</td>
+<td>600kbit&#x2F;s</td>
+<td>1.25</td>
+<td>0.625</td>
+<td>1.67</td>
+<td>26.72</td>
+</tr>
+<tr>
+<td>1200</td>
+<td>1200kbit&#x2F;s</td>
+<td>0.625</td>
+<td>0.313</td>
+<td>0.83</td>
+<td>13.28</td>
+</tr>
+</tbody></table>
+<h2 id="帧的表示情况"><a href="#帧的表示情况" class="headerlink" title="帧的表示情况"></a>帧的表示情况</h2><p>11位油门信号：共有2048个不同的值。0保留为上锁命令，1-47被保留为特殊命令。剩下的48-2047（共2000步）用于实际的油门值</p>
+<p>1位回传请求：如果设置了这一位，那么遥测数据将通过另外一根专线（电调回传线）单独发回飞控</p>
+<p>4位CRC(Cyclic Redundancy Checksum，循环冗余校验)：检验数据的有效性（包括油门数据以及回传请求位）</p>
+<p><img src="https://s2.loli.net/2024/09/29/v3jhNAL8yuH7rFM.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
+<h4 id="1-47特殊命令"><a href="#1-47特殊命令" class="headerlink" title="1-47特殊命令"></a>1-47特殊命令</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>-<span class="hljs-number">5</span>：beep（<span class="hljs-number">1</span>= low freq. <span class="hljs-number">5</span> = high freq）<br><span class="hljs-attribute">6</span>： esc信息请求（fw版本和通过tlm线发送的SN）<br><span class="hljs-attribute">7</span>：一个方向旋转<br><span class="hljs-attribute">8</span>：另一个方向旋转<br><span class="hljs-attribute">9</span>：<span class="hljs-number">3</span>d模式关闭<br><span class="hljs-attribute">10</span>：<span class="hljs-number">3</span>d模式打开<br><span class="hljs-attribute">11</span>：esc设置请求（saved settings over the TLM wire）<br><span class="hljs-attribute">12</span>：保存设置<br></code></pre></td></tr></table></figure>
 
-<h4 id="3-修改platformIO-ini文件"><a href="#3-修改platformIO-ini文件" class="headerlink" title="3.修改platformIO.ini文件"></a>3.修改platformIO.ini文件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">//烧录和调试配置</span><br>upload_protocol <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br>debug_tool <span class="hljs-operator">=</span> cmsis<span class="hljs-operator">-</span>dap<br><br><span class="hljs-comment">// 添加头文件链接</span><br>build_flags <span class="hljs-operator">=</span> <br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span>u,_printf_float<br>    <span class="hljs-operator">-</span><span class="hljs-type">Wl</span>,<span class="hljs-operator">-</span><span class="hljs-type">Map</span>,output.map<br>    <span class="hljs-operator">-</span><span class="hljs-type">O0</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">Libraries</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">CMSIS</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/Libraries/</span><span class="hljs-type">FWlib</span><span class="hljs-operator">/</span>inc<br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-operator">/</span><span class="hljs-type">User</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">DMA</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">EXTI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">I2C</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">LED</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">RCC</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">SPI</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">Systick</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">Isrc</span><span class="hljs-regexp">/User/</span><span class="hljs-type">USART</span><br><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">STM32F10X_HD</span><br>    <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-type">USE_STDPERIPH_DRIVER</span><br><br><span class="hljs-comment">// 定义串口通信，使用motion进行串口调试</span><br>monitor_speed <span class="hljs-operator">=</span> <span class="hljs-number">115200</span><br>monitor_echo <span class="hljs-operator">=</span> yes<br>monitor_rts <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>monitor_dtr <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><br><span class="hljs-comment">// 将烧录文件转为hex格式</span><br>extra_scripts <span class="hljs-operator">=</span> export_hex.py<br></code></pre></td></tr></table></figure>
+<h3 id="计算CRC"><a href="#计算CRC" class="headerlink" title="计算CRC"></a>计算CRC</h3><p>校验和是根据油门数据和遥测位来计算的，因此，下面中的value表示的是前12位数据。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">crc</span> = (value ^ (value &gt;&gt; <span class="hljs-number">4</span>) ^ (value &gt;&gt;<span class="hljs-number">8</span>)) &amp; <span class="hljs-number">0</span>x0f;<br></code></pre></td></tr></table></figure>
 
-<h4 id="4-修改core-cm3-c文件内容"><a href="#4-修改core-cm3-c文件内容" class="headerlink" title="4.修改core_cm3.c文件内容"></a>4.修改core_cm3.c文件内容</h4><p>修改core_cm3.c里面的内容（736、753行）</p>
-<p><img src="https://s2.loli.net/2024/09/04/AiZRHY1Kd4wjWnb.png" srcset="/YYang.github.io/img/loading.gif" lazyload alt="image.png"></p>
-<h4 id="5-创建烧录文件hex转换脚本"><a href="#5-创建烧录文件hex转换脚本" class="headerlink" title="5.创建烧录文件hex转换脚本"></a>5.创建烧录文件hex转换脚本</h4><p>export_hex.py</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nsis">Import(<span class="hljs-string">&quot;env&quot;</span>)<br> <br><span class="hljs-comment"># # Custom HEX from ELF</span><br> <br>env.AddPostAction(<br> <br>    <span class="hljs-string">&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;</span>,<br> <br>    env.VerboseAction(<span class="hljs-string">&quot; &quot;</span>.join([<br> <br>        <span class="hljs-string">&quot;<span class="hljs-variable">$OBJCOPY</span>&quot;</span>, <span class="hljs-string">&quot;-O&quot;</span>, <span class="hljs-string">&quot;ihex&quot;</span>, <span class="hljs-string">&quot;-R&quot;</span>, <span class="hljs-string">&quot;.eeprom&quot;</span>,<br> <br>        <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.elf&quot;&#x27;</span>, <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;&#x27;</span>  <span class="hljs-comment"># 加个单引号</span><br> <br>    ]), <span class="hljs-string">&quot;Building <span class="hljs-variable">$BUILD_DIR</span>/<span class="hljs-variable">$&#123;PROGNAME&#125;</span>.hex&quot;</span>)<br> <br>)<br></code></pre></td></tr></table></figure>
+<p>假设我们正在发送一个1046的油门值（正好是全油门的一半），并且遥测位为0：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs tap">value  = 100000101100<br>(&gt;&gt;4)  =<span class="hljs-number"> 000010000010 </span><span class="hljs-comment"># right shift value by 4</span><br>(^)    =<span class="hljs-number"> 100010101110 </span><span class="hljs-comment"># XOR with value</span><br>(&gt;&gt;8)  =<span class="hljs-number"> 000000001000 </span><span class="hljs-comment"># right shift value by 8</span><br>(^)    =<span class="hljs-number"> 100010100110 </span><span class="hljs-comment"># XOR with previous XOR</span><br>(0x0F) =<span class="hljs-number"> 000000001111 </span><span class="hljs-comment"># Mask 0x0F</span><br>(&amp;)    =<span class="hljs-number"> 000000000110 </span><span class="hljs-comment"># CRC</span><br></code></pre></td></tr></table></figure>
 
-<p>然后就可以编译并且烧录到单片机中，烧录过程查看博主内容</p>
+<p>所以，从飞控传输到电调的两个字节的数据是：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">1000001011000110<br></code></pre></td></tr></table></figure>
+
+<p>帧的长度很重要，因为它表示的是电调的更新速率。帧的长度越短，那么每秒发送数据帧的频率就越高。换句话说，比特率越高，我们每秒钟可以发送的数据就越多。</p>
 
                 
               </div>
@@ -325,7 +373,7 @@
     
       <span class="category-chain">
         
-  <a href="/YYang.github.io/categories/STM32/" class="category-chain-item">STM32</a>
+  <a href="/YYang.github.io/categories/Fly/" class="category-chain-item">Fly</a>
   
   
 
@@ -340,7 +388,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/YYang.github.io/tags/VScode/" class="print-no-link">#VScode</a>
+        <a href="/YYang.github.io/tags/DShot%E5%8D%8F%E8%AE%AE/" class="print-no-link">#DShot协议</a>
       
     </div>
   
@@ -352,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VScode+platformIO编译STM32标准库</div>
-      <div>https://braveyyang.github.io/YYang.github.io/2024/09/04/VScode+platformIO编译STM32标准库/</div>
+      <div>DShot协议</div>
+      <div>https://braveyyang.github.io/YYang.github.io/2024/09/29/20240529ZYY-DShot协议/</div>
     </div>
     <div class="license-meta">
       
@@ -365,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月4日</div>
+          <div>2024年9月29日</div>
         </div>
       
       
@@ -397,18 +445,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/09/12/STM32%E7%9A%84TIM%E5%AD%A6%E4%B9%A0/" title="STM32的TIM学习">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STM32的TIM学习</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/YYang.github.io/2024/08/30/STM32%E7%9A%84SPI%E5%AD%A6%E4%B9%A0/" title="STM32的SPI学习">
-                        <span class="hidden-mobile">STM32的SPI学习</span>
+                      <a href="/YYang.github.io/2024/09/14/Work%20No.29/" title="Python">
+                        <span class="hidden-mobile">Python</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
